@@ -1,0 +1,834 @@
+%!TEX root = ../apuntesMarkov.tex
+
+\section{Cadenas de Markov a tiempo discreto}
+
+\subsection{Definición, construcción y propiedades básicas}
+
+\subsubsection{Breve recuerdo de probabilidades}
+
+Un \emph{espacio de probabilidad} es un espacio de medida $(\Omega,\cf,\pp)$ tal que $\pp(\Omega)=1$.
+$\pp$ es la \emph{medida de probabilidad}.
+Los $A\in\cf$ son los \emph{eventos}.
+\lsep
+Dado un espacio medible $(S,\cs)$, una \emph{variable aleatoria} $X$ a valores en $S$ es una función $X\!:\Omega\longrightarrow S$ que es $\cf$-$\cs$ medible.
+Usualmente nos olvidamos del espacio de probabilidad en la notación.
+Por ejemplo, cuando escribimos $\pp(X\in A)$ a lo que nos referimos es a la medida de la preimagen de $A$ por $X$, es decir
+\[\pp(X\in A)=\pp(X^{-1}(A))=\pp(\{\omega\in \Omega\!:X(\omega)\in A\}).\]
+Rara vez incluimos los $\omega$'s en la notación, pero es importante mantener la definición formal en mente.
+\lsep Dos eventos $A$ y $B$ son \emph{independientes} si $\pp(A\cap B)=\pp(A)\pp(B)$.
+La \emph{probabilidad condicional} de $A$ dado $B$ es
+\[\pp(A|B)=\frac{\pp(A\cap B)}{\pp(B)}\]
+(asumiendo $\pp(B)>0$; a menudo omitiremos especificar esto cuando hablamos de probabilidades condicionales).
+\lsep
+Notar que la aplicación $\pp(\cdot|B)\!:\cf\longrightarrow[0,1]$ define una medida de probabilidad sobre $(\Omega,\cf,\pp)$ soportada en $B$ (o alternativamente una medida de probabilidad sobre $(B,\cf,\pp)$).
+De esta forma, por ejemplo, podemos decir que dados $A,B,C\in\cf$, $A$ y $B$ son \emph{independientes condicionalmente a $C$} si $\pp(A\cap B|C)=\pp(A|C)\pp(B|C)$.
+\uexer: Asegúrese de que comprende el contenido de la última frase.
+
+% \begin{mdframed}[style=st_red]
+\begin{sqgnote}
+Repase la noción de independencia para variables aleatorias y familias de variables aleatorias.
+\end{sqgnote}
+% \mbox{}\vskip-30pt\mbox{}
+\begin{sqgnote}
+Repase la definición y propiedades de esperanza condicional, dadas en el Apéndice \ref{sec:espCond}.
+\end{sqgnote}
+% \end{mdframed}
+
+
+\subsubsection{Procesos estocásticos y cadenas de Markov}
+
+Dados $(\Omega,\cf,\pp)$ y $(S,\cs)$ como antes, decimos que una sucesión $(X_n)_{n\geq0}$ de variables aleatorias es un \emph{proceso estocástico}.
+Alternativamente uno puede pensar en el proceso estocástico $(X_n)_{n\geq0}$ como una variable aleatoria a valores en el espacio producto $S^\nn$, es decir $X\!:\Omega\longrightarrow S^\nn$ que es $\cf$-$\cs^\nn$ medible, con $\cs^\nn$ dotado de la $\sigma$-álgebra producto.
+\lsep
+(Más adelante consideraremos procesos estocásticos indexados por $\rr^+$ en vez de $\nn$).
+\lsep
+El propósito del curso es estudiar un tipo especial pero muy importante de procesos estocásticos: los procesos de Markov.
+
+\vs
+
+En todo lo que sigue $I$ (o a veces $E$) denotará un conjunto numerable, el ``espacio de estados'' donde nuestros procesos estocásticos tomarán valores.
+Sobre $I$ consideramos la $\sigma$-álgebra de las partes $\cp(I)$.
+Los elementos de $I$ los denotaremos típicamente por $i,j,k$ o $x,y,z$.
+Detrás de todo lo que haremos habrá un espacio de probabilidad fijo $(\Omega,\cf,\pp)$, que solo invocaremos cuando sea necesario.
+
+\begin{defn}\tbf{Cadena de Markov}
+Un proceso estocástico $X=(X_n)_{n\geq0}$ a valores en $I$ es un \emph{proceso de Markov a tiempo discreto} o una \emph{cadena de Markov} si satisface la \emph{propiedad de Markov}:
+\begin{equation}\label{eq:propMarkov}
+\pp\big(X_{n+1}=i_{n+1}\big|X_0=i_0,\dotsc,X_{n}=i_{n}\big)=\pp\big(X_{n+1}=i_{n+1}\big|X_{n}=i_{n}\big)
+\end{equation}
+para todo $i_0,\dotsc,i_{n+1}\in I$ (que satisfaga $\pp(X_0=i_0,\dotsc,X_{n}=i_{n}\big)>0$).
+% Es decir, condicional al presente, el futuro del proceso es independiente del pasado.
+\end{defn}
+
+\begin{rem}
+La propiedad de Markov es equivalente a decir que $X_{n+1}$ y $(X_0,\dotsc,X_{n-1})$ son independientes condicionales a $X_n$, es decir, ``condicional al presente, el futuro del proceso es independiente del pasado''.
+\uexer: demuestre esto.
+\end{rem}
+
+
+\begin{prop}
+Si $X$ es una cadena de Markov entonces para todo $0\leq t_0\leq\dotsm\leq t_{n+1}$ en $\nn$ y todo $i_0,\dotsc,i_{n+1}\in I$,
+\begin{equation}
+\pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_0}=i_0,\dotsc,X_{t_n}=i_{n}\big)=\pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_n}=i_{n}\big).
+\end{equation}
+\end{prop}
+
+\begin{proof}
+\uexer.
+\end{proof}
+
+\begin{ex}\tbf{Marcha aleatoria simple en $\zz$}\label{ex:marchaZ}
+Una partícula o individuo camina por $\zz$ de la siguiente forma.
+A tiempo $0$ comienza en $X_0=x\in\zz$.
+Luego en cada instante de tiempo decide dar un paso a la derecha con probabilidad $p\in[0,1]$ y un paso a la izquierda con probabilidad $1-p$, todo de manera independiente, es decir, para cada $n\geq1$ tenemos
+\[X_n=\begin{dcases*}
+X_{n-1}+1 & con probabilidad $p$,\\
+X_{n-1}-1 & con probabilidad $1-p$.
+\end{dcases*}\]
+Entonces $(X_n)_{n\geq0}$ es una cadena de Markov (\uexers: chequee esto).
+\lsep
+Por ahora esta descripción es informal, luego veremos como se puede construir esta cadena de manera rigurosa.
+\end{ex}
+
+\begin{defn}\tbf{Cadena de Markov homogénea, matriz de transición} 
+Sea $X$ una cadena de Markov.
+Decimos que $X$ es \emph{homogénea} si
+\[\pp(X_{m+1}=j|X_m=i)=\pp(X_{n+1}=j|X_n=i)\quad\forall~m,n\geq0,~i,j\in I.\]
+En este caso a la matriz $P=\big(p_{ij}\big)_{i,j\in I}$ dada por $p_{ij}=\pp(X_{1}=j|X_0=i)$ le llamamos \emph{matriz de transición} de la cadena de Markov $X$; $p_{ij}$ es la \emph{probabilidad de transición de $i$ a $j$}.
+\end{defn}
+
+\begin{ex}
+La marcha aleatoria simple del Ejem. \ref{ex:marchaZ} es una cadena de Markov homogénea, y su matriz de transición $P$ está dada por
+\[p_{ij}=\begin{dcases*}
+p & si $j=i+1$,\\
+1-p & si $j=i-1$,\\
+0 & cualquier otro $j$.
+\end{dcases*}\]
+\end{ex}
+
+Notar que $P$ es una matriz indexada por un conjunto numerable, pero esto no nos traerá mayores dificultades (lo discutiremos en más detalle más adelante).
+$P$ no puede ser cualquier matriz, si no que claramente debe satisfacer algunas propiedades especiales, precisamente:
+
+\begin{defn}\tbf{Matriz estocástica}
+Una matriz $P=\big(p_{ij}\big)_{i,j\in I}$ se dice \emph{matriz estocástica} si:\\[-20pt]
+\begin{itemize}
+\item $p_{ij}\geq0$ para todo $i,j\in I$.
+\item $\sum_{j\in I}p_{ij}=1$ para todo $i\in I$.
+\end{itemize}
+En otras palabras, $P$ es una matriz estocástica si para cada $i\in I$, $(p_{ij})_{j\in I}$ es un vector de probabilidad.
+\end{defn}
+
+\begin{prop}
+Si $P$ es la matriz de transición de una cadena de Markov, entonces $P$ es matriz estocástica.
+\end{prop}
+
+\begin{proof} 
+\uexer~(fácil).
+\end{proof} 
+
+Durante el curso estaremos interesados casi exclusivamente en el caso de cadenas de Markov homogéneas.
+Por lo tanto, en todo lo que sigue trabajaremos bajo la siguiente convención:
+\begin{quote}
+% \begin{mdframed}[style=st_red]
+Salvo en los casos puntuales en que se indique lo contrario, todas las cadenas de Markov que aparezcan en estas notas serán consideradas implícitamente como cadenas homogéneas.
+% \end{mdframed}
+\end{quote}
+
+\vskip1pt
+
+\begin{exer}
+Sea $X$ una cadena de Markov no homogénea a valores en $I$.
+Encuentre una cadena de Markov $\tilde X$ a valores en $I\times\nn$ que es homogénea y que permite recuperar la distribución de la cadena original $X$. 
+\end{exer}
+
+\subsubsection{Caracterización y construcción}
+
+La matriz de transición gobierna la evolución de nuestra cadena de Markov $X$.
+Para determinar la distribución de la cadena hace falta un ingrediente más:
+
+\begin{defn}\tbf{Distribución inicial}
+Al vector de probabilidad $\mu$ sobre $I$ definido por $\mu_i=\pp(X_0=i)$ le llamamos la \emph{distribución inicial} de la cadena de Markov $X$.
+\end{defn}
+
+Usaremos indistintamente la notación $\mu$ para un vector de probabilidad como en la definición y para una medida de probabilidad sobre $I$, que en cualquier caso son la misma cosa.
+
+Es relativamente fácil ver que toda cadena de Markov, y en particular sus distribuciones finito-dimensionales, queda determinada por su matriz de transición y su distribución inicial:
+
+\begin{prop}\label{prop:caractMarkov}
+$X$ es una cadena de Markov con matriz de transición $P$ y distribución inicial $\mu$ si y solo si
+\[\pp(X_0=i_0,X_1=i_1,\dotsc,X_n=i_n)=\mu_{i_0}p_{i_0i_1}\dotsc p_{i_{n-1}i_n}.\]
+\end{prop}
+
+\begin{proof}
+Para la primera implicancia escribimos
+\begin{align}
+\pp(X_0=i_0,\dotsc,X_n=i_n)&=\pp(X_n=i_n|X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\hspace{-16pt}\\
+&=\pp(X_n=i_n|X_{n-1}=i_{n-1})\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\\
+&=p_{i_{n-1}i_n}\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0),\\
+\shortintertext{donde en la segunda igualdad usamos la propiedad de Markov, y luego repetimos inductivamente hasta}
+&=p_{i_{n-1}i_n}p_{i_{n-2}i_{n-1}}\dotsm p_{i_1i_0}\pp(X_0=i_0)\\
+&=p_{i_{n-1}i_n}p_{i_{n-2}i_{n-1}}\dotsm p_{i_1i_0}\mu_{i_0},
+\end{align}
+que es lo que buscábamos.
+
+Para la conversa, probemos primero que $X$ es cadena de Markov, es decir, que satisface la propiedad de Markov.
+Usando la hipótesis tenemos
+\begin{align}
+\pp(X_{n+1}=i_{n+1}|X_{i_n},\dotsc,X_0=i_0)&=\frac{\pp(X_{n+1}=i_{n+1},\dotsc,X_0=i_0)}{\pp(X_{i_n},\dotsc,X_0=i_0)}\\
+&=\frac{\mu_{i_0}p_{i_0i_1}\dotsc p_{i_{n}i_{n+1}}}{\mu_{i_0}p_{i_0i_1}\dotsc p_{i_{n-1}i_n}}=p_{i_{n}i_{n+1}}.
+\end{align}
+Por otro lado tenemos
+\begin{align}
+\pp(X_{n+1}=i_{n+1}|X_n=i_n)&=\frac{\pp(X_{n+1}=i_{n+1},X_n=i_n)}{\pp(X_n=i_n)}\\
+&\textstyle=\frac1{\pp(X_n=i_n)}\sum_{i_0,\dotsc,i_{n-1}\in I}\pp(X_{n+1}=i_{n+1},\dotsc,X_0=i_0)\\
+&\textstyle=\frac1{\pp(X_n=i_n)}\sum_{i_0,\dotsc,i_{n-1}\in I}\mu_{i_0}p_{i_0i_1}\dotsm p_{i_{n-1}i_{n}}p_{i_{n}i_{n+1}}\\&
+\textstyle=\frac1{\pp(X_n=i_n)}\sum_{i_0,\dotsc,i_{n-1}\in I}\pp(X_0=i_0,\dotsc,X_{n}=i_{n})p_{i_{n}i_{n+1}},
+\end{align}
+donde usamos probabilidades totales y luego la hipótesis nuevamente.
+Dejando el factor $p_{i_{n}i_{n+1}}$ afuera, la última suma vale $\pp(X_n=i_n)$, y entonces deducimos que $\pp(X_{n+1}=i_{n+1}|X_n=i_n)=p_{i_{n}i_{n+1}}$.
+Juntando con lo anterior, esto nos da la propiedad de Markov, y además nos dice que $P$ es la matriz de transición de la cadena.
+Falta derivar la condición inicial, pero esto es directo de la hipótesis, tomando $n=1$ y sumando sobre $i_1\in I$ (\uexers: hágalo).
+\end{proof}
+
+Es natural preguntarse ahora por la conversa al resultado anterior: dados un vector de probabilidad $\mu$ y una matriz estocástica $P$, existe una cadena de Markov con condición inicial $\mu$ y matriz de transición $P$?
+
+\begin{thm}\tbf{Existencia de una cadena de Markov con $\mu$ y $P$ dados}
+Sea $\mu$ una medida de probabilidad sobre $I$ y $P$ una matriz estocástica indexada por $I$.
+Entonces existe un espacio de probabilidad $(\Omega,\cf,\pp)$ y una sucesión $X=\big(X_n\big)_{n\geq0}$ de variables aleatorias en este espacio tal que $X$ es una cadena de Markov con distribución inicial $\mu$ y matriz de transición $P$.
+\end{thm}
+
+La construcción de una cadena de Markov como en el teorema no es única.
+En la demostración usaremos la que se conoce como la \emph{construcción canónica}, después veremos otra que también es importante.
+
+\begin{sqgnote}
+Repase el Teorema de Consistencia de Kolmogorov (ver, por ej., \cite{medidaJSM}).
+\end{sqgnote}
+
+\begin{proof}
+Partimos eligiendo $\Omega$ como $I^\nn$ y $\cf=\cp(I)^\nn$ (la $\sigma$-álgebra producto); $(\Omega,\cf)$ elegidos así es el ``espacio medible canónico'' para la construcción de una cadena de Markov con $\mu$ y $P$ dados.
+Para definir $\pp$ especificamos su valor sobre cilindros mediante
+\begin{equation}\label{eq:cyl1}
+\pp\big(\{\omega\in I^\nn\!:\omega_{0}=i_0,\dotsc,\omega_n=i_n\}\big)=\mu_{i_0}p_{i_0i_1}\dotsm p_{i_{n-1}i_n}.
+\end{equation}
+Usando el Teorema de Consistencia de Kolmogorov se tiene que existe una única medida de probabilidad $\pp$ sobre todo $I^\nn$ que satisface \eqref{eq:cyl1}.
+
+\begin{exer}
+Verificar esto.
+\end{exer}
+
+\noindent Ahora definimos la variable aleatoria $X_n\!:\Omega\longrightarrow I$ mediante
+\[X_n(\omega)=\omega_n.\]
+Por construcción se tiene entonces que
+\begin{align}
+\pp(X_0=i_0,\dotsc,X_n=i_n)&=\pp(\{\omega\in I^\nn\!:X_0(\omega)=i_0,\dotsc,X_n(\omega)=i_n)\\
+&=\pp(\{\omega\in I^\nn\!:\omega_{0}=i_0,\dotsc,\omega_n=i_n\})=\mu_{i_0}p_{i_0i_1}\dotsm p_{i_{n-1}i_n}.
+\end{align}
+Gracias a la Prop. \ref{prop:caractMarkov} deducimos que $X=\big(X_n\big)_{n\geq0}$ satisface lo requerido.
+\end{proof}
+
+\begin{notation}
+Escribiremos $X\sim\CM(\mu,P)$ si $X$ es cadena de Markov con distribución inicial $\mu$ y matriz de transición $P$.
+Si no necesitamos especificar la distribución inicial, escribiremos $X\sim\CM(P)$.
+\end{notation}
+
+En la notación anterior no hacemos mención al espacio de probabilidad donde está definida la cadena.
+En la mayoría de los resultados del curso esto no es relevante; los resultados valdrán para cadenas construidas en cualquier espacio de probabilidad si se asumen las hipótesis necesarias sobre su distribución (i.e. sobre $\mu$ y $P$).
+Si uno lo desea, puede considerar entonces que todas nuestras cadenas están construidas usando la construcción canónica, salvo que se indique lo contrario.
+
+Hay una construcción alternativa que es importante y muy útil, pues permite identificar muchos procesos estocásticos como cadenas de Markov (y demostrar que lo son) fácilmente.
+La damos a continuación.
+
+\begin{thm}\tbf{Construcción directa de cadenas de Markov}
+Sea $(\Omega,\cf,\pp)$ una espacio de probabilidad en el cual están definidas variables aleatorias independientes $(U_n)_{n\geq0}$ con distribución Unif$\ts[0,1]$ y adicionalmente una variable aleatoria $\xi_0$ a valores $I$ con distribución $\mu$, independiente de todas las $U_n$.
+Sea $\Phi\!:\![0,1]\times I\longrightarrow I$ medible y definamos $\big(X_n\big)_{n\geq0}$ mediante
+\begin{equation}
+\begin{aligned}
+X_0&=\xi_0,\\
+X_{n+1}&=\Phi(U_n,X_n),\quad n\geq0.
+\end{aligned}\label{eq:constrDirMarkov}
+\end{equation}
+Entonces $X\sim\CM(\mu,P)$ con $P$ dada por $p_{ij}=\pp(\Phi(U_0,i)=j)$.
+\end{thm}
+
+\begin{proof}
+En clases. \ucmark
+\end{proof}
+
+\begin{rem}
+\leavevmode
+\begin{enumerate}
+\item Toda cadena de Markov puede construirse de esta manera, es decir, si $\mu$ y $P$ están dados entonces podemos darnos un espacio de probabilidad como en el teorema y encontrar un $\Phi$ que hace lo requerido.
+\lsep
+En efecto, supongamos que nos dan $X\sim\CM(\mu,P)$ y consideremos un espacio de probabilidad con $\xi_0$ distribuido según $\mu$ (a valores en $I$) y una secuencia $(U_n)_{n\geq0}$ como en el teorema.
+Debemos construir una función $\Phi$ que haga lo requerido.
+Para esto enumeramos $I$ como $I=\{i_\ell\}_{\ell\geq0}$ y definimos, para cada $k,\ell\in\nn$,
+\[a^{k}_\ell=\sum_{j=0}^\ell p_{i_ki_j}\quad\uptext{(que es }=\pp(X_1\in\{i_0,\dotsc,i_\ell\}|X_0=i_k)\uptext{)},\]
+y además $a^k_{-1}=0$.
+Los intervalos $\{[a^k_{\ell-1},a^k_\ell),\,\ell\geq0\}$, que son fijos (y deterministas) en función de $P$, particionan $[0,1]$, luego podemos definir $\Phi(u,i_k)=i_\ell$ donde $\ell$ es el único índice tal que $u\in[a^k_{\ell-1},a^k_\ell)$.
+Con esto tenemos
+\[\pp(\Phi(U_0,i_k)=i_\ell)=\pp(U_0\in[a^k_{\ell-1},a^k_\ell))=a^k_\ell-a^k_{\ell-1}=p_{i_ki_\ell},\]
+tal como requeríamos.
+\item La conclusión del teorema sigue valiendo si cambiamos las $U_n$ por cualquier otra sucesión de variables aleatorias i.i.d. (pero en ese caso no necesariamente vale el punto 1 anterior).
+\item La construcción puede pensarse como una versión para cadenas de Markov del siguiente resultado clásico de probabilidades: si $F$ es  la función de distribución (acumulada) de una variable aleatoria real, y si definimos $G\!:[0,1]\longrightarrow\rr$ mediante la fórmula $G(a)=\sup\{x\in\rr\!:F(x)<a)$, entonces si $U\sim$~Unif[0,1], se tiene que la variable aleatoria $G(U)$ tiene función de distribución $F$ ($G$ en este caso puede pensarse como una especie de inversa de la función inyectiva, pero no necesariamente biyectiva, $F$).
+\lsep 
+En particular, la construcción entrega una manera de extender este último resultado a variables aleatorias a valores en conjuntos numerables.
+\end{enumerate}
+\end{rem}
+
+\begin{exer}
+Demuestre el resultado mencionado en (iii) de la observación anterior y, en particular, que $G$ está bien definida (y coincide con $F^{-1}$ si $F$ es invertible).
+\end{exer}
+
+Una de las gracias del teorema anterior es que nos permite chequear fácilmente que procesos estocásticos concretos satisfacen la propiedad de Markov.
+
+\begin{ex}
+Volvemos a la marcha aleatoria simple del Ejem. \ref{ex:marchaZ}.
+Aquí podemos tomar $\xi_0=x$ y definir
+\[\Phi(u,i)=\begin{dcases*}
+i+1 & si $u\leq p$,\\
+i-1 & si $u>p$.
+\end{dcases*}\]
+El teorema nos asegura que el proceso estocástico construido de acuerdo a \eqref{eq:constrDirMarkov} es una cadena de Markov con matriz de transición requerida.
+\end{ex}
+
+\subsubsection{Probabilidades de transición}
+
+\begin{notation}
+Si $X\sim\CM(P)$ e $i\in I$ usaremos denotaremos por $\pp_i$ a la medida de probabilidad correspondiente a la cadena $X\sim\CM(\delta_i,P)$ con $\delta_i(j)=\uno{i=j}$ (es decir, a la cadena que parte en $i$).
+Usaremos $\ee_i$ para denotar la esperanza bajo $\pp_i$.
+\lsep
+Más generalmente, si $\mu$ es una distribución de probabilidad sobre $I$, usamos $\pp_\mu$ (y $\ee_\mu$) para denotar la distribución de la cadena $X\sim\CM(\mu,P)$.
+\end{notation}
+
+\begin{exer}
+Convencerse de que $\pp_\mu=\sum_{i\in I}\mu_i\pp_i$ y $\ee_\mu=\sum_{i\in I}\mu_i\ee_i$.
+\end{exer}
+
+Como ya mencionamos, $P$ es una matriz indexada por el conjunto numerable $I$.
+A menudo es útil interpretar a $P$ como un operador lineal que actúa sobre funciones $f\!:I\longrightarrow I$ de acuerdo a 
+\begin{equation}
+Pf(i)=\sum_{j\in I}p_{ij}f(j).\label{eq:Pf}
+\end{equation}
+La suma podría ser o no convergente, pero en muchos casos de interés lo es; por ejemplo si $f$ es acotada (por Teorema de Convergencia Dominada) o positiva (por Teorema de Convergencia Monótona, aunque en este caso debemos aceptar que la suma valga $\infty$).
+Cuando $I$ es finito, lo anterior corresponde exactamente a la acción de $P$ como matriz indexada por $I\times I$ al multiplicar a $f$ como vector indexado por $I$, y esta perspectiva podemos extenderla naturalmente al caso en que $I$ que infinito.
+\lsep
+En particular, podemos definir productos de matrices estocásticas mediante la fórmula usual, $(PQ)_{ij}=\sum_{k\in I}p_{ik}q_{kj}$, que en este caso siempre es convergente.
+Naturalmente denotamos también por $P^0$ a la matriz identidad, es decir $(P^0)_{ij}=\uno{i=j}$.
+\lsep
+La fórmula \eqref{eq:Pf} tiene una interpretación probabilística natural:
+\[Pf(i)=\ee_{i}(f(X_1))\]
+De manera similar podemos multiplicar a un vector de probabilidad $\mu$ sobre $I$ por la derecha, y obtenemos
+\[(\mu P)_j=\sum_{i\in I}\mu_ip_{ij}=\pp_\mu(X_1=j).\]
+\uexer: Convénzase de las dos fórmulas anteriores.
+
+\begin{defn}\tbf{Probabilidades de transición}
+Dada $X\sim\CM(P)$ y $n\in\nn$, denotamos por $P^{(n)}=(p^{(n)}_{ij})_{i,j\in I}$ a la \emph{matriz de transición en $n$ pasos} dada por
+\[p^{(n)}_{ij}=\pp_i(X_n=j).\]
+\end{defn}
+
+\begin{thm}\tbf{Ecuaciones de Chapman-Kolmogorov}
+Si $X\sim\CM(P)$ entonces para todo $m,n\geq0$ se tiene
+\[p^{(m+n)}_{ij}=\sum_{k\in I}p^{(m)}_{ik}p^{(n)}_{kj}.\]
+En particular,
+\[P^{(n)}=P^n\]
+para todo $n\geq0$.
+\end{thm}
+
+\begin{proof}
+\begin{align}
+p^{(m+n)}_{ij}&=\pp_i(X_{m+n}=j)=\sum_{k\in I}\pp_i(X_{m+n}=j|X_m=k)\pp_i(X_m=k)\\
+&=\sum_{k\in I}\pp(X_{m+n}=j|X_0=i,X_m=k)\pp_i(X_m=k)=\sum_{k\in I}\pp(X_{m+n}=j|X_m=k)\pp_i(X_m=k)\hspace{-18pt}\\
+&=\sum_{k\in I}\pp_k(X_{n}=j)\pp_i(X_m=k)=\sum_{k\in I}p^{(m)}_{ik}p^{(n)}_{kj}.
+\end{align}
+La segunda afirmación sale de la primera por inducción, y además claramente implica la primera por definición de potencia de matrices.
+\end{proof}
+
+\subsubsection{Versión general de la propiedad de Markov}
+
+\begin{defn}\tbf{Filtración}
+Sea $(\Omega,\cf)$ un espacio medible.
+Una \emph{filtración} en este espacio es una familia $\big(\cf_n\big)_{n\geq0}$ de sub $\sigma$-álgebras de $\cf$ tal que $\cf_n\subseteq\cf_{n+1}$ para cada $n\geq0$.
+\lsep
+Si $X$ es un proceso estocástico construido en un espacio de probabilidad $(\Omega,\cf,\pp)$, la \emph{filtración natural} asociada a $X$ es aquella dada por
+\[\cf_n=\sigma(\{X_0,\dotsc,X_n\}).\]
+\end{defn}
+
+La filtración natural es aquella filtración más pequeña que tal que $X_0,\dotsc,X_n$ es $\cf_n$-medible para cada $n\geq0$, en el sentido de que para cualquier otra filtración $\big(\cg_n\big)_{n\geq0}$ que satisfaga lo mismo necesariamente debe tenerse que $\cg_n\supseteq\cf_n$ para cada $n\geq0$.
+\begin{quote}
+Durante todo el curso, $\big(\cf_n\big)_{n\geq0}$ denotará la filtración natural asociada al proceso estocástico que se esté considerando.
+\end{quote}
+\lsep
+$\cf_n$ nos permite representar la información contenida en la evolución del proceso hasta tiempo $n$.
+
+\begin{notation}
+Si $\cg$ es sub $\sigma$-álgebra de $\cf$ y $A\in\cf$, escribimos
+\[\pp(A|\cg)=\ee(\uno{A}|\cg).\]
+\end{notation}
+
+En el siguiente resultado reinterpretamos la definición y caracterización de cadenas de Markov en el lenguaje de esperanzas condicionales:
+
+\begin{prop}
+Sea $X$ un proceso estocástico (y $\big(\cf_n\big)_{n\geq0}$ su filtración natural asociada).
+Son equivalentes:
+\begin{enumerate}[label=\uptext{(\roman*)}]
+\item $X$ es cadena de Markov (homogénea).
+\item $\pp(X_{n+1}=j|\cf_n)=\sum_{i\in I}\pp(X_{n+1}=j|X_n=i)\uno{X_n=i}$.
+\item $\pp(X_{n+1}=j|\cf_n)$ es $\sigma(\{X_n\})$-medible.
+\end{enumerate}	
+En particular, si $X\sim\CM(P)$ se tiene que
+\[\pp(X_{n+1}=j|\cf_n)(\omega)=p_{X_n(\omega),j}\]
+(donde para mayor claridad hemos incluido los $\omega$'s, aunque casi nunca los escribiremos).
+\end{prop}
+
+\begin{rem}\label{rem:abusonot}
+A veces abusaremos notación y escribiremos la última igualdad de la siguiente forma:
+\[\pp(X_{n+1}=j|\cf_n)(\omega)=\pp_{X_n(\omega)}(X_1=j).\]
+En estos casos, el lado derecho debe interpretarse como $\pp_{X_n(\omega)}(\tilde X_1=j)$ donde $\tilde X$ es una copia independiente de $X$.
+\end{rem}
+
+\begin{proof}
+Tenemos que $\cf_n=\sigma(\{X_0,\dotsc,X_n\})=\sigma\big(\big\{\bigcap_{j=0}^nX_j^{-1}(\{i_j\}),\,i_0,\dotsc,i_n\in I\big\}\big)$.
+La lista de conjuntos que aparece generando la $\sigma$-álgebra es una partición de $\Omega$ y luego, gracias a la Prop. \ref{prop:totProbEst},
+\begin{align}
+\pp(X_{n+1}=j|\cf_n)&=\sum_{i_0,\dotsc,i_n\in I}\frac{\pp(X_0=i_0,\dotsc,X_n=i_n,X_{n+1}=j)}{\pp(X_0=i_0,\dotsc,X_n=i_n)}\uno{X_0=i_0,\dotsc,X_n=i_n}\\
+&=\sum_{i_0,\dotsc,i_n\in I}\pp(X_{n+1}=j|X_0=i_0,\dotsc,X_n=i_n)\uno{X_0=i_0,\dotsc,X_n=i_n}.
+\end{align}
+El lado derecho es igual a $\sum_{i_n\in I}\pp(X_{n+1}=j|X_n=i_n)\uno{X_n=i_n}$ si y sólo si $\pp(X_{n+1}=j|X_0=i_0,\dotsc,X_n=i_n)=\pp(X_{n+1}=j|X_n=i_n)$ (\uexers: demuestre esta equivalencia), que es justamente la propiedad de Markov.
+Esto nos da la equivalencia de (i) y (ii).
+
+Que (ii) implica (iii) es directo.
+Para la conversa usamos la hipótesis de medibilidad para escribir
+\begin{align}
+\pp(X_{n+1}=j|\cf_n)&=\ee(\pp(X_{n+1}=j|\cf_n)|\sigma(\{X_n\}))=\ee(\ee(\uno{X_{n+1}=j}|\cf_n)|\sigma(\{X_n\}))\\
+&=\ee(\uno{X_{n+1}=j}|\sigma(\{X_n\})).
+\end{align}
+Desarrollando la última esperanza condicional como en la primera equivalencia deducimos que (ii) se tiene.
+\end{proof}
+
+La siguiente es una versión general de la propiedad de Markov.
+
+\begin{thm}\label{thm:propMarkGen}
+Sea $X$ cadena de Markov (homogénea) y sea $f\!:I^\nn\longrightarrow\rr$ medible y acotada.
+Entonces
+\[\ee\big(f(X_{n+1},X_{n+2}\dotsc)\big|\cf_n\big)=\ee_{X_n}\tsm\big(f(X_1,X_2,\dotsc)\big).\]
+\end{thm}
+
+\begin{rem}
+\leavevmode
+\begin{enumerate}[label=(\roman*)]
+\item Lo anterior es una equivalencia (\uexers{}: demuéstrelo).
+\item Acá hemos abusado notación nuevamente, ver la Obs. \ref{rem:abusonot}, el significado de lo que escribimos es análogo.
+\item Se tiene también que $\ee\big(f(X_{n},X_{n+1},\dotsc)\big|\cf_n\big)=\ee_{X_n}\tsm\big(f(X_0,X_1,\dotsc)\big)$, la demostración es la misma (o puede obtenerse como corolario).
+\end{enumerate}
+\end{rem}
+
+\begin{proof}
+Partiremos probando primero por inducción que la propiedad se tiene para el conjunto ${\cal R}$ de funciones de la forma $f(i_1,i_2,\dotsc)=f_1(i_1)f_2(i_2)\dotsm f_m(i_m)$, donde $m\geq1$ y $f_1,\dotsc,f_m\!:I\longrightarrow\rr$ son medibles y acotadas.
+
+\begin{exer}
+Use la propiedad de Markov para probar el caso base, $m=1$.
+\end{exer}
+
+Ahora hacemos el paso inductivo, considerando el caso $m+1$.
+Tenemos
+\begin{align}
+\ee\big(f(X_{n+1},X_{n+2},\dotsc)\big|\cf_n\big)&=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m+1}(X_{n+m+1})\big|\cf_n\big)\\
+&=\ee\big(\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m+1}(X_{n+m+1})\big|\cf_{n+m}\big)\big|\cf_n\big)\\
+&=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m}(X_{n+m})\ee\big(f_{m+1}(X_{m+1})\big|\cf_{n+m}\big)\big|\cf_n\big)\hskip-15pt\\
+&=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m}(X_{n+m})\ee_{X_{n+m}}\big(f_{m+1}(X_1)\big)\big|\cf_n\big),
+\end{align}
+donde usamos el caso base en la última igualdad.
+Notemos que el último factor dentro de la esperanza depende ahora solo de $X_{n+m}$, al igual que el que lo precede.
+Entonces si definimos $\tilde f_m(j)=f_m(j)\ee_{j}\big(f_1(X_1)\big)$ y usamos la hipótesis inductiva, lo anterior es igual a
+\begin{align}
+&\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm \tilde f_{m}(X_{n+m})\big|\cf_n\big)
+=\ee_{X_n}\big(f_1(X_{1})f_2(X_{2})\dotsm \tilde f_{m}(X_{m})\big)\\
+&\qquad=\ee_{X_n}\big(f_1(X_{1})f_2(X_{2})\dotsm f_{m}(X_{m})\ee_{X_{m}}\big(f_{m+1}(X_1)\big)\big)\\
+&\qquad=\ee_{X_n}\big(f_1(X_{1})f_2(X_{2})\dotsm f_{m}(X_{m})\ee\big(f_{m+1}(X_{m+1})\big|\cf_{n+m}\big)\big)\\
+&\qquad=\ee_{X_n}\big(\ee\big(f_1(X_{1})f_2(X_{2})\dotsm f_{m}(X_{m})f_{m+1}(X_{m+1})\big|\cf_{n+m}\big)\big)\\
+&\qquad=\ee_{X_n}\big(f_1(X_{1})f_2(X_{2})\dotsm f_{m+1}(X_{m+1})\big),
+\end{align}
+que es lo que queríamos.
+
+Ahora concluimos.
+Sea ${\cal A}$ el conjunto de funciones $f\!:I^\nn\longrightarrow\rr$ medibles y acotadas que satisfacen la igualdad que queremos probar.
+${\cal A}$ claramente es un espacio vectorial, contiene a las constantes, y por Teorema de la Clase Monótona, si $(f_n)_{n\geq0}\subset{\cal A}$ con $f_n\geq0$ satisface $f_n\nearrow f$ entonces $f\in{\cal A}$.
+Arriba probamos que ${\cal R}\subseteq{\cal A}$, y es evidente que ${\cal R}$ es cerrado bajo producto, y luego por la forma funcional del Teorema de la Clase Monótona, $\sigma({\cal R})\subseteq{\cal A}$.
+Pero $\sigma({\cal R})$ es claramente todo el espacio de funciones medibles y acotadas de $I^\nn$ en $\rr$, lo que termina la demostración.
+\end{proof}
+
+\subsection{Propiedad de Markov fuerte}
+
+Nuestro objetivo ahora es extender la propiedad de Markov a tiempos aleatorios.
+Lo primero es definir y estudiar una clase adecuada de tiempos aleatorios.
+intuitivamente, si queremos que la propiedad de Markov siga valiendo, lo que necesitamos es que estos tiempos solo dependan de la trayectoria del proceso hasta el presente, pero no de su futuro.
+A continuación veremos la manera de hacer esto preciso.
+
+\subsubsection{Tiempos de parada}
+
+\begin{defn}\tbf{Tiempos de parada}
+Sea $(\Omega,\cf,\pp,(\cf_n)_{n\geq0})$ un \emph{espacio de probabilidad filtrado}, es decir, un espacio de probabilidad $(\Omega,\cf,\pp)$ con una filtración $(\cf_n)_{n\geq0}$ definida sobre él.
+Decimos que una variable aleatoria $\tau\!:\Omega\longrightarrow\nn\cup\{\infty\}$ es un \emph{tiempo de parada} si
+\[\{\tau\leq n\}\in\cf_n\quad\forall~n\geq0.\]
+Abreviaremos tiempo de parada como t.d.p.
+\end{defn}
+
+\begin{ex}\label{ex:taua}
+Si $X$ es una marcha aleatoria simple y $a\in\zz$, $\tau_a=\inf\{m\geq0\!:X_m\geq a\}$ es un t.d.p.
+\end{ex}
+
+\begin{exer}
+Demuestre que la propiedad que define t.d.p. es equivalente a pedir que $\{\tau=n\}\in\cf_n$ para todo $n\geq0$.
+\end{exer}
+
+\begin{prop}%\tbf{Propiedades de tiempos de parada}
+\leavevmode
+\begin{enumerate}[label=\uptext{(\arabic*)}]
+\item Si $\tau_1,\tau_2$ son t.d.p. entonces $\tau_1\wedge\tau_2\coloneqq\min\{\tau_1,\tau_2\}$ y $\tau_1\vee\tau_2\coloneqq\max\{\tau_1,\tau_2\}$ son t.d.p.
+\item Si $(\tau_n)_{n\geq0}$ son t.d.p. entonces $\liminf_n\tau_n$, $\limsup_n\tau_n$, $\inf_n\tau_n$ y $\sup_n\tau_n$ son t.d.p.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\uexer.
+\end{proof}
+
+Dada una filtración $(\cf_n)_{n\geq0}$, escribiremos
+\[\cf_\infty=\lim_{n\to\infty}\cf_n=\bigcup_{n\geq0}\cf_n.\]
+En el caso de la filtración natural asociada a un proceso estocástico, esto corresponde intuitivamente a la información contenida en la trayectoria completa del proceso.
+
+\begin{defn}
+Dado un espacio de probabilidad filtrado y un t.d.p. $\tau$, definimos
+\[\cf_\tau=\big\{A\in\cf_\infty\!:A\cap\{\tau\leq n\}\in\cf_n~\forall n\geq0\}.\]
+\end{defn}
+
+\begin{ex}
+Probar que si $\tau=n$, entonces con la definición anterior se cumple $\cf_\tau=\cf_n$.
+\end{ex}
+
+\begin{prop}\tbf{Propiedades de $\cf_\tau$}
+Sean $\tau$, $\tau_1$, $\tau_2$ t.d.p.
+\begin{enumerate}[label=\uptext{(\arabic*)}]
+\item $\cf_\tau$ es $\sigma$-álgebra.
+\item $\tau$ es $\cf_\tau$-medible.
+\item Si $\tau_1(\omega)\leq\tau_2(\omega)$ para cada $\omega\in\Omega$ entonces $\cf_{\tau_1}\subseteq\cf_{\tau_2}$.
+\item $\cf_\tau=\big\{A\in\cf_\infty\!:A\cap\{\tau= n\}\in\cf_n~\forall n\geq0\}$.
+\item $A\in\cf_\tau$ si y sólo si existe $(A_n)_{n\in\nn\cup\{\infty\}}$ con $A_n\in\cf_n$ tal que $A=\bigcup_{n\in\nn\cup\{\infty\}}A_n\cap\{\tau=n\}$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Consideremos (1).
+Claramente $\emptyset,\Omega\in\cf_\tau$.
+Ahora supongamos que $A\in\cf_\tau$.
+Como $A\cap\{\tau\leq n\}\in\cf_n$ para cada $n$, tomando complemento tenemos $A^{\sf c}\cup\{\tau>n\}\in\cf_n$ para cada $n$.
+Pero además $\{\tau\leq n\}\in\cf_n$, y entonces $\{\tau\leq n\}\cap\big(A^{\sf c}\cup\{\tau>n\}\big)=A^{\sf c}\cap\{\tau\leq n\}\in\cf_n$.
+Luego $A^{\sf c}\in\cf_\tau$.
+\uexer: verificar la propiedad de uniones numerables para terminar la demostración de (1).
+\uexer: Demostrar (2), (3) y (4).
+
+Para demostrar (5) tomamos $A\in\cf_\tau$ y escribimos
+\[A=\bigcup_{n\in\nn\cup\{\infty\}}A\cap\{\tau=n\}=\bigcup_{n\in\nn\cup\{\infty\}}A_n\cap\{\tau=n\}\]
+con $A_n=A\cap\{\tau=n\}$.
+La otra implicancia es aún más directa.
+\end{proof}
+
+Terminamos esta parte con un resultado que será útil a continuación, y que es muy similar a la propiedad (5) anterior y se demuestra de manera análoga (\uexers: hágalo).
+
+\begin{lem}\label{lem:Ymed}
+$Y\!:\Omega\longrightarrow\rr$ es $\cf_\tau$-medible si y sólo si existe una sucesión $(Y_n)_{n\in\nn\cup\{\infty\}}$ de variables aleatorias, con $Y_n$ $\cf_n$-medible, tal que $Y=\sum_{n\in\nn\cup\{\infty\}}Y_n\uno{\tau=n}$.
+\end{lem}
+
+\subsubsection{Propiedad de Markov fuerte}
+
+Con las definiciones y resultados anteriores ya estamos en condiciones de establecer la versión esencialmente más fuerte de la propiedad de Markov disponible para cadenas de Markov.
+
+\begin{thm}\tbf{Propiedad de Markov fuerte}
+Sea $X$ cadena de Markov (homogénea) y sea $f\!:I^\nn\longrightarrow\rr$ medible y acotada.
+Sea $\tau$ un tiempo de parada.
+Entonces
+\begin{equation}
+\ee\big(f(X_{\tau},X_{\tau+1}\dotsc)\big|\cf_\tau\big)\uno{\tau<\infty}=\ee_{X_\tau}\tsm\big(f(X_0,X_1,\dotsc)\big)\uno{\tau<\infty}.\label{eq:propMarkF}
+\end{equation}
+\end{thm}
+
+Esto es, la misma propiedad demostrada en el Teo. \ref{thm:propMarkGen} (y todas las que le preceden, que son casos particulares de ella) valen también en el caso de tiempos de parada $\tau$, en el evento en que $\tau$ es finito (la multiplicación por $\uno{\tau<\infty}$ significa que la igualdad de las dos esperanzas se establece para $\omega\in\Omega$ tal que $\tau(\omega)<\infty$; en caso contrario las indicatrices hacen que la igualdad sea trivial).
+
+\begin{proof}
+La idea es reducirnos a la propiedad Markov ya conocida.
+Sea $\varphi\!:I\longrightarrow\rr$ dada por $\varphi(i)=\ee_i(f(X_0,X_1,\dotsc))$.
+Como $f$ es $\cp(I^\nn)$-medible y $X_n$ es $\cf_n$-medible, $\varphi(X_n)$ es $\cf_n$-medible.
+Luego gracias al Lem. \ref{lem:Ymed} tenemos que $\uno{\tau<\infty}\varphi(X_\tau)$, que es igual a $\sum_{n\geq0}\uno{\tau=n}\varphi(X_n)$, es $\cf_\tau$-medible.
+
+En la expresión del lado izquierdo de \eqref{eq:propMarkF} podemos mover la indicatriz $\uno{\tau<\infty}$ adentro de la esperanza condicional (pues $\{\tau<\infty\}\in\cf_\tau$).
+Luego la propiedad que queremos probar es equivalente, por definición de la esperanza condicional, a pedir que para todo $A\in\cf_\tau$
+\[\ee\big(f(X_{\tau},X_{\tau+1}\dotsc)\uno{A}\uno{\tau<\infty}\big)=\ee\big(\ee_{X_\tau}\tsm\big(f(X_0,X_1,\dotsc)\big)\uno{A}\uno{\tau<\infty}\big).\]
+El lado derecho es igual a $\ee\big(\varphi(X_\tau)\uno{A}\uno{\tau<\infty}\big)$, y luego descomponiendo de acuerdo al valor de $\tau$, lo anterior es lo mismo que probar que 
+\[\ee\big(f(X_{n},X_{n+1}\dotsc)\uno{A}\uno{\tau=n}\big)=\ee\big(\ee_{X_n}\tsm\big(f(X_0,X_1,\dotsc)\big)\uno{A}\uno{\tau=n}\big)\]
+para cada $A\in\cf_\tau$ y cada $n\geq0$, gracias a que $f$ es acotada y el Teorema de Convergencia Dominada.
+Pero $A\cap\{\tau=n\}\in\cf_n$, y entonces por definición de esperanza condicional nuevamente y la propiedad de Markov usual (Teo. \ref{thm:propMarkGen}) la igualdad anterior se tiene, lo que termina la demostración.
+\end{proof}
+
+\begin{rem}
+Hemos escrito la propiedad de Markov para $f$ acotada por simplicidad, pero la demostración puede adaptarse a otros casos, por ejemplo $f\geq0$ usando Teorema de Convergencia Monótona.
+\end{rem}
+
+\begin{ex}
+La hipótesis de que $\tau$ sea t.d.p. es necesaria en el teorema anterior: en general la propiedad no vale para tiempos aleatorios que no sean tiempos de parada.
+Por ejemplo podemos considerar la marcha aleatoria simple en $\zz$ del Ej. \ref{ex:marchaZ} partiendo desde $0$ y definir el tiempo $\sigma=\sup\{k\geq0\!:X_k\leq0\}$, que claramente depende del futuro de la trayectoria (pues necesita saber que la marcha nunca más será negativa), por lo que no es tiempo de parada.
+Como la marcha parte en $0$ se tiene que si $\sigma<\infty$ entonces $X_\sigma=0$ (recordando que la marcha solo se mueve con pasos de largo $\pm1$).
+Si la propiedad de Markov se tuviera, entonces por ejemplo tendríamos $\ee(X_{\sigma+1}|\cf_\sigma)\uno{\sigma<\infty}=\ee_{X_\sigma}(X_{1})\uno{\sigma<\infty}=\ee_{0}(X_{1})\uno{\sigma<\infty}=(p-q)\uno{\sigma<\infty}$.
+Pero claramente $\ee(X_{\sigma+1}|\cf_\sigma)\uno{\sigma<\infty}=\uno{\sigma<\infty}$, porque si a tiempo $\sigma$ es la última vez que estuvimos en $\zz_{\leq0}$, entonces un instante de tiempo después necesariamente estaremos en $1$.
+Como $p-q<1$ si $p<1$, vemos que esto no es posible.
+\end{ex}
+
+\subsubsection{Ejemplo: probabilidades de pasada}
+
+La propiedad de Markov fuerte es una de las herramientas más importantes en el estudio de cadenas de Markov.
+Para ilustrar esto veremos un ejemplo.
+Consideremos de nuevo la marcha aleatoria simple en $\zz$ del Ej. \ref{ex:marchaZ} partiendo desde $0$ y definamos el siguiente tiempo de parada (ya introducido en el Ej. \ref{ex:taua}): para $a>0$ dado,
+\[\tau_{a}=\inf\{n\geq0\!:X_n\geq a\},\]
+es decir, el primer tiempo en que la marcha alcanza el nivel $a$.
+La pregunta que queremos responder es la siguiente: ¿cuál es la probabilidad de que la cadena llegue a $a$ alguna vez, es decir, del evento $\{\tau_a<\infty\}$?
+
+El truco es considerar la función generadora de momentos de $\tau_a$: para $s\in(0,1)$ definimos
+\begin{equation}\label{eq:phia}
+\phi_a(s)=\ee_0(s^{\tau_a})=\sum_{k\geq0}s^k\pp_0(\tau_a=k).
+\end{equation}
+Partimos escribiendo
+\[\phi_a(s)=\ee_0(s^{\tau_a}\uno{\tau_1<\infty})+\ee_0(s^{\tau_a}\uno{\tau_1=\infty})=\ee_0(s^{\tau_a}\uno{\tau_1<\infty}),\]
+pues si la marcha nunca alcanza el nivel $1$ (que es lo que indica el evento $\{\tau_1=\infty\}$) entonces tampoco podrá alcanzar el nivel $a\geq1$, lo que implica $\tau_a=\infty$ y luego $s^{\tau_a}=0$.
+Ahora usando propiedades de la esperanza condicional tenemos
+\[\phi_a(s)=\ee_0(\ee(s^{\tau_a}\uno{\tau_1<\infty}|\cf_{\tau_1}))=\ee_0(\ee(s^{\tau_a}|\cf_{\tau_1})\uno{\tau_1<\infty})=\ee_0(\ee(s^{\tau_a-\tau_1}|\cf_{\tau_1})s^{\tau_1}\uno{\tau_1<\infty}).\]
+Ahora notamos dos cosas: 1. $s^{\tau_a-\tau_1}$ es acotado (por $1$, porque $\tau_a\geq\tau_1$), y 2. la variable aleatoria $\tau_a-\tau_1$ solo depende de la trayectoria de la marcha aleatoria a partir de tiempo $\tau_1$ (pues es el tiempo que le toma llegar al nivel $a$ luego de haber alcanzado el nivel $1$, que sucede precisamente a tiempo $\tau_11$).
+Luego podemos aplicar la propiedad de Markov fuerte al lado derecho anterior para deducir que es igual a
+\[\ee_0(\ee_{X_{\tau_1}}(s^{\tau_a})s^{\tau_1}\uno{\tau_1<\infty}).\]
+
+\begin{exer}
+Justifique esto cuidadosamente.
+\end{exer}
+
+Lo anterior es igual a
+\[\ee_0(\ee_{1}(s^{\tau_a})s^{\tau_1}\uno{\tau_1<\infty})=\ee_{1}(s^{\tau_a})\ee_0(s^{\tau_1}\uno{\tau_1<\infty})=\ee_{0}(s^{\tau_{a-1}})\ee_0(s^{\tau_1})=\phi_{a-1}(s)\phi_1(s),\]
+donde usamos que la marcha aleatoria es invariante bajo traslaciones, por lo que el tiempo de pasada a $a$ partiendo desde $1$ tiene la misma distribución que el tiempo de pasada a $a-1$ partiendo desde $0$.
+Si repetimos esto inductivamente obtenemos 
+\[\phi_a(s)=\phi_1(s)^a.\]
+
+Ahora descomponiendo de acuerdo al primer paso, tenemos
+\[\phi_1(s)=p\tts\ee_0(s^{\tau_1}|X_1=1)+q\tts\ee_0(s^{\tau_1}|X_1=-1)=p\tts s+q\tts\ee_{-1}(s^{\tau_1+1}),\]
+donde aplicamos la propiedad de Markov (débil); \uexers: justifique este último paso; ¿por qué sale un término $+1$ en el último exponente?
+Para la última esperanza usamos de nuevo la invarianza bajo traslación de la marcha, de forma que es igual a $\ee_{0}(s^{\tau_2+1})=s\phi_2(s)=s\phi_1(s)^2$ (lo que habíamos probado recién) y obtenemos $\phi_1(s)=ps+qs\phi_1(s)^2$, lo que lleva a 
+\[\phi_1(s)=\frac{1\pm\sqrt{1-4pqs^2}}{2qs}.\]
+Un análisis sencillo muestra que el lado derecho anterior está en $[0,1]$ para todo $s\in[0,1]$ (como debe ser por de $\phi_1(s)$) para la raíz con signo menos, y de acá concluimos que
+\[\phi_a(s)=\left(\frac{1-\sqrt{1-4pqs^2}}{2qs}\right)^a.\]
+De aquí podemos sacar por ejemplo la distribución de $\tau_a$, mediante
+\[\pp_0(\tau_a=k)=\frac{1}{k!}\frac{\d^k}{\d s^k}\phi_a(s)\big|_{s=0}\]
+(comparando con el lado derecho de \eqref{eq:phia} y usando unicidad de la expansión en serie de potencias en $s$).
+
+Para el problema que nos interesaba tenemos, usando \eqref{eq:phia} nuevamente,
+\[\pp_0(\tau_a<\infty)=\sum_{k\geq0}\pp_0(\tau_a=k)=\lim_{s\to1^-}\phi_a(s)=\left(\frac{1-\sqrt{1-4pq}}{2q}\right).\]
+Usando ahora $q=1-p$, el argumento de la raíz es $(1-2p)^2$, y de esto concluimos que
+\[\pp_0(\tau_a<\infty)=
+\begin{dcases*}
+\left(\frac{p}{q}\right)^a & si $p<\tfrac12$,\\
+1 & si $p\geq\tfrac12$.
+\end{dcases*}\]
+Notar que, como debiera esperarse, cuando la probabilidad de salto a la derecha es mayor que $\frac12$, la marcha alcanza cualquier nivel $a>0$ eventualmente con probabilidad $1$.
+Lo que también se concluye, y que es quizás menos claro intuitivamente, es que para el caso $p<\frac12$ siempre hay una probabilidad positiva de nunca alcanzar $a$.
+
+\subsection{Probabilidades de absorción}
+
+Ver P2 aux. 3 \ucmark.
+
+\subsection{Clasificación de estados}
+
+\subsubsection{Clases e irreducibilidad}
+
+\begin{defn}
+Sea $X$ una cadena de Markov y sean $i,j\in I$.
+Decimos que \emph{$i$ lleva a $j$}, y escribimos $i\to j$, si $\pp_i(\exists n\geq0\!:X_n=j)>0$.
+Decimos que \emph{$i$ y $j$ se comunican}, y escribimos $i\leftrightarrow j$, si $i\to j$ y $j\to i$.
+\end{defn}
+
+\begin{ex}
+Consideremos una cadena de Markov a valores en $I=\{1,2,3,4,5\}$.
+En el siguiente grafo dirigido representamos por aristas entre nodos las transiciones que suceden con probabilidad estrictamente positiva (es decir, ponemos una arista de $i$ a $j$ si y solo si $p_{ij}>0$); usaremos esta convención varias veces a lo largo de las notas.
+\begin{center}
+\begin{tikzpicture}[-latex,auto,node distance=1.2cm and 2.5cm,on grid,semithick,state/.style ={circle,top color=white,draw}]
+\node[state] (A) {\footnotesize$1$};
+\node[state] (B) [right =of A] {\footnotesize$2$};
+\node[state] (C) [right =of B] {\footnotesize$3$};
+\node[state] (D) [below =of A] {\footnotesize$4$};
+\node[state] (E) [right =of D] {\footnotesize$5$};
+\path (A) edge [bend left =15] (B);
+\path (B) edge [bend left =15] (C);
+\path (C) edge [bend left =15] (B);
+\path (A) edge [bend right =15] (D);
+\path (D) edge [bend left =15] (E);
+% \path (A) edge [bend right = -15] node[below =0.15 cm] {$1/2$} (C);
+% \path (A) edge [bend left =25] node[above] {$1/4$} (B);
+% \path (B) edge [bend left =15] node[below =0.15 cm] {$1/2$} (A);
+% \path (C) edge [bend left =15] node[below =0.15 cm] {$1/2$} (B);
+% \path (B) edge [bend right = -25] node[below =0.15 cm] {$1/2$} (C);
+\end{tikzpicture}
+\end{center}
+Para esta cadena tenemos $1\to2$, $2\leftrightarrow3$ y $1\to5$, pero $4\nrightarrow2$.
+\end{ex}
+
+\begin{prop}
+Las siguientes son equivalentes:
+\begin{enumerate}[label=\uptext{(\arabic*)}]
+\item $i\to j$.
+\item Existen $n\in\nn$ e $i_1,\dotsc,i_n$ tales que $p_{i_1i_2}p_{i_2i_3}\dotsm p_{i_{n-1}i_n}>0$.
+\item Existe $n\geq0$ tal que $\pp_i(X_n=j)>0$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+
+Que (2) implica (1) es directo.
+Para ver que (1) implica (3) probamos la contrarecíproca: asumiendo que $\pp_i(X_n=j)=0$ para todo $n$, tenemos que 
+\[\pp_i(\exists n\geq0\!:X_n=j)\leq\sum_{n\geq0}\pp_i(X_n=j)=0.\]
+Veamos ahora que (3) implica (2): tenemos que
+\[0<\pp_i(X_n=j)=\!\!\sum_{i_1,\dotsc,i_{n-1}}\pp_i(X_1=i_1,\dotsc,X_{n-1}=i_{n-1},X_n=j)=\!\!\sum_{i_1,\dotsc,i_{n-1}}p_{ii_1}p_{i_1i_2}\dotsm p_{i_{n-1}j},\]
+y luego alguno de los sumandos debe ser positivo.
+\end{proof}
+
+\begin{prop}
+La relación $\to$ es reflexiva y transitiva y la relación $\leftrightarrow$ es de equivalencia.
+\end{prop}
+
+\begin{proof}
+Demostremos que $\to$ es transitiva, el resto queda de ejercicio.
+Supongamos que $i\to j$ y $j\to k$, de manera que por la proposición anterior existen $m,n\in\nn$ tales que $p^{(m)}_{ij}>0$ y $p^{(n)}_{jk}>0$.
+Por Chapman-Kolmogorov tenemos $p^{(m+n)}_{ik}=\sum_{\ell\in\nn}p^{(m)}_{i\ell}p^{(n)}_{\ell k}\geq p^{(m)}_{ij}p^{(n)}_{jk}>0$, y entonces $i\to k$.
+\end{proof}
+
+\begin{defn}\tbf{Clase y clase cerrada}
+La \emph{clase} de $i\in I$, que denotaremos por $C(i)$, es la clase de equivalencia de $i$ en $I$ con respecto a la relación $\leftrightarrow$.
+Decimos que una clase $C$ es \emph{cerrada} si cada vez que $i\in C$ y $i\to j$ se tiene necesariamente que $j\in C$.
+\end{defn}
+
+\begin{ex}
+\leavevmode
+\begin{center}
+\begin{tikzpicture}[-latex,auto,node distance=0.8cm and 3cm,on grid,semithick,state/.style ={circle,top color=white,draw}]
+\node[state] (C) {\footnotesize$3$};
+\node[state] (A) [above left =of C] {\footnotesize$1$};
+\node[state] (B) [below left =of C] {\footnotesize$2$};
+\node[state] (D) [above right =of C] {\footnotesize$4$};
+\node[state] (E) [below right =of C] {\footnotesize$5$};
+\node[state] (F) [right =of E] {\footnotesize$6$};
+\path (A) edge [bend right =15] (B);
+\path (B) edge [bend right =15] (A);
+\path (B) edge [bend left =15] (C);
+\path (C) edge [bend left =15] (D);
+\path (C) edge [bend right =15] (E);
+\path (E) edge [bend left =15] (F);
+\path (F) edge [bend left =15] (E);
+% \path (A) edge [bend right = -15] node[below =0.15 cm] {$1/2$} (C);
+% \path (A) edge [bend left =25] node[above] {$1/4$} (B);
+% \path (B) edge [bend left =15] node[below =0.15 cm] {$1/2$} (A);
+% \path (C) edge [bend left =15] node[below =0.15 cm] {$1/2$} (B);
+% \path (B) edge [bend right = -25] node[below =0.15 cm] {$1/2$} (C);
+\end{tikzpicture}
+\end{center}
+Para esta cadena hay tres clases: $\{1,2,3\}$, $\{4\}$, $\{5,6\}$.
+Las últimas dos son cerradas.
+\end{ex}
+
+\begin{defn}\tbf{Irreducibilidad}
+Decimos que una cadena de Markov $X$ es \emph{irreducible}, o alternativamente que su matriz de transición $P$ lo es, si $X$ tiene una única clase.
+\end{defn}
+
+Notar que si $X$ es irreducible, su única clase es necesariamente cerrada.
+
+\begin{ex}\label{ex:irred}
+\leavevmode
+\begin{center}
+\begin{tikzpicture}[-latex,auto,node distance=1cm and 2.5cm,on grid,semithick,state/.style={circle,draw,fill=black,scale=0.5}]
+\node[state] (A) {};
+\node[state] (B) [right=of A] {};
+\node[state] (C) [below=of A] {};
+\node[state] (D) [below=of B] {};
+\path (A) edge [bend left=15] (B);
+\path (B) edge [bend left=15] (D);
+\path (D) edge [bend left=15] (B);
+\path (D) edge [bend left=15] (C);
+\path (C) edge [bend left=15] (A);
+\path (D) edge [bend left=5] (A);
+\end{tikzpicture}
+\end{center}
+Esta cadena es irreducible.
+La marcha aleatoria simple en $\zz$ también lo es.
+Pero
+\begin{center}
+\begin{tikzpicture}[-latex,auto,node distance=2cm and 1.2cm,on grid,semithick,state/.style={circle,draw,fill=black,scale=0.5}]
+\node[state] (A) {};
+\node[state] (A-) [left=of A] {};
+\node[state] (B) [right=of A] {};
+\node[state] (C) [right=of B] {};
+\node[state] (D) [right=of C] {};
+\node[state] (E) [right=of D] {};
+\node[state] (F) [right=of E] {};
+\path (A) [bend left=15] edge (A-);
+\path (A-) [bend left=15] edge (A);
+\path (B) edge (A);
+\path (B) [bend left=15] edge (C);
+\path (C) [bend left=15] edge (B);
+\path (C) [bend left=15] edge (D);
+\path (D) [bend left=15] edge (C);
+\path (D) [bend left=15] edge (E);
+\path (E) [bend left=15] edge (D);
+\path (E) [bend left=15] edge (F);
+\path (F) [bend left=15] edge (E);
+\end{tikzpicture}
+\end{center}
+no es irreducible, pues los dos estados de más a la izquierda forman una clase separada del resto de los estados de la cadena.
+\end{ex}
+
+La noción de irreducibilidad será clave en nuestro estudio de cadenas de Markov: típicamente asumiremos que nuestras cadenas son irreducibles.
+La idea es que cuando hay más de una clase, la cadena puede estudiarse por separado en cada una de ellas.
+
+\subsubsection{Periodo}
+
+Otra noción importante, que asumiremos a menudo de nuestras cadenas, es la de aperiodicidad.
+Partimos por la siguiente definición.
+
+\begin{defn}\tbf{Periodo}
+El \emph{periodo} de $i\in I$ es
+\[\d(i)=\uptext{mcd}\{n>0\!:p^{(n)}_{ii}>0\},\]
+donde mcd denota al máximo común divisor (y tomamos $\uptext{mcd}(\emptyset)=0$).
+\end{defn}
+
+\begin{ex}
+La marcha aleatoria en $\zz$ tiene período 2 (\uexers: verifíquelo).
+La primera cadena del Ej. \ref{ex:irred} tiene periodo $1$.
+\end{ex}
+
+\begin{defn}
+Decimos que una propiedad definida para estados de una cadena de Markov es \emph{propiedad de clase} si se tiene que cada vez que $i$ satisface la propiedad y $j\in C(i)$ entonces $j$ satisface la propiedad.
+\end{defn}
+
+\begin{prop}
+El periodo es propiedad de clase (es decir, $i\leftrightarrow j$ implica que $\d(i)=\d(j)$).
+\end{prop}
+
+\begin{proof}
+Pospuesta \ucmark.
+\end{proof}
+
+\begin{defn}\tbf{Aperiodicidad}
+Decimos que un estado $i\in I$ es \emph{aperiódico} si $\d(i)=1$.
+Decimos que una cadena de Markov es \emph{aperiódica} si todos sus estados lo son.
+\end{defn}
+
+\begin{lem}
+Sea $X$ irreducible y sea $i\in I$.
+Si $i$ es aperiódico entonces $X$ lo es.
+Más aún, en este caso se tiene que para todo $i,j\in I$ existe un $n_0\geq0$ tal que $p_{ij}^{(n)}>0$ para todo $n\geq n_0$.
+\end{lem}
+
+\begin{proof}
+\uexer.
+\end{proof}

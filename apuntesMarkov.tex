@@ -1,0 +1,35 @@
+\documentclass[letterpaper,reqno,11pt,oneside,final]{article}
+
+\input{utils/preambulo}
+\input{utils/portada}
+
+\begin{document}
+% Maketitle
+\thispagestyle{empty}		% Remove page numbering on this page
+\mbox{}\vskip30pt
+\printtitle					% Print the title data as defined above
+  	\vfill
+\printauthor				% Print the author data as defined above
+\newpage
+
+\input{capitulos/cadenas_de_markov}\newpage
+\appendix
+\input{capitulos/esperanzas_condicionales}\newpage
+
+% \input{capitulos/prefacio}
+% \tableofcontents
+% \newpage
+% \input{capitulos/introduccion}\newpage
+% \input{capitulos/regresion_lineal}\newpage
+% \input{capitulos/regresion_nolineal}\newpage
+% %\input{capitulos/clasificacion}\newpage
+% \input{capitulos/seleccion_de_modelos}\newpage
+% \input{capitulos/redes_neuronales}\newpage
+% \input{capitulos/maquinas_soporte_vectorial}\newpage
+% \input{capitulos/procesos_gaussianos}\newpage
+% \input{capitulos/no_supervisado}\newpage
+
+\printbibliography[heading=apa]
+
+
+\end{document} 

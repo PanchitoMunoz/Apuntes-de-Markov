@@ -1,0 +1,103 @@
+%!TEX root = ../apuntesMarkov.tex
+
+\section{Repaso sobre esperanzas condicionales}\label{sec:espCond}
+
+En lo que sigue nos damos un espacio de probabilidad $(\Omega,\cf,\pp)$ y asumimos que $X\in L^1(\Omega,\cf,\pp)$, es decir $X$ es una variable aleatoria a valores reales en este espacio, tal que $\ee(|X|)<\infty$.
+
+\begin{defn}\tbf{Esperanza condicional}
+Sea $\cg$ una sub $\sigma$-álgebra de $\cf$.
+La \emph{esperanza condicional} de $X$ dada $\cg$ es la única variable aleatoria $Z\in L^1(\Omega,\cf,\pp)$ tal que:
+\begin{itemize}
+\item $Z$ es $\cg$-medible (o sea $Z\in L^1(\Omega,\cg,\pp)$).
+\item Para todo $A\in\cg$, $\ee(X\uno{A})=\ee(Z\uno{A})$.
+\end{itemize}
+A esta variable aleatoria la denotamos por $Z=\ee(X|\cg)$.
+\end{defn}
+
+La existencia de la esperanza condicional es una consecuencia del Teorema de Radon-Nikodym, ver \cite{medidaJSM} o \cite[Cap. 5]{durrett}.
+
+¿Qué significa condicionar con respecto a una $\sigma$-álgebra $\cg$?
+La idea es que $\cg$ describe información que tenemos a disposición: para cada $A\in\cg$ sabemos si el evento $A$ ha ocurrido o no (en otras palabras, dado $\omega\in\Omega$ sabemos si $\omega\in A$ o $\omega\notin A$ para cada evento $A\in\cg$).
+En particular, mientras más fina sea la $\sigma$-álgebra $\cg$, más información contiene.
+Veamos un par de ejemplos que ilustran esto:
+
+\begin{ex}
+Supongamos que $X$ es $\cg$-medible.
+Esto significa que $X^{-1}(U)\in\cg$ para todo $U\in\mathcal{B}(\rr)$ y por lo tanto, de acuerdo a lo anterior, la información contenida en $\cg$ permitiría determinar si $X(\omega)\in U$ para cualquiera de estos $U$, lo que obviamente permitiría determinar el valor de $X(\omega)$.
+Luego debiéramos esperar que $\ee(X|\cg)=X$ (en otra palabras, si ya conocemos $X$ entonces nuestra mejor aproximación a $X$ es simplemente $X$).
+Esto es cierto, y puede chequearse muy fácilmente: la segunda condición de la definición es trivial, y la primera es la hipótesis (ver también la Prop. \ref{prop:espcond}(4)).
+\end{ex}
+
+\begin{ex}
+En el caso anterior $\cg$ contenía información perfecta sobre $X$.
+La situación opuesta es cuando $\cg$ no contiene ninguna información sobre $X$, que corresponde al caso en que $X$ es indepediente de $\cg$, lo que significa que $\pp(\{X\in U\}\cap B)=\pp(X\in U)\pp(B)$ para cada $U\in\mathcal{B}(\rr)$ y $B\in\cg$.
+En este caso tenemos $\ee(X|\cg)=\ee(X)$ (en otras palabras, como no tenemos ninguna información sobre $X$, nuestra mejor aproximación a $X$ es su media $\ee(X)$).
+\end{ex}
+
+\begin{exer}
+Demuestre el resultado descrito en el ejemplo anterior.
+\end{exer}
+
+\begin{ex}
+Por último consideremos un ejemplo concreto.
+Tomemos $\Omega=\{1,2,3,4,5,6\}$, $\cf=\cp(\Omega)$, $\pp$ la medida de probabilidad uniforme sobre $\Omega$ y $X(\omega)=\omega$ (en otras palabras, $X$ modela el lanzamiento de un dado).
+Supongamos que $\cg=\{\emptyset,\{1,3,5\},\{2,4,6\},\Omega\}$.
+Entonces $\cg$ contiene la respuesta a la pregunta ¿fue el resultado del lanzamiento un número par o impar?.
+En base a esto, tenemos por ejemplo que $\ee((-1)^X|\cg)(\omega)=\uno{\omega\uptext{ es par}}-\uno{\omega\uptext{ es impar}})$ y $\ee(X|\cg)(\omega)=4\cdot\uno{\omega\uptext{ es par}}-3\cdot\uno{\omega\uptext{ es impar}})$ (\uexer: chequear estas fórmulas usando la Prop. \ref{prop:espcond}).
+\end{ex}
+
+Enumeraremos a continuación las propiedades básicas de la esperanza condicional (para las demostraciones, ver \cite{medidaJSM,durrett}):
+
+\begin{prop}\label{prop:espcond}
+Sean $X$ e $Y$ variables aleatorias integrables y $\alpha\in\rr$.
+\begin{enumerate}[label=\uptext{(\arabic*})]
+\item $\ee(1|\cg)=1$.
+\item Si $X\geq0$ c.s. entonces $\ee(X|\cg)\geq0$ c.s. En particular, si $X\geq Y$ c.s. entonces $\ee(X|\cg)\geq\ee(Y|\cg)$ c.s.
+\item $\ee(\alpha\tts X+Y|\cg)=\alpha\ee(X|\cg)+\ee(Y|\cg)$.
+\item Si $Y$ es $\cg$-medible y $\ee(|XY|)<\infty$ entonces $\ee(XY|\cg)=Y\ee(X|\cg)$.
+En particular, $\ee(Y|\cg)=Y$ y $\ee(X|\cf)=X$.
+\item Si $\varphi$ es convexa y $\ee(\varphi(X))<\infty$, entonces $\varphi(\ee(X|\cg))\leq\ee(\varphi(X)|\cg))$.
+En particular, $|\ee(X|\cg)|\leq\ee(|X||\cg)$.
+\item Si $\mathcal{H}\subseteq\cg\subseteq\cf$ entonces
+\[\ee(\ee(X|\cg)|\mathcal{H})=\ee(\ee(X|\mathcal{H})|\cg)=\ee(X|\mathcal{H}).\]
+\end{enumerate}
+\end{prop}
+
+Las propiedades (4) y (6) son clave, y se usan de manera repetida a lo largo de las notas.
+(6) es consistente con la intepretación de la esperanza condicional como una proyección (la $\sigma$-álgebra, o proyección, más chica siempre gana), que puede hacerse rigurosa en el caso de variables en $L^2(\Omega,\cf,\pp)$ (visto en auxiliar, o ver \cite[Teo. 5.1.8]{durrett}).
+En términos de la interpretación de $\sigma$-álgebras como información, una posible manera de entender la propiedad es la siguiente: si pensamos en $\cg$ como la información que posee un genio y $\mathcal{H}$ la que posee un necio, entonces el genio no tiene cómo mejorar la estimación del necio, pero el necio siempre puede echar a perder la estimación del genio.
+Por otro lado, (4) dice que si la variable aleatoria $Y$ es conocida dada la información contenida en $\cg$, entonces puede ser considerada como una cantidad determinista, y puede salir como un factor fuera de la esperanza condicional.
+
+La siguiente propiedad se conoce a veces como la versión estocástica de la Ley de Probabilidades Totales (fue vista en clase auxiliar):
+
+\begin{prop}\label{prop:totProbEst}
+Sea $\Lambda\subseteq\nn$ y $(A_n)_{n\in\Lambda}\subseteq\cf$ una partición de $\Omega$ con $\pp(A_n)>0$ para cada $n\in\Lambda$.
+Sea $\cg=\sigma(\{A_n\}_{n\in\Lambda})$.
+Entonces si $X\in L^1(\Omega,\cf,\pp)$,
+\[\ee(X|\cg)(\omega)=\sum_{n\in\Lambda}\frac{\ee(X\uno{A_n})}{\pp(A_n)}\uno{A_n}(\omega).\]
+\end{prop}
+
+\begin{def}\tbf{Probabilidad condicional}
+Sea $A\in\cf$ y $\cg$ sub $\sigma$-álgebra de $\cf$.
+Definimos la \emph{probabilidad de $A$ condicional a $\cg$} como
+\[\pp(A|\cg)=\ee(\uno{A}|\cg).\]
+\end{def}
+
+\begin{exer}\label{ex:probCond}
+Demuestre que si $\cg=\sigma(\{B,B^\uptext{c}\})$ entonces
+\[\pp(A|\cg)(\omega)=\pp(A|B)\uno{\omega\in B}+\pp(A|B^\uptext{c})\uno{\omega\in B^\uptext{c}}.\]
+\end{exer}
+
+\begin{sqgnote}
+Asegúrese de comprender el contenido del ejercicio anterior en función de la interpretación de $\sigma$-álgebras como información.
+\end{sqgnote}
+
+\begin{notation}
+Si $X$ es una variable aleatoria real como arriba e $Y_1,\dotsc,Y_n$ es una familia de variables aleatorias en el mismo espacio (no necesariamente reales), escribiremos $\ee(X|Y_1,\dotsc,Y_n)$ para denotar $\ee(X|\sigma(\{Y_1,\dotsc,Y_n\}))$.
+Lo mismo vale para probabilidades condicionales: $\pp(A|Y_1,\dotsc,Y_n)$ denota $\pp(A|\sigma(\{Y_1,\dotsc,Y_n\}))$.	
+\end{notation}
+
+\begin{rem}
+La noción de esperanza y probabilidad condicional con respecto a variables aleatorias que se ve en cursos básicos de probabilidades es consistente con la que se ha introducido acá, lo que justifica la notación anterior.
+Para más detalles, ver \cite[Cap. 5]{durrett} \ucmark.
+\end{rem}
