@@ -1,6 +1,6 @@
 # Procesos de Markov
 
-Este repositorio contiene el apunte en desarrollo del curso MA4401, Procesos de Markov.
+Este repositorio contiene el [apunte][pdf] en desarrollo del curso MA4401, Procesos de Markov.
 
 Daniel Remenik
 DIM/CMM
