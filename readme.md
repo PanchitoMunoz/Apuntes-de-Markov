@@ -8,5 +8,5 @@ Universidad de Chile
 email: dremenik AATT dim DOOTT uchile.cl 
 
 co-autor:
-Francisco Muñoz
+Francisco Muñoz,
 Universidad de Chile
