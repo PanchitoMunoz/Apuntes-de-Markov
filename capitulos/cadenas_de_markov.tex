@@ -150,7 +150,7 @@ Encuentre una cadena de Markov $\tilde X$ a valores en $I\times\nn$ que es homog
 La matriz de transición gobierna la evolución de nuestra cadena de Markov $X$.
 Para determinar la distribución de la cadena hace falta un ingrediente más:
 
-\begin{defn}\tbf{Distribución inicial}
+\begin{defn}\tbf{Distribución inicial}\marginnote{Distribución Inicial}
 Al vector de probabilidad $\mu$ sobre $I$ definido por $\mu_i=\pp(X_0=i)$ le llamamos la \emph{distribución inicial} de la cadena de Markov $X$.
 \end{defn}
 
@@ -158,7 +158,7 @@ Usaremos indistintamente la notación $\mu$ para un vector de probabilidad como 
 
 Es relativamente fácil ver que toda cadena de Markov, y en particular sus distribuciones finito-dimensionales, queda determinada por su matriz de transición y su distribución inicial:
 
-\begin{prop}\label{prop:caractMarkov}
+\begin{prop}\label{prop:caractMarkov}\marginnote{Caracterización de una Cadena de Markov}
 $X$ es una cadena de Markov con matriz de transición $P$ y distribución inicial $\mu$ si y solo si
 \[\pp(X_0=i_0,X_1=i_1,\dotsc,X_n=i_n)=\mu_{i_0}p_{i_0i_1}\dotsc p_{i_{n-1}i_n}.\]
 \end{prop}
@@ -196,7 +196,7 @@ Falta derivar la condición inicial, pero esto es directo de la hipótesis, toma
 
 Es natural preguntarse ahora por la conversa al resultado anterior: dados un vector de probabilidad $\mu$ y una matriz estocástica $P$, existe una cadena de Markov con condición inicial $\mu$ y matriz de transición $P$?
 
-\begin{thm}\tbf{Existencia de una cadena de Markov con $\mu$ y $P$ dados}
+\begin{thm}\tbf{Existencia de una cadena de Markov con $\mu$ y $P$ dados}\marginnote{Exist. de una CM con $\mu$ y $P$ dados}
 Sea $\mu$ una medida de probabilidad sobre $I$ y $P$ una matriz estocástica indexada por $I$.
 Entonces existe un espacio de probabilidad $(\Omega,\cf,\pp)$ y una sucesión $X=\big(X_n\big)_{n\geq0}$ de variables aleatorias en este espacio tal que $X$ es una cadena de Markov con distribución inicial $\mu$ y matriz de transición $P$.
 \end{thm}
@@ -230,7 +230,7 @@ Por construcción se tiene entonces que
 Gracias a la Prop. \ref{prop:caractMarkov} deducimos que $X=\big(X_n\big)_{n\geq0}$ satisface lo requerido.
 \end{proof}
 
-\begin{notation}
+\begin{notation}\marginnote{Notación para una dist. de una CM}
 Escribiremos $X\sim\CM(\mu,P)$ si $X$ es cadena de Markov con distribución inicial $\mu$ y matriz de transición $P$.
 Si no necesitamos especificar la distribución inicial, escribiremos $X\sim\CM(P)$.
 \end{notation}
@@ -242,7 +242,7 @@ Si uno lo desea, puede considerar entonces que todas nuestras cadenas están con
 Hay una construcción alternativa que es importante y muy útil, pues permite identificar muchos procesos estocásticos como cadenas de Markov (y demostrar que lo son) fácilmente.
 La damos a continuación.
 
-\begin{thm}\tbf{Construcción directa de cadenas de Markov}
+\begin{thm}\tbf{Construcción directa de cadenas de Markov}\marginnote{Constr. directa de CM}
 Sea $(\Omega,\cf,\pp)$ una espacio de probabilidad en el cual están definidas variables aleatorias independientes $(U_n)_{n\geq0}$ con distribución Unif$\ts[0,1]$ y adicionalmente una variable aleatoria $\xi_0$ a valores $I$ con distribución $\mu$, independiente de todas las $U_n$.
 Sea $\Phi\!:\![0,1]\times I\longrightarrow I$ medible y definamos $\big(X_n\big)_{n\geq0}$ mediante
 \begin{equation}
