@@ -6,21 +6,21 @@
 
 \subsubsection{Breve recuerdo de probabilidades}
 
-Un \emph{espacio de probabilidad} es un espacio de medida $(\Omega,\cf,\pp)$ tal que $\pp(\Omega)=1$.
-$\pp$ es la \emph{medida de probabilidad}.
+Un \emph{espacio de probabilidad}\marginnote{Espacio de Probabilidad} es un espacio de medida $(\Omega,\cf,\pp)$ tal que $\pp(\Omega)=1$.
+$\pp$ es la \emph{medida de probabilidad}\marginnote{Medida de Probabilidad}.
 Los $A\in\cf$ son los \emph{eventos}.
 \lsep
-Dado un espacio medible $(S,\cs)$, una \emph{variable aleatoria} $X$ a valores en $S$ es una función $X\!:\Omega\longrightarrow S$ que es $\cf$-$\cs$ medible.
+Dado un espacio medible $(S,\cs)$, una \emph{variable aleatoria}\marginnote{Variable Aleatoria} $X$ a valores en $S$ es una función $X\!:\Omega\longrightarrow S$ que es $\cf$-$\cs$ medible.
 Usualmente nos olvidamos del espacio de probabilidad en la notación.
 Por ejemplo, cuando escribimos $\pp(X\in A)$ a lo que nos referimos es a la medida de la preimagen de $A$ por $X$, es decir
 \[\pp(X\in A)=\pp(X^{-1}(A))=\pp(\{\omega\in \Omega\!:X(\omega)\in A\}).\]
 Rara vez incluimos los $\omega$'s en la notación, pero es importante mantener la definición formal en mente.
-\lsep Dos eventos $A$ y $B$ son \emph{independientes} si $\pp(A\cap B)=\pp(A)\pp(B)$.
-La \emph{probabilidad condicional} de $A$ dado $B$ es
+\lsep Dos eventos $A$ y $B$ son \emph{independientes}\marginnote{Independencia} si $\pp(A\cap B)=\pp(A)\pp(B)$.
+La \emph{probabilidad condicional}\marginnote{Prob. Condicional} de $A$ dado $B$ es
 \[\pp(A|B)=\frac{\pp(A\cap B)}{\pp(B)}\]
 (asumiendo $\pp(B)>0$; a menudo omitiremos especificar esto cuando hablamos de probabilidades condicionales).
 \lsep
-Notar que la aplicación $\pp(\cdot|B)\!:\cf\longrightarrow[0,1]$ define una medida de probabilidad sobre $(\Omega,\cf,\pp)$ soportada en $B$ (o alternativamente una medida de probabilidad sobre $(B,\cf,\pp)$).
+Notar que la aplicación $\pp(\cdot|B)\!:\cf\longrightarrow[0,1]$ define una medida de probabilidad\marginnote{Med. de Prob. sobre un evento B} sobre $(\Omega,\cf,\pp)$ soportada en $B$ (o alternativamente una medida de probabilidad sobre $(B,\cf,\pp)$).
 De esta forma, por ejemplo, podemos decir que dados $A,B,C\in\cf$, $A$ y $B$ son \emph{independientes condicionalmente a $C$} si $\pp(A\cap B|C)=\pp(A|C)\pp(B|C)$.
 \uexer: Asegúrese de que comprende el contenido de la última frase.
 
