@@ -298,10 +298,10 @@ El teorema nos asegura que el proceso estocástico construido de acuerdo a \eqre
 \subsubsection{Probabilidades de transición}
 
 \begin{notation}
-Si $X\sim\CM(P)$ e $i\in I$ usaremos denotaremos por $\pp_i$ a la medida de probabilidad correspondiente a la cadena $X\sim\CM(\delta_i,P)$ con $\delta_i(j)=\uno{i=j}$ (es decir, a la cadena que parte en $i$).
-Usaremos $\ee_i$ para denotar la esperanza bajo $\pp_i$.
+Si $X\sim\CM(P)$ e $i\in I$ usaremos denotaremos por $\pp_i$\marginnote{Notación $\pp_i$} a la medida de probabilidad correspondiente a la cadena $X\sim\CM(\delta_i,P)$ con $\delta_i(j)=\uno{i=j}$ (es decir, a la cadena que parte en $i$).
+Usaremos $\ee_i$\marginnote{Notación $\ee_i$}[-2pt] para denotar la esperanza bajo $\pp_i$.
 \lsep
-Más generalmente, si $\mu$ es una distribución de probabilidad sobre $I$, usamos $\pp_\mu$ (y $\ee_\mu$) para denotar la distribución de la cadena $X\sim\CM(\mu,P)$.
+Más generalmente, si $\mu$ es una distribución de probabilidad sobre $I$, usamos \marginnote{Notación $\pp_\mu$ y $\ee_\mu$}$\pp_\mu$ (y $\ee_\mu$) para denotar la distribución de la cadena $X\sim\CM(\mu,P)$.
 \end{notation}
 
 \begin{exer}
@@ -309,32 +309,32 @@ Convencerse de que $\pp_\mu=\sum_{i\in I}\mu_i\pp_i$ y $\ee_\mu=\sum_{i\in I}\mu
 \end{exer}
 
 Como ya mencionamos, $P$ es una matriz indexada por el conjunto numerable $I$.
-A menudo es útil interpretar a $P$ como un operador lineal que actúa sobre funciones $f\!:I\longrightarrow I$ de acuerdo a 
+A menudo es útil \marginnote{Interpretación de $P$ como operador lineal}interpretar a $P$ como un operador lineal que actúa sobre funciones $f\!:I\longrightarrow I$ de acuerdo a 
 \begin{equation}
 Pf(i)=\sum_{j\in I}p_{ij}f(j).\label{eq:Pf}
 \end{equation}
 La suma podría ser o no convergente, pero en muchos casos de interés lo es; por ejemplo si $f$ es acotada (por Teorema de Convergencia Dominada) o positiva (por Teorema de Convergencia Monótona, aunque en este caso debemos aceptar que la suma valga $\infty$).
 Cuando $I$ es finito, lo anterior corresponde exactamente a la acción de $P$ como matriz indexada por $I\times I$ al multiplicar a $f$ como vector indexado por $I$, y esta perspectiva podemos extenderla naturalmente al caso en que $I$ que infinito.
 \lsep
-En particular, podemos definir productos de matrices estocásticas mediante la fórmula usual, $(PQ)_{ij}=\sum_{k\in I}p_{ik}q_{kj}$, que en este caso siempre es convergente.
+En particular, podemos definir\marginnote{Producto de Matr. Est.} productos de matrices estocásticas mediante la fórmula usual, $(PQ)_{ij}=\sum_{k\in I}p_{ik}q_{kj}$, que en este caso siempre es convergente.
 Naturalmente denotamos también por $P^0$ a la matriz identidad, es decir $(P^0)_{ij}=\uno{i=j}$.
 \lsep
-La fórmula \eqref{eq:Pf} tiene una interpretación probabilística natural:
+La fórmula \eqref{eq:Pf} tiene una\marginnote{Interpr. de la ec. \eqref{eq:Pf}} interpretación probabilística natural:
 \[Pf(i)=\ee_{i}(f(X_1))\]
 De manera similar podemos multiplicar a un vector de probabilidad $\mu$ sobre $I$ por la derecha, y obtenemos
 \[(\mu P)_j=\sum_{i\in I}\mu_ip_{ij}=\pp_\mu(X_1=j).\]
 \uexer: Convénzase de las dos fórmulas anteriores.
 
 \begin{defn}\tbf{Probabilidades de transición}
-Dada $X\sim\CM(P)$ y $n\in\nn$, denotamos por $P^{(n)}=(p^{(n)}_{ij})_{i,j\in I}$ a la \emph{matriz de transición en $n$ pasos} dada por
+Dada $X\sim\CM(P)$ y $n\in\nn$, denotamos por $P^{(n)}=(p^{(n)}_{ij})_{i,j\in I}$ a la\marginnote{Matriz de Transición en $n$ pasos} \emph{matriz de transición en $n$ pasos} dada por
 \[p^{(n)}_{ij}=\pp_i(X_n=j).\]
 \end{defn}
 
-\begin{thm}\tbf{Ecuaciones de Chapman-Kolmogorov}
+\begin{thm}\tbf{Ecuaciones de Chapman-Kolmogorov}\marginnote{Ec. de Chapman-Kolmogorov}[20pt]
 Si $X\sim\CM(P)$ entonces para todo $m,n\geq0$ se tiene
 \[p^{(m+n)}_{ij}=\sum_{k\in I}p^{(m)}_{ik}p^{(n)}_{kj}.\]
-En particular,
-\[P^{(n)}=P^n\]
+En particular, \marginnote{$P^{(n)}=P^n$}[15pt]
+\[P^{(n)}=P^n\] 
 para todo $n\geq0$.
 \end{thm}
 
