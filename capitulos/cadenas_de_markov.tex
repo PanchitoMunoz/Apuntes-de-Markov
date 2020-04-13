@@ -37,7 +37,7 @@ Repase la definición y propiedades de esperanza condicional, dadas en el Apénd
 
 \subsubsection{Procesos estocásticos y cadenas de Markov}
 
-Dados $(\Omega,\cf,\pp)$ y $(S,\cs)$ como antes, decimos que una sucesión $(X_n)_{n\geq0}$ de variables aleatorias es un \emph{proceso estocástico}.
+Dados $(\Omega,\cf,\pp)$ y $(S,\cs)$ como antes, decimos que una sucesión $(X_n)_{n\geq0}$ de variables aleatorias es un \emph{proceso estocástico}\marginnote{Proceso Estocástico}.
 Alternativamente uno puede pensar en el proceso estocástico $(X_n)_{n\geq0}$ como una variable aleatoria a valores en el espacio producto $S^\nn$, es decir $X\!:\Omega\longrightarrow S^\nn$ que es $\cf$-$\cs^\nn$ medible, con $\cs^\nn$ dotado de la $\sigma$-álgebra producto.
 \lsep
 (Más adelante consideraremos procesos estocásticos indexados por $\rr^+$ en vez de $\nn$).
@@ -46,22 +46,22 @@ El propósito del curso es estudiar un tipo especial pero muy importante de proc
 
 \vs
 
-En todo lo que sigue $I$ (o a veces $E$) denotará un conjunto numerable, el ``espacio de estados'' donde nuestros procesos estocásticos tomarán valores.
+En todo lo que sigue $I$\marginnote{Espacio de Estados} (o a veces $E$) denotará un conjunto numerable, el ``espacio de estados'' donde nuestros procesos estocásticos tomarán valores.
 Sobre $I$ consideramos la $\sigma$-álgebra de las partes $\cp(I)$.
 Los elementos de $I$ los denotaremos típicamente por $i,j,k$ o $x,y,z$.
 Detrás de todo lo que haremos habrá un espacio de probabilidad fijo $(\Omega,\cf,\pp)$, que solo invocaremos cuando sea necesario.
 
 \begin{defn}\tbf{Cadena de Markov}
-Un proceso estocástico $X=(X_n)_{n\geq0}$ a valores en $I$ es un \emph{proceso de Markov a tiempo discreto} o una \emph{cadena de Markov} si satisface la \emph{propiedad de Markov}:
+Un proceso estocástico $X=(X_n)_{n\geq0}$ a valores en $I$ es un \emph{proceso de Markov a tiempo discreto} o una \emph{cadena de Markov}\marginnote{Cadena de Markov} si satisface la \emph{propiedad de Markov}:
 \begin{equation}\label{eq:propMarkov}
 \pp\big(X_{n+1}=i_{n+1}\big|X_0=i_0,\dotsc,X_{n}=i_{n}\big)=\pp\big(X_{n+1}=i_{n+1}\big|X_{n}=i_{n}\big)
-\end{equation}
+\end{equation}\marginnote{Propiedad de Markov}[-1cm]
 para todo $i_0,\dotsc,i_{n+1}\in I$ (que satisfaga $\pp(X_0=i_0,\dotsc,X_{n}=i_{n}\big)>0$).
 % Es decir, condicional al presente, el futuro del proceso es independiente del pasado.
 \end{defn}
 
 \begin{rem}
-La propiedad de Markov es equivalente a decir que $X_{n+1}$ y $(X_0,\dotsc,X_{n-1})$ son independientes condicionales a $X_n$, es decir, ``condicional al presente, el futuro del proceso es independiente del pasado''.
+La propiedad de Markov es equivalente a decir que $X_{n+1}$ y $(X_0,\dotsc,X_{n-1})$ son independientes condicionales a $X_n$, es decir, ``condicional\marginnote{Interpretación de la CM} al presente, el futuro del proceso es independiente del pasado''.
 \uexer: demuestre esto.
 \end{rem}
 
@@ -71,13 +71,13 @@ Si $X$ es una cadena de Markov entonces para todo $0\leq t_0\leq\dotsm\leq t_{n+
 \begin{equation}
 \pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_0}=i_0,\dotsc,X_{t_n}=i_{n}\big)=\pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_n}=i_{n}\big).
 \end{equation}
-\end{prop}
-
+\end{prop}\marginnote{CM a distintos tiempos}[-1cm]
+\vskip
 \begin{proof}
 \uexer.
 \end{proof}
 
-\begin{ex}\tbf{Marcha aleatoria simple en $\zz$}\label{ex:marchaZ}
+\begin{ex}\tbf{Marcha aleatoria simple en $\zz$}\label{ex:marchaZ}\marginnote{Marcha Aleatoria Simple en $\zz$}
 Una partícula o individuo camina por $\zz$ de la siguiente forma.
 A tiempo $0$ comienza en $X_0=x\in\zz$.
 Luego en cada instante de tiempo decide dar un paso a la derecha con probabilidad $p\in[0,1]$ y un paso a la izquierda con probabilidad $1-p$, todo de manera independiente, es decir, para cada $n\geq1$ tenemos
@@ -92,9 +92,9 @@ Por ahora esta descripción es informal, luego veremos como se puede construir e
 
 \begin{defn}\tbf{Cadena de Markov homogénea, matriz de transición} 
 Sea $X$ una cadena de Markov.
-Decimos que $X$ es \emph{homogénea} si
+Decimos que $X$ es \emph{homogénea}\marginnote{CM Homogénea} si
 \[\pp(X_{m+1}=j|X_m=i)=\pp(X_{n+1}=j|X_n=i)\quad\forall~m,n\geq0,~i,j\in I.\]
-En este caso a la matriz $P=\big(p_{ij}\big)_{i,j\in I}$ dada por $p_{ij}=\pp(X_{1}=j|X_0=i)$ le llamamos \emph{matriz de transición} de la cadena de Markov $X$; $p_{ij}$ es la \emph{probabilidad de transición de $i$ a $j$}.
+En este caso a la matriz $P=\big(p_{ij}\big)_{i,j\in I}$\marginnote{Matriz de Transición} dada por $p_{ij}=\pp(X_{1}=j|X_0=i)$ le llamamos \emph{matriz de transición} de la cadena de Markov $X$; $p_{ij}$\marginnote{Prob. de Transición} es la \emph{probabilidad de transición de $i$ a $j$}.
 \end{defn}
 
 \begin{ex}
@@ -109,8 +109,10 @@ p & si $j=i+1$,\\
 Notar que $P$ es una matriz indexada por un conjunto numerable, pero esto no nos traerá mayores dificultades (lo discutiremos en más detalle más adelante).
 $P$ no puede ser cualquier matriz, si no que claramente debe satisfacer algunas propiedades especiales, precisamente:
 
+\newpage
+
 \begin{defn}\tbf{Matriz estocástica}
-Una matriz $P=\big(p_{ij}\big)_{i,j\in I}$ se dice \emph{matriz estocástica} si:\\[-20pt]
+Una matriz $P=\big(p_{ij}\big)_{i,j\in I}$ se dice \marginnote{Matriz Estocástica}\emph{matriz estocástica} si:\\[-20pt]
 \begin{itemize}
 \item $p_{ij}\geq0$ para todo $i,j\in I$.
 \item $\sum_{j\in I}p_{ij}=1$ para todo $i\in I$.
@@ -118,9 +120,11 @@ Una matriz $P=\big(p_{ij}\big)_{i,j\in I}$ se dice \emph{matriz estocástica} si
 En otras palabras, $P$ es una matriz estocástica si para cada $i\in I$, $(p_{ij})_{j\in I}$ es un vector de probabilidad.
 \end{defn}
 
-\begin{prop}
+\begin{prop}\marginnote{Matr. de Trans. de CM es Matr. Est.}
 Si $P$ es la matriz de transición de una cadena de Markov, entonces $P$ es matriz estocástica.
 \end{prop}
+
+\vskip
 
 \begin{proof} 
 \uexer~(fácil).
@@ -130,7 +134,7 @@ Durante el curso estaremos interesados casi exclusivamente en el caso de cadenas
 Por lo tanto, en todo lo que sigue trabajaremos bajo la siguiente convención:
 \begin{quote}
 % \begin{mdframed}[style=st_red]
-Salvo en los casos puntuales en que se indique lo contrario, todas las cadenas de Markov que aparezcan en estas notas serán consideradas implícitamente como cadenas homogéneas.
+\marginnote{Todas las CM son homogéneas (convención)}Salvo en los casos puntuales en que se indique lo contrario, todas las cadenas de Markov que aparezcan en estas notas serán consideradas implícitamente como cadenas homogéneas.
 % \end{mdframed}
 \end{quote}
 
