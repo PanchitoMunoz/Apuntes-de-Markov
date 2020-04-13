@@ -351,27 +351,27 @@ La segunda afirmación sale de la primera por inducción, y además claramente i
 
 \begin{defn}\tbf{Filtración}
 Sea $(\Omega,\cf)$ un espacio medible.
-Una \emph{filtración} en este espacio es una familia $\big(\cf_n\big)_{n\geq0}$ de sub $\sigma$-álgebras de $\cf$ tal que $\cf_n\subseteq\cf_{n+1}$ para cada $n\geq0$.
+Una\marginnote{Filtración} \emph{filtración} en este espacio es una familia $\big(\cf_n\big)_{n\geq0}$ de sub $\sigma$-álgebras de $\cf$ tal que $\cf_n\subseteq\cf_{n+1}$ para cada $n\geq0$.
 \lsep
-Si $X$ es un proceso estocástico construido en un espacio de probabilidad $(\Omega,\cf,\pp)$, la \emph{filtración natural} asociada a $X$ es aquella dada por
+Si $X$ es un proceso estocástico construido en un espacio de probabilidad $(\Omega,\cf,\pp)$, la \emph{filtración natural}\marginnote{Filtración Natural} asociada a $X$ es aquella dada por
 \[\cf_n=\sigma(\{X_0,\dotsc,X_n\}).\]
 \end{defn}
 
-La filtración natural es aquella filtración más pequeña que tal que $X_0,\dotsc,X_n$ es $\cf_n$-medible para cada $n\geq0$, en el sentido de que para cualquier otra filtración $\big(\cg_n\big)_{n\geq0}$ que satisfaga lo mismo necesariamente debe tenerse que $\cg_n\supseteq\cf_n$ para cada $n\geq0$.
+La\marginnote{Filtración natural es la más pequeña} filtración natural es aquella filtración más pequeña que tal que $X_0,\dotsc,X_n$ es $\cf_n$-medible para cada $n\geq0$, en el sentido de que para cualquier otra filtración $\big(\cg_n\big)_{n\geq0}$ que satisfaga lo mismo necesariamente debe tenerse que $\cg_n\supseteq\cf_n$ para cada $n\geq0$.
 \begin{quote}
 Durante todo el curso, $\big(\cf_n\big)_{n\geq0}$ denotará la filtración natural asociada al proceso estocástico que se esté considerando.
 \end{quote}
 \lsep
-$\cf_n$ nos permite representar la información contenida en la evolución del proceso hasta tiempo $n$.
+$\cf_n$\marginnote{$\cf_n$ representa la información contenida} nos permite representar la información contenida en la evolución del proceso hasta tiempo $n$.
 
 \begin{notation}
-Si $\cg$ es sub $\sigma$-álgebra de $\cf$ y $A\in\cf$, escribimos
+Si $\cg$ es sub $\sigma$-álgebra de $\cf$ y $A\in\cf$, escribimos \marginnote{Notación de $\pp(A|\cg)$}
 \[\pp(A|\cg)=\ee(\uno{A}|\cg).\]
 \end{notation}
 
 En el siguiente resultado reinterpretamos la definición y caracterización de cadenas de Markov en el lenguaje de esperanzas condicionales:
 
-\begin{prop}
+\begin{prop}\marginnote{Caract. de CM usando filtración natural}
 Sea $X$ un proceso estocástico (y $\big(\cf_n\big)_{n\geq0}$ su filtración natural asociada).
 Son equivalentes:
 \begin{enumerate}[label=\uptext{(\roman*)}]
@@ -384,7 +384,7 @@ En particular, si $X\sim\CM(P)$ se tiene que
 (donde para mayor claridad hemos incluido los $\omega$'s, aunque casi nunca los escribiremos).
 \end{prop}
 
-\begin{rem}\label{rem:abusonot}
+\begin{rem}\label{rem:abusonot}\marginnote{Abuso de notación de la igualdad anterior}
 A veces abusaremos notación y escribiremos la última igualdad de la siguiente forma:
 \[\pp(X_{n+1}=j|\cf_n)(\omega)=\pp_{X_n(\omega)}(X_1=j).\]
 En estos casos, el lado derecho debe interpretarse como $\pp_{X_n(\omega)}(\tilde X_1=j)$ donde $\tilde X$ es una copia independiente de $X$.
@@ -411,7 +411,7 @@ Desarrollando la última esperanza condicional como en la primera equivalencia d
 
 La siguiente es una versión general de la propiedad de Markov.
 
-\begin{thm}\label{thm:propMarkGen}
+\begin{thm}\label{thm:propMarkGen}\marginnote{Vers. general de la propiedad de Markov}
 Sea $X$ cadena de Markov (homogénea) y sea $f\!:I^\nn\longrightarrow\rr$ medible y acotada.
 Entonces
 \[\ee\big(f(X_{n+1},X_{n+2}\dotsc)\big|\cf_n\big)=\ee_{X_n}\tsm\big(f(X_1,X_2,\dotsc)\big).\]
