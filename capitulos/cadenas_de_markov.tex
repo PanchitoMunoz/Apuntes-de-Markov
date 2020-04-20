@@ -470,7 +470,7 @@ A continuación veremos la manera de hacer esto preciso.
 
 \subsubsection{Tiempos de parada}
 
-\begin{defn}\tbf{Tiempos de parada}
+\begin{defn}\tbf{Tiempos de parada} \marginnote{Tiempos de Parada}
 Sea $(\Omega,\cf,\pp,(\cf_n)_{n\geq0})$ un \emph{espacio de probabilidad filtrado}, es decir, un espacio de probabilidad $(\Omega,\cf,\pp)$ con una filtración $(\cf_n)_{n\geq0}$ definida sobre él.
 Decimos que una variable aleatoria $\tau\!:\Omega\longrightarrow\nn\cup\{\infty\}$ es un \emph{tiempo de parada} si
 \[\{\tau\leq n\}\in\cf_n\quad\forall~n\geq0.\]
@@ -485,7 +485,7 @@ Si $X$ es una marcha aleatoria simple y $a\in\zz$, $\tau_a=\inf\{m\geq0\!:X_m\ge
 Demuestre que la propiedad que define t.d.p. es equivalente a pedir que $\{\tau=n\}\in\cf_n$ para todo $n\geq0$.
 \end{exer}
 
-\begin{prop}%\tbf{Propiedades de tiempos de parada}
+\begin{prop}\marginnote{Prop. de tiempos de parada}%\tbf{Propiedades de tiempos de parada}
 \leavevmode
 \begin{enumerate}[label=\uptext{(\arabic*)}]
 \item Si $\tau_1,\tau_2$ son t.d.p. entonces $\tau_1\wedge\tau_2\coloneqq\min\{\tau_1,\tau_2\}$ y $\tau_1\vee\tau_2\coloneqq\max\{\tau_1,\tau_2\}$ son t.d.p.
@@ -497,12 +497,12 @@ Demuestre que la propiedad que define t.d.p. es equivalente a pedir que $\{\tau=
 \uexer.
 \end{proof}
 
-Dada una filtración $(\cf_n)_{n\geq0}$, escribiremos
+Dada una filtración $(\cf_n)_{n\geq0}$, escribiremos\marginnote{Notación de $\cf_\infty$}
 \[\cf_\infty=\lim_{n\to\infty}\cf_n=\bigcup_{n\geq0}\cf_n.\]
-En el caso de la filtración natural asociada a un proceso estocástico, esto corresponde intuitivamente a la información contenida en la trayectoria completa del proceso.
+En el caso de la filtración natural asociada a un proceso estocástico, esto\marginnote{Intuición sobre $\cf_\infty$} corresponde intuitivamente a la información contenida en la trayectoria completa del proceso.
 
 \begin{defn}
-Dado un espacio de probabilidad filtrado y un t.d.p. $\tau$, definimos
+Dado un espacio de probabilidad filtrado y un t.d.p. $\tau$,\marginnote{Def. de $\cf_\tau$} definimos
 \[\cf_\tau=\big\{A\in\cf_\infty\!:A\cap\{\tau\leq n\}\in\cf_n~\forall n\geq0\}.\]
 \end{defn}
 
@@ -510,7 +510,7 @@ Dado un espacio de probabilidad filtrado y un t.d.p. $\tau$, definimos
 Probar que si $\tau=n$, entonces con la definición anterior se cumple $\cf_\tau=\cf_n$.
 \end{ex}
 
-\begin{prop}\tbf{Propiedades de $\cf_\tau$}
+\begin{prop}\marginnote{\sffamily Propiedades de $\cf_\tau$}\tbf{Propiedades de $\cf_\tau$}
 Sean $\tau$, $\tau_1$, $\tau_2$ t.d.p.
 \begin{enumerate}[label=\uptext{(\arabic*)}]
 \item $\cf_\tau$ es $\sigma$-álgebra.
@@ -539,7 +539,7 @@ La otra implicancia es aún más directa.
 
 Terminamos esta parte con un resultado que será útil a continuación, y que es muy similar a la propiedad (5) anterior y se demuestra de manera análoga (\uexers: hágalo).
 
-\begin{lem}\label{lem:Ymed}
+\begin{lem}\label{lem:Ymed}\marginnote{Caract. de que una VA sea $\cf_\tau$-med.}
 $Y\!:\Omega\longrightarrow\rr$ es $\cf_\tau$-medible si y sólo si existe una sucesión $(Y_n)_{n\in\nn\cup\{\infty\}}$ de variables aleatorias, con $Y_n$ $\cf_n$-medible, tal que $Y=\sum_{n\in\nn\cup\{\infty\}}Y_n\uno{\tau=n}$.
 \end{lem}
 
