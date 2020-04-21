@@ -650,8 +650,8 @@ Ver P2 aux. 3 \ucmark.
 
 \begin{defn}
 Sea $X$ una cadena de Markov y sean $i,j\in I$.
-Decimos que \emph{$i$ lleva a $j$}, y escribimos $i\to j$, si $\pp_i(\exists n\geq0\!:X_n=j)>0$.
-Decimos que \emph{$i$ y $j$ se comunican}, y escribimos $i\leftrightarrow j$, si $i\to j$ y $j\to i$.
+Decimos que\marginnote{Def. ``$i$ lleva a $j$'' ($i\to j$)} \emph{$i$ lleva a $j$}, y escribimos $i\to j$, si $\pp_i(\exists n\geq0\!:X_n=j)>0$.
+Decimos que\marginnote{Def. ``$i$ y $j$ se comunican'' ($i\leftrightarrow j$)} \emph{$i$ y $j$ se comunican}, y escribimos $i\leftrightarrow j$, si $i\to j$ y $j\to i$.
 \end{defn}
 
 \begin{ex}
@@ -679,7 +679,7 @@ En el siguiente grafo dirigido representamos por aristas entre nodos las transic
 Para esta cadena tenemos $1\to2$, $2\leftrightarrow3$ y $1\to5$, pero $4\nrightarrow2$.
 \end{ex}
 
-\begin{prop}
+\begin{prop}\marginnote{Caract. de $i \to j $}
 Las siguientes son equivalentes:
 \begin{enumerate}[label=\uptext{(\arabic*)}]
 \item $i\to j$.
@@ -698,7 +698,7 @@ Veamos ahora que (3) implica (2): tenemos que
 y luego alguno de los sumandos debe ser positivo.
 \end{proof}
 
-\begin{prop}
+\begin{prop}\marginnote{$\to$ es refl. y trans. y $\leftrightarrow$ es de equiv.}
 La relación $\to$ es reflexiva y transitiva y la relación $\leftrightarrow$ es de equivalencia.
 \end{prop}
 
@@ -708,7 +708,7 @@ Supongamos que $i\to j$ y $j\to k$, de manera que por la proposición anterior e
 Por Chapman-Kolmogorov tenemos $p^{(m+n)}_{ik}=\sum_{\ell\in\nn}p^{(m)}_{i\ell}p^{(n)}_{\ell k}\geq p^{(m)}_{ij}p^{(n)}_{jk}>0$, y entonces $i\to k$.
 \end{proof}
 
-\begin{defn}\tbf{Clase y clase cerrada}
+\begin{defn}\tbf{Clase y clase cerrada}\marginnote{Clase y clase cerrada}
 La \emph{clase} de $i\in I$, que denotaremos por $C(i)$, es la clase de equivalencia de $i$ en $I$ con respecto a la relación $\leftrightarrow$.
 Decimos que una clase $C$ es \emph{cerrada} si cada vez que $i\in C$ y $i\to j$ se tiene necesariamente que $j\in C$.
 \end{defn}
@@ -741,7 +741,7 @@ Para esta cadena hay tres clases: $\{1,2,3\}$, $\{4\}$, $\{5,6\}$.
 Las últimas dos son cerradas.
 \end{ex}
 
-\begin{defn}\tbf{Irreducibilidad}
+\begin{defn}\tbf{Irreducibilidad}\marginnote{Irreducibilidad}
 Decimos que una cadena de Markov $X$ es \emph{irreducible}, o alternativamente que su matriz de transición $P$ lo es, si $X$ tiene una única clase.
 \end{defn}
 
