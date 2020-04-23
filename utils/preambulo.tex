@@ -85,6 +85,17 @@
 \allowdisplaybreaks[2]
 \numberwithin{equation}{section}
 
+% Comando para notas al margen
+\newcommand{\NAM}[2][]{
+\ifnum \notasalmargen=1 #2 \else #1 \fi
+}
+\newcommand{\MarginNote}[2][]{
+\ifthenelse{\equal{#1}{}}{
+\NAM{\marginnote{#2}}}{
+\NAM{\marginnote{#2}[#1]}
+}
+}
+
 %%% Theorem environments %%%
 \newtheorem{thm}{Teorema}[section]
 \newtheorem{lem}[thm]{Lema}

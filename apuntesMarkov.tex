@@ -1,5 +1,8 @@
 \documentclass[letterpaper,reqno,11pt,oneside,final]{article}
 
+% usar notas al margen (1 para usar notas al margen, 0 si no)
+\def\notasalmargen{1}
+
 \input{utils/preambulo}
 \input{utils/portada}
 
@@ -13,8 +16,10 @@
 \newpage
 
 % =============Personal==============   
+\NAM{
 \newgeometry{top=1.5cm, bottom=1.5cm, outer=5cm, inner=2cm, heightrounded, marginparwidth=4cm, marginparsep=-0.5cm}
 \savegeometry{notas-al-margen}
+}
 % =============Personal==============   
 
 \input{capitulos/cadenas_de_markov}\newpage
