@@ -90,6 +90,18 @@ Entonces $(X_n)_{n\geq0}$ es una cadena de Markov (\uexers: chequee esto).
 Por ahora esta descripción es informal, luego veremos como se puede construir esta cadena de manera rigurosa.
 \end{ex}
 
+\begin{ex}\tbf{Ruina del jugador}\label{ex:ruina}
+Consideramos ahora un juego de apuestas, donde en cada turno el jugador gana $1$ con probabilidad $p$ y pierde $1$ con probabilidad $1-p$.
+El jugador para de jugar si se queda sin dinero.
+Esto es muy similar a la cadena anterior, excepto que ahora el espacio de estados es $\zz_{\geq0}$ y tenemos
+\[X_n=\begin{dcases*}
+X_{n-1}+1 & con probabilidad $p$ si $n>0$,\\
+X_{n-1}-1 & con probabilidad $1-p$ si $n>0$,\\
+0 & con probabilidad $1$ si $n=0$.
+\end{dcases*}\]
+\end{ex}
+
+
 \begin{defn}\tbf{Cadena de Markov homogénea, matriz de transición} 
 Sea $X$ una cadena de Markov.
 Decimos que $X$ es \emph{homogénea}\marginnote{CM Homogénea} si
@@ -108,8 +120,6 @@ p & si $j=i+1$,\\
 
 Notar que $P$ es una matriz indexada por un conjunto numerable, pero esto no nos traerá mayores dificultades (lo discutiremos en más detalle más adelante).
 $P$ no puede ser cualquier matriz, si no que claramente debe satisfacer algunas propiedades especiales, precisamente:
-
-\newpage
 
 \begin{defn}\tbf{Matriz estocástica}
 Una matriz $P=\big(p_{ij}\big)_{i,j\in I}$ se dice \marginnote{Matriz Estocástica}\emph{matriz estocástica} si:\\[-20pt]
@@ -518,6 +528,7 @@ Sean $\tau$, $\tau_1$, $\tau_2$ t.d.p.
 \item Si $\tau_1(\omega)\leq\tau_2(\omega)$ para cada $\omega\in\Omega$ entonces $\cf_{\tau_1}\subseteq\cf_{\tau_2}$.
 \item $\cf_\tau=\big\{A\in\cf_\infty\!:A\cap\{\tau= n\}\in\cf_n~\forall n\geq0\}$.
 \item $A\in\cf_\tau$ si y sólo si existe $(A_n)_{n\in\nn\cup\{\infty\}}$ con $A_n\in\cf_n$ tal que $A=\bigcup_{n\in\nn\cup\{\infty\}}A_n\cap\{\tau=n\}$.
+\item $\{\tau_1\leq\tau_2\},\{\tau_1<\tau_2\}\in\cf_{\tau_1}\cap\cf_{\tau_2}$.
 \end{enumerate}
 \end{prop}
 
@@ -578,15 +589,16 @@ Hemos escrito la propiedad de Markov para $f$ acotada por simplicidad, pero la d
 \end{rem}
 
 \begin{ex}
-La hipótesis de que $\tau$ sea t.d.p. es necesaria en el teorema anterior: en general la propiedad no vale para tiempos aleatorios que no sean tiempos de parada.
+La hipótesis de que $\tau$ sea t.d.p. es necesaria para que una propiedad como la del teorema anterior sea válida.
 Por ejemplo podemos considerar la marcha aleatoria simple en $\zz$ del Ej. \ref{ex:marchaZ} partiendo desde $0$ y definir el tiempo $\sigma=\sup\{k\geq0\!:X_k\leq0\}$, que claramente depende del futuro de la trayectoria (pues necesita saber que la marcha nunca más será negativa), por lo que no es tiempo de parada.
-Como la marcha parte en $0$ se tiene que si $\sigma<\infty$ entonces $X_\sigma=0$ (recordando que la marcha solo se mueve con pasos de largo $\pm1$).
-Si la propiedad de Markov se tuviera, entonces por ejemplo tendríamos $\ee(X_{\sigma+1}|\cf_\sigma)\uno{\sigma<\infty}=\ee_{X_\sigma}(X_{1})\uno{\sigma<\infty}=\ee_{0}(X_{1})\uno{\sigma<\infty}=(p-q)\uno{\sigma<\infty}$.
-Pero claramente $\ee(X_{\sigma+1}|\cf_\sigma)\uno{\sigma<\infty}=\uno{\sigma<\infty}$, porque si a tiempo $\sigma$ es la última vez que estuvimos en $\zz_{\leq0}$, entonces un instante de tiempo después necesariamente estaremos en $1$.
-Como $p-q<1$ si $p<1$, vemos que esto no es posible.
+Si asumimos $\sigma<\infty$ y observamos la trayectoria de marcha a partir de tiempo $\sigma$, donde tenemos necesariamente $X_\sigma=0$, lo que vemos no es una copia independiente de la cadena comenzada en $0$, pues si a tiempo $\sigma$ es la última vez que estuvimos en $\zz_{\leq0}$ entonces el resto de la trayectoria debe mantenerse sobre $0$ (por ejemplo, $X_{\sigma+1}=1$).
+% Como la marcha parte en $0$ se tiene que si $\sigma<\infty$ entonces $X_\sigma=0$ (recordando que la marcha solo se mueve con pasos de largo $\pm1$).
+% Si la propiedad de Markov se tuviera, entonces por ejemplo tendríamos $\ee(X_{\sigma+1}|\cf_\sigma)\uno{\sigma<\infty}=\ee_{X_\sigma}(X_{1})\uno{\sigma<\infty}=\ee_{0}(X_{1})\uno{\sigma<\infty}=(p-q)\uno{\sigma<\infty}$.
+% Pero claramente $\ee(X_{\sigma+1}|\cf_\sigma)\uno{\sigma<\infty}=\uno{\sigma<\infty}$, porque si a tiempo $\sigma$ es la última vez que estuvimos en $\zz_{\leq0}$, entonces un instante de tiempo después necesariamente estaremos en $1$.
+% Como $p-q<1$ si $p<1$, vemos que esto no es posible.
 \end{ex}
 
-\subsubsection{Ejemplo: probabilidades de pasada}
+\subsubsection{Ejemplo: probabilidades de pasada}\label{sec:pasada}
 
 La propiedad de Markov fuerte es una de las herramientas más importantes en el estudio de cadenas de Markov.
 Para ilustrar esto veremos un\marginnote{Ej. de Prop. de Markov Fuerte en Marcha Aleat.} ejemplo.
@@ -610,6 +622,7 @@ Luego podemos aplicar la propiedad de Markov fuerte al lado derecho anterior par
 
 \begin{exer}
 Justifique esto cuidadosamente.
+Para ello escriba $s^{\tau_a-\tau_1}$ como $f(X_{\tau_1}+1,X_{\tau_1}+2,\dotsc)$ para alguna $f\!:I^\nn\longrightarrow\rr$ adecuada y use \eqref{eq:propMarkF}.
 \end{exer}
 
 Lo anterior es igual a
@@ -631,7 +644,7 @@ De aquí podemos sacar por ejemplo la distribución de $\tau_a$, mediante
 
 Para el problema que nos interesaba tenemos, usando \eqref{eq:phia} nuevamente,
 \[\pp_0(\tau_a<\infty)=\sum_{k\geq0}\pp_0(\tau_a=k)=\lim_{s\to1^-}\phi_a(s)=\left(\frac{1-\sqrt{1-4pq}}{2q}\right).\]
-Usando ahora $q=1-p$, el argumento de la raíz es $(1-2p)^2$, y de esto concluimos que
+El argumento de la raíz es $(1-2p)^2$, y de esto concluimos que
 \[\pp_0(\tau_a<\infty)=
 \begin{dcases*}
 \left(\frac{p}{q}\right)^a & si $p<\tfrac12$,\\
@@ -639,6 +652,12 @@ Usando ahora $q=1-p$, el argumento de la raíz es $(1-2p)^2$, y de esto concluim
 \end{dcases*}\]
 Notar que, como debiera esperarse, cuando la probabilidad de salto a la derecha es mayor que $\frac12$, la marcha alcanza cualquier nivel $a>0$ eventualmente con probabilidad $1$.
 Lo que también se concluye, y que es quizás menos claro intuitivamente, es que para el caso $p<\frac12$ siempre hay una probabilidad positiva de nunca alcanzar $a$.
+
+\begin{ex}
+Para la cadena de Markov dada por la ruina del jugador, Ej. \ref{ex:ruina}, demuestre que la probabilidad de que el jugador se quede eventualmente sin dinero si parte en $1$ es $(1-p)/p$ si $p>\frac12$ y $1$ si $p\leq\frac12$.
+\uindic: si bien puede repetir el análisis de arriba, esto no es necesario y puede comparar directamente con el ejemplo anterior.
+¿Puede calcular el tiempo esperado de llegada a $0$ para el caso $p>\frac12$?
+\end{ex}
 
 \subsection{Probabilidades de absorción}
 
@@ -799,33 +818,45 @@ La idea es que cuando hay más de una clase, la cadena puede estudiarse por sepa
 Otra noción importante, que asumiremos a menudo de nuestras cadenas, es la de aperiodicidad.
 Partimos por la siguiente definición.
 
-\begin{defn}\tbf{Periodo}
+\begin{defn}\tbf{Periodo}\marginnote{Periodo}
 El \emph{periodo} de $i\in I$ es
 \[\d(i)=\uptext{mcd}\{n>0\!:p^{(n)}_{ii}>0\},\]
 donde mcd denota al máximo común divisor (y tomamos $\uptext{mcd}(\emptyset)=0$).
 \end{defn}
 
-\begin{ex}
-La marcha aleatoria en $\zz$ tiene período 2 (\uexers: verifíquelo).
+\begin{ex}\label{ex:periodo}
+La marcha aleatoria en $\zz$ tiene período 2 (\uexers: verifíquelo); esto implica en este caso, por ejemplo, que si la marcha comienza en un estado par, entonces estará en un estado par en cada instante de tiempo par y en uno impar en cada instante de tiempo impar.
 La primera cadena del Ej. \ref{ex:irred} tiene periodo $1$.
 \end{ex}
 
-\begin{defn}
+\begin{defn}\marginnote{Propiedad de Clase}
 Decimos que una propiedad definida para estados de una cadena de Markov es \emph{propiedad de clase} si se tiene que cada vez que $i$ satisface la propiedad y $j\in C(i)$ entonces $j$ satisface la propiedad.
 \end{defn}
 
-\begin{prop}
+\begin{prop}\label{prop:periodo-clase}
 El periodo es propiedad de clase (es decir, $i\leftrightarrow j$ implica que $\d(i)=\d(j)$).
 \end{prop}
 
 \begin{proof}
-Pospuesta \ucmark.
+Tomemos $i\neq j$ en la misma clase, de forma que existen $m$ y $n$ tales que $p^{(m)}_{ij}>0$ y $p^{(n)}_{ji}>0$.
+Además sabemos que existe $r>0$ tal que $p^{(r)}_{ii}>0$ (por ejemplo podemos tomar $r=m+n$ por Chapman-Kolmogorov).
+Luego para todo $k\geq0$ Chapman-Kolmogorov da
+\[p^{(n+m+kr)}_{jj}\geq p^{(m)}_{ji}(p^{(r)}_{ii})^kp^{(n)}_{ij}\]
+(\uexers: verifique esto), y concluimos que $\d(j)$ es divisor de $m+n+kr$ para todo $k\geq0$.
+En particular, $\d(j)$ es divisor de $(m+n+2r)-(m+n+r)=r$.
+Obtenemos como conclusión que para cada $r>0$ tal que $p^{(r)}_{ii}>0$ se tiene que $\d(j)$ divide a $r$ y luego, en particular, $\d(j)$ divide a $\d(i)$.
+Intercambiando los roles de $i$ y $j$ concluimos que $\d(i)$ divide a $\d(j)$, y luego $\d(i)=\d(j)$.
 \end{proof}
 
-\begin{defn}\tbf{Aperiodicidad}
+\begin{defn}\tbf{Aperiodicidad}\marginnote{Aperiodicidad}
 Decimos que un estado $i\in I$ es \emph{aperiódico} si $\d(i)=1$.
 Decimos que una cadena de Markov es \emph{aperiódica} si todos sus estados lo son.
 \end{defn}
+
+Ciertos aspectos del estudio de cadenas de Markov se simplifican al considerar cadenas aperiódicas, que evitan comportamientos como los descritos en el Ex. \ref{ex:periodo} para la marcha aleatoria simple en $\zz$.
+Sin embargo, y tal como el mismo ejemplo muestra, muchas cadenas naturales no son aperiódicas, por lo que estas sí tendrán que ser consideradas en nuestro estudio.
+
+El siguiente resultado se demuestra de manera similar a la Prop. \ref{prop:periodo-clase}:
 
 \begin{lem}
 Sea $X$ irreducible y sea $i\in I$.
@@ -833,6 +864,247 @@ Si $i$ es aperiódico entonces $X$ lo es.
 Más aún, en este caso se tiene que para todo $i,j\in I$ existe un $n_0\geq0$ tal que $p_{ij}^{(n)}>0$ para todo $n\geq n_0$.
 \end{lem}
 
+\begin{exer}
+Demuestre el lema anterior.
+\end{exer}
+
+\subsubsection{Recurrencia y transiencia}
+
+Ahora examinaremos uno de los aspectos claves en el estudio de cadenas de Markov: la distinción entre recurrencia y transiencia.
+
+% \subsubsection{Definición y propiedades básicas}
+
+\begin{defn}\tbf{Tiempo de retorno}\marginnote{Tiempo de retorno}
+Dada una cadena de Markov $X$, definimos su \emph{tiempo de retorno} (o \emph{tiempo de llegada}) a $i\in I$ como
+\[\tau_i=\inf\{n\geq1\!:X_n=i\}.\]
+Más generalmente, si $A\subseteq I$, escribimos
+\[\tau_i=\inf\{n\geq1\!:X_n\in A\}.\]
+\end{defn}
+
+Los anteriores son claramente tiempos de parada (\uexers: demuéstrelo).
+Para efectos del estudio de recurrencia de cadenas de Markov que haremos a continuación, típicamente estaremos interesados en el caso en que la cadena comienza en $i$ y nos preguntamos por el primer tiempo en que vuelve a $i$, lo que explica llamar a $\tau_i$ el tiempo de retorno a $i$ (pero, por supuesto, la definición tiene sentido para la cadena comenzando en cualquier estado $j$).
+
+\begin{defn}
+El \emph{número de visitas} a $i$ es
+\[N_i=\sum_{n\geq0}\uno{X_n=i}.\]
+\end{defn}
+
+\begin{defn}\tbf{Recurrencia y transiencia}
+Decimos que $i\in I$ es\marginnote{Recurrencia} \emph{recurrente} si
+\[\pp_i(\tau_i<\infty)=1.\]
+En caso contrario, decimos que $i$ es\marginnote{Transiencia} \emph{transiente}.
+\end{defn}
+
+En palabras, un estado es recurrente si partiendo de $i$ la cadena vuelve a $i$ en el futuro con probabilidad $1$.
+Nuestro objetivo es demostrar la siguiente dicotomía entre recurrencia y transiencia:
+
+\begin{thm}\label{thm:rec-trans}\marginnote{Teo: Dicotomía entre recurrencia y transiencia}
+\leavevmode
+\begin{enumerate}[label=\uptext{\arabic*.}]
+\item \uptext{(Caso recurrente)}\enspace Las siguientes son equivalentes:
+\begin{enumerate}[label=\uptext{(\roman*)}]
+\item $\pp_i(\tau_i<\infty)=1$.
+\item $\pp_i(N_i=\infty)=1$.
+\item $\ee_i(N_i)=\infty$.
+\end{enumerate}
+\item \uptext{(Caso transiente)}\enspace Las siguientes son equivalentes:
+\begin{enumerate}[label=\uptext{(\roman*)}]
+\item $\pp_i(\tau_i<\infty)<1$.
+\item $\pp_i(N_i=\infty)=0$.
+\item $\ee_i(N_i)<\infty$.
+\end{enumerate}
+\end{enumerate}
+\end{thm}
+
+El contenido esencial de este teorema es el hecho de que la recurrencia de un estado $i\in I$ equivale a que, partiendo de $i$, la cadena visita $i$ una infinidad de veces.
+
+Partimos con un lema sencillo:
+
+\begin{lem}\marginnote{$\ee_i(N_i)=\sum_{n\geq0}p_{ii}^{(n)}$.}
+$\ee_i(N_i)=\sum_{n\geq0}p_{ii}^{(n)}$.
+\end{lem}
+
 \begin{proof}
-\uexer.
+\[\textstyle\ee_i(N_i)=\ee_i(\sum_{n\geq0}\uno{X_n=i})=\sum_{n\geq0}\ee_i(\uno{X_n=i})=\sum_{n\geq0}\pp_i(X_n=i)=\sum_{n\geq0}p_{ii}^{(n)},\]
+donde en la segunda igualdad usamos el Teorema de Convergencia Monótona.
+\end{proof}
+
+Como consecuencia de este lema y el teorema obtenemos un criterio explícito para chequear si un estado es recurrente o transiente:
+
+\begin{cor}\marginnote{Caract. para det. si un est. es recurrente}
+Un estado $i\in I$ es recurrente si y solo si $\sum_{n\geq0}p_{ii}^{(n)}=\infty$.
+\end{cor}
+
+\begin{ex}\label{eq:srw-rec-1}
+Veremos más adelante (\ucmark) que para la marcha aleatoria simple en $\zz$ se tiene $p^{(2n)}_{00}\sim\frac{(4p(1-p))^n}{\sqrt{\pi n}}$ (mientras que $p^{(2n)}_{00}=0$ para todo $n$).
+En el caso simétrico, $p=\frac12$, tenemos $4p(1-p)=1$, y por lo tanto $\sum_{n\geq0}p_{ii}^{(n)}=\infty$, de donde concluimos que la marcha aleatoria es recurrente.
+En el caso asimétrico, $p\neq\frac12$, como la función $p\longmapsto p(1-p)$ alcanza su máximo en $[0,1]$ en $p=\frac12$, tenemos $4p(1-p)<1$ y por lo tanto $\sum_{n\geq0}p_{ii}^{(n)}<\infty$, de donde se sigue que la marcha aleatoria es transiente.
+\uexer: ¿Es este resultado consistente con lo que obtuvimos en el ejemplo de la Sección \ref{sec:pasada}?
+\end{ex}
+
+Para la demostración del Teorema \ref{thm:rec-trans} utilizaremos una idea que se conoce a veces como descomposición por tiempo de llegada.
+Esto lo hacemos en el resultado siguiente.
+Sea
+\[u^{(n)}_{ij}=\pp_i(\tau_j=n).\]
+Notemos que $u^{(0)}_{ii}=0$, por definición de $\tau_i$.
+
+\begin{lem}
+Para todo $n\geq0$ se tiene que
+\[p_{ij}^{(n)}=\sum_{k=1}^nu_{ij}^{(k)}p_{jj}^{n-k}\uno{n>0}+\uno{n=0,i=j}.\]
+\end{lem}
+
+\begin{proof}
+El caso $n=0$ es trivial, así que asumamos que $n>0$.
+Tenemos
+\[p_{ij}^{(n)}=\pp_i(X_n=j)=\ee_i(\uno{X_n=j}\uno{\tau_j\leq n})=\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j\leq n})=\sum_{k=1}^n\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j=k}),\]%=\sum_{k=1}^n\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j=k})
+donde usamos el hecho que $X_n=j$ implica que $\tau_j\leq n$.
+Ahora usamos la propiedad de Markov fuerte en la esperanza condicional.
+Para ello reescribimos el término $k$-ésimo de la suma al lado derecho como $\ee_i(\ee(\uno{X_n-k+\tau_j=j}|\cf_{\tau_j})\uno{\tau_j=k})$ (\uexers: ¿por qué podemos hacer esto?), de manera que la esperanza condicional que aparece adentro es igual a $\ee_{X_{\tau_j}}\!(\uno{X_n-k=j})$.
+Luego
+\[p_{ij}^{(n)}=\sum_{k=1}^n\ee_i(\pp_j(X_{n-k}=j)\uno{\tau_j=k})=\sum_{k=1}^np^{(n-k)}_{jj}\pp_i(\tau_j=k)=\sum_{k=1}^np^{(n-k)}_{jj}u_{ij}^{(k)},\]
+que es lo queríamos probar.
+\end{proof}
+
+Estamos listos para demostrar la dicotomía entre recurrencia y transiencia.
+Antes de hacerlo introducimos una notación que usaremos en la demostración.
+
+\begin{defn}
+Definimos en \emph{tiempo del $k$-ésimo retorno} a $i$, $\tau^{(k)}_i$, inductivamente como
+\[\tau^{(1)}_i=\tau_i,\qquad\tau^{(k)}_i=\inf\{n>\tau^{(k-1)}_i\!:X_n=i\}\quad\text{para $k>1$}.\]
+\end{defn}
+
+\begin{proof}[Demostración del Teorema \ref{thm:rec-trans}]
+Comenzamos por el caso recurrente, probando la equivalencia entre (i) y (iii).
+Sean
+\begin{equation}
+p_{ii}(z)=\sum_{n\geq0}p^{(n)}_{ii}z^n,\qquad u_{ii}(z)=\sum_{n\geq0}u^{(n)}_{ii}z^n.
+\end{equation}
+Como $p^{(n)}_{ii}$ y $u^{(n)}_{ii}$ están en $[0,1]$ para todo $n$, ambas series son absolutamente convergentes si $|z|<1$.
+Para tales $z$ tenemos entonces
+% \begin{align}
+\[u_{ii}(z)p_{ii}(z)=\sum_{n\geq0}\sum_{k=0}^nu_{ii}^{(k)}z^kp_{ii}^{(n-k)}z^{n-k}=\sum_{n\geq0}z^n\sum_{k=0}^nu_{ii}^{(k)}p_{ii}^{(n-k)}\]
+% \end{align}
+(simplemente por regla de multiplicación de series de potencias).
+Sea $S_n=\sum_{k=0}^nu_{ii}^{(k)}p_{ii}^{(n-k)}$, que es el coeficiente $n$-ésimo de la serie de potencias del lado derecho arriba.
+Si $n=0$ tenemos $S_n=u_{ii}^{(0)}p_{ii}^{(0)}=0$.
+En caso contrario, gracias al lema anterior tenemos $S_n=u_{ii}^{(0)}p_{ii}^{(0)}+p_{ii}^{(n)}$.
+Concluimos entonces que para todo $n\geq0$ se tiene $S_n=p_{ii}^{(n)}\uno{n>0}=p_{ii}^{(n)}-\uno{n=0}$ (\uexers: ¿por qué se tiene esto último?).
+Usando esto arriba obtenemos
+\[u_{ii}(z)p_{ii}(z)=\sum_{n\geq0}(p_{ii}^{(n)}-\uno{n=0})z^n=\sum_{n\geq0}p_{ii}^{(n)}-1=p_{ii}(z)-1\]
+o, equivalentemente,
+\[p_{ii}(z)(1-u_{ii}(z))=1\]
+para todo $|z|<1$.
+Ahora notamos que
+\begin{align}
+\lim_{z\to1^-}p_{ii}(z)&=\sum_{n\geq0}p_{ii}^{(n)}=\ee_i(N_i),\\
+\lim_{z\to1^-}u_{ii}(z)&=\sum_{n\geq0}u_{ii}^{(n)}=\sum_{n\geq0}\pp_i(\tau_i=n)=\pp_i(\tau_i<\infty).
+\end{align}
+Pero, por lo anterior,
+\[\lim_{z\to1^-}p_{ii}(z)(1-u_{ii}(z))=1.\]
+Luego $\ee_i(N_i)=\infty$ implica que necesariamente $\pp_i(\tau_i<\infty)=1$ y viceversa, lo que nos dice que (i) y (iii) son equivalentes.
+
+Que (ii) implica (iii) es directo.
+Veamos entonces que (i) implica (ii).
+Tenemos que
+\[\{N_i=\infty\}=\{\tau_i^{(k)}~\forall\,k\geq1\}.\]
+\uexer: Pruebe lo anterior.
+Luego
+\[\pp_i(N_i=\infty)=\pp_i\Big({\textstyle\bigcap_{k\geq1}}\{\tau^{(k)}_i<\infty\}\Big)=\lim_{k\to\infty}\pp_i(\tau^{(k)}_i<\infty),\]
+donde en la segunda igualdad usamos que los eventos $\{\tau^{(k)}_i<\infty\}$ son decrecientes.
+De esta forma la implicancia que queremos probar equivale a probar que 
+\begin{equation}
+\pp_i(\tau_i<\infty)=1\quad\Longrightarrow\quad\lim_{k\to\infty}\pp_i(\tau^{(k)}_i<\infty)=1.
+\end{equation}
+Y el lado derecho equivale a pedir que $\pp_i(\tau^{(k)}_i<\infty)=1$ para todo $k\geq1$ (\uexers: ¿por qué?).
+Probaremos esto por inducción.
+El caso $k=1$ es la hipótesis.
+Para el paso inductivo usamos el siguiente:
+\begin{exer}
+Demuestre que para todo $k\geq1$,
+\[\pp_i(\tau^{(k+1)}_i<\infty)=\pp_i(\tau_i<\infty)\pp_i(\tau^{(k)}_i<\infty).\]
+\end{exer}
+\noindent La conclusión ahora es directa.
+
+Resta probar el caso transiente.
+Del caso recurrente obtenemos directamente que
+\[\pp_i(\tau_i<\infty)<1\quad\Longleftrightarrow\quad\pp_i(N_i=\infty)<1\quad\Longleftrightarrow\quad\ee_i(N_i)<\infty.\]
+Luego lo que falta demostrar es que las propiedades anteriores equivalen a $\pp_i(N_i=\infty)=0$, pero esto es directo: esta propiedad implica trivialmente que $\pp_i(N_i=\infty)<1$, mientras que la propiedad $\ee_i(N_i)<\infty$ implica que $\pp_i(N_i=\infty)=0$.
+\end{proof}
+
+La siguiente es una consecuencia más o menos directa del argumento usado en la demostración para probar que (ii) implica (iii):
+
+\begin{prop}\label{prop:geomNi}
+Sea $\theta_i=\pp_i(\tau_i<\infty)$.
+Entonces para todo $k\geq1$,
+\[\pp_i(\tau^{(k)}_i<\infty)=\theta_i^k.\]
+En particular
+\[\pp_i(N_i=k)=\theta_i^k(1-\theta_i)\qquad\text{y}\qquad\ee_i(N_i)=\frac{\theta_i}{1-\theta_i},\]
+es decir, $N_i$ es una variable Geom$[\theta_i]$.
+\end{prop}
+
+\begin{exer}
+Demuestre la Proposición \ref{prop:geomNi} y asegúrese de comprender su contenido (¿por qué es natural esperar que $N_i$ sea una variable geométrica?).
+\end{exer}
+
+En el resto de esta sección profundizaremos nuestro estudio de recurrencia y transiencia.
+
+\begin{prop}
+La recurrencia es propiedad de clase, i.e. si $i\leftrightarrow j$ entonces $i$ es recurrente si y solo si $j$ es recurrente.
+\end{prop}
+
+\begin{proof}
+Supongamos que $i\leftrightarrow j$, de manera que existen $m,n\geq0$ tal que $p^{(m)}_{ij}>0$ y $p^{(n)}_{ji}>0$, y asumamos que $i$ es transiente.
+Por Chapman-Kolmogorov tenemos $p^{(m+n+r)}_{ii}\geq p^{(m)}_{ij}p^{(r)}_{jj}p^{(n)}_{ji}$ para cada $r\geq0$, y luego
+\[\ee_j(N_j)=\sum_{r\geq0}p^{(r)}_{jj}\leq\frac{1}{p^{(m)}_{ij}p^{(n)}_{ji}}\sum_{r\geq0}p^{(m+n+r)}_{ii}\leq\frac{1}{p^{(m)}_{ij}p^{(n)}_{ji}}\ee_i(N_i)<\infty,\]
+pues $i$ es transiente.
+Deducimos entonces que $j$ es transiente.
+La otra implicancia sale igual, intercambiando $i$ y $j$.
+\end{proof}
+
+\begin{prop}
+\leavevmode
+\begin{enumerate}[label=\uptext{(\roman*)}]
+\item Para $i\neq j$ se tiene $i\rightarrow j$ si y solo si $\pp_i(\tau_j<\infty)>0$.
+\item $\pp_i(N_j=\infty)=\pp_i(\tau_j<\infty)\pp_j(N_j=\infty)$.
+\item Si $i\rightarrow j$ e $i$ es recurrente entonces $\pp_i(\tau_j<\infty)=1$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+La parte (i) es trivial.
+
+\begin{exer}
+Use la propiedad de Markov para demostrar (ii).
+\end{exer}
+\noindent La parte (iii) es la más interesante.
+Partimos con la descomposición
+\[\pp_i(\tau_j<\infty)=\pp_i(\tau_j<\tau_i)+\pp_i(\tau_i\leq\tau_j,\,\tau_j<\infty).\]
+Para el segundo término del lado derecho usamos la propiedad de Markov fuerte:
+\begin{align}
+\pp_i(\tau_i\leq\tau_j,\,\tau_j<\infty)&=\ee_i(\ee(\uno{\tau_j<\infty}|\cf_{\tau_i})\uno{\tau_i\leq\tau_j})=\ee_i(\ee_{X_{\tau_i}}(\uno{\tau_j<\infty})\uno{\tau_i\leq\tau_j})\\
+&=\ee_i(\pp_i(\tau_j<\infty)\uno{\tau_i\leq\tau_j})=\pp_i(\tau_j<\infty)\pp_i(\tau_i\leq\tau_j)
+\end{align}
+donde, en la primera igualdad, usamos el hecho que $\{\tau_i\leq\tau_j\}\in\cf_{\tau_i}$.
+Luego $\pp_i(\tau_j<\infty)=\pp_i(\tau_j<\tau_i)+\pp_i(\tau_j<\infty)\pp_i(\tau_i\leq\tau_j)$, que podemos reescribir como
+\[\pp_i(\tau_j<\infty)\pp_i(\tau_j<\tau_i)=\pp_i(\tau_j<\tau_i).\]
+Luego basta probar que $\pp_i(\tau_j<\tau_i)>0$, lo que se deja como ejercicio.
+\end{proof}
+
+\begin{exer}
+Termine la demostración del resultado anterior.
+\end{exer}
+
+\begin{prop}
+Toda clase recurrente es cerrada.
+\end{prop}
+
+\begin{proof}
+Sea $C$ una clase recurrente y sean $i,j$ tales que $i\in C$ e $i\rightarrow j$.
+Debemos demostrar entonces que $j\in C$, es decir que $j\rightarrow i$.
+Supongamos por contradicción que esto no se tiene, es decir, que $j\nrightarrow i$.
+Sabemos que hay un $n\geq0$ tal que $p_{ij}^{(n)}>0$.
+Tenemos que $\pp_i(X_n=j,\,N_i<\infty)=\pp_i(X_n=j)$, pues $j\nrightarrow i$.
+Luego
+\[\pp_i(N_i<\infty)\geq\pp_i(X_n=j,N_i<\infty)=\pp_i(X_n=j)=p_{ij}^{(n)}>0,\]
+de donde se sigue que $i$ es transiente, lo que nos da la contradicción buscada.
 \end{proof}
