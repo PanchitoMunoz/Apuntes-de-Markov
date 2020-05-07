@@ -89,15 +89,10 @@
 \newcommand{\NAM}[2][]{
 \ifnum \notasalmargen=1 #2 \else #1 \fi
 }
-\newcommand{\MarginNote}[2][]{
-\ifthenelse{\equal{#1}{}}{
-\NAM{\marginnote{#2}}}{
-\NAM{\marginnote{#2}[#1]}
-}
-}
+\newcommand{\MarginNote}[2][]{\ifthenelse{\equal{#1}{}}{\NAM{\marginnote{#2}}}{\NAM{\marginnote{#2}[#1]}}}
 
 %%% Theorem environments %%%
-\newtheorem{thm}{Teorema}[section]
+\newtheorem{thm}{Teorema}[subsection]
 \newtheorem{lem}[thm]{Lema}
 % \newtheorem{theorem}{thmrema}
 \newtheorem{prop}[thm]{Proposición}

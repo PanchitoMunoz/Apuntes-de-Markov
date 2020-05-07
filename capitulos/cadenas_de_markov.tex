@@ -61,7 +61,7 @@ para todo $i_0,\dotsc,i_{n+1}\in I$ (que satisfaga $\pp(X_0=i_0,\dotsc,X_{n}=i_{
 \end{defn}
 
 \begin{rem}
-La propiedad de Markov es equivalente a decir que $X_{n+1}$ y $(X_0,\dotsc,X_{n-1})$ son independientes condicionales a $X_n$, es decir, ``condicional\MarginNote{Interpretación de la CM} al presente, el futuro del proceso es independiente del pasado''.
+La propiedad de Markov es equivalente a decir que $X_{n+1}$ y \NAM[$(X_0,\dotsc,X_{n-1})$]{$(X_0,\dotsc,\\ X_{n-1})$} son independientes condicionales a $X_n$, es decir, ``condicional\MarginNote{Interpretación de la CM} al presente, el futuro del proceso es independiente del pasado''.
 \uexer: demuestre esto.
 \end{rem}
 
@@ -101,6 +101,22 @@ X_{n-1}-1 & con probabilidad $1-p$ si $n>0$,\\
 \end{dcases*}\]
 \end{ex}
 
+\begin{ex}\tbf{Cadena de Ehrenfest}\label{ex:ehrenfest}
+En este ejemplo nos imaginamos una caja rectangular dividida en dos cámaras que están conectadas por un pequeño orificio, donde $r$ moléculas de aire se mueven libremente al azar.
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.6in]{figures/ehrenfest.png}
+\end{figure}
+P. Ehrenfest propuso a comienzos del sigo XX el siguente modelo para estudiar esta situación.
+Tenemos $r$ bolas distribuidas en 2 dos urnas, una con $k$ bolas (la cámara izquierda de la caja) y la otra con las restantes $r-k$ (la cámara derecha).
+Luego en cada instante de tiempo tomamos una de las $r$ bolas elegida uniformemente al azar y la cambiamos de urna.
+La cadena de Markov detrás de este ejemplo es la siguiente: $I=\{0,\dots,r\}$ y, para $n\geq1$, tenemos
+\[X_n=\begin{dcases*}
+X_{n-1}+1 & con probabilidad $\frac{r-X_{n-1}}{r}$,\\
+X_{n-1}-1 & con probabilidad $\frac{X_{n-1}}{r}$.
+\end{dcases*}\]
+\end{ex}
+
 
 \begin{defn}\tbf{Cadena de Markov homogénea, matriz de transición} 
 Sea $X$ una cadena de Markov.
@@ -117,6 +133,10 @@ p & si $j=i+1$,\\
 0 & cualquier otro $j$.
 \end{dcases*}\]
 \end{ex}
+
+\begin{exer}
+Escriba la matriz de transición asociada a la cadena de Ehrenfest introducida en el Ejemplo \ref{ex:ehrenfest}.
+\end{exer}
 
 Notar que $P$ es una matriz indexada por un conjunto numerable, pero esto no nos traerá mayores dificultades (lo discutiremos en más detalle más adelante).
 $P$ no puede ser cualquier matriz, si no que claramente debe satisfacer algunas propiedades especiales, precisamente:
@@ -175,14 +195,28 @@ $X$ es una cadena de Markov con matriz de transición $P$ y distribución inicia
 
 \begin{proof}
 Para la primera implicancia escribimos
+\NAM[
 \begin{align}
-\pp(X_0=i_0,\dotsc,X_n=i_n)&=\pp(X_n=i_n|X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\hspace{-16pt}\\
+\pp(X_0=i_0,\dotsc,X_n=i_n)
+&=\pp(X_n=i_n|X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\hspace{-16pt}\\
 &=\pp(X_n=i_n|X_{n-1}=i_{n-1})\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\\
 &=p_{i_{n-1}i_n}\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0),\\
 \shortintertext{donde en la segunda igualdad usamos la propiedad de Markov, y luego repetimos inductivamente hasta}
 &=p_{i_{n-1}i_n}p_{i_{n-2}i_{n-1}}\dotsm p_{i_1i_0}\pp(X_0=i_0)\\
 &=p_{i_{n-1}i_n}p_{i_{n-2}i_{n-1}}\dotsm p_{i_1i_0}\mu_{i_0},
 \end{align}
+]{
+\begin{align}
+\pp(X_0=i_0,\dotsc,X_n=i_n)
+&=\pp(X_n=i_n|X_{n-1}=i_{n-1},\dotsc,X_0=i_0) \\
+&\qquad \qquad \qquad \qquad \qquad \qquad \cdot \pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\hspace{-16pt}\\
+&=\pp(X_n=i_n|X_{n-1}=i_{n-1})\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0)\\
+&=p_{i_{n-1}i_n}\pp(X_{n-1}=i_{n-1},\dotsc,X_0=i_0),\\
+\shortintertext{donde en la segunda igualdad usamos la propiedad de Markov, y luego repetimos inductivamente hasta}
+&=p_{i_{n-1}i_n}p_{i_{n-2}i_{n-1}}\dotsm p_{i_1i_0}\pp(X_0=i_0)\\
+&=p_{i_{n-1}i_n}p_{i_{n-2}i_{n-1}}\dotsm p_{i_1i_0}\mu_{i_0},
+\end{align}
+}
 que es lo que buscábamos.
 
 Para la conversa, probemos primero que $X$ es cadena de Markov, es decir, que satisface la propiedad de Markov.
@@ -340,20 +374,31 @@ Dada $X\sim\CM(P)$ y $n\in\nn$, denotamos por $P^{(n)}=(p^{(n)}_{ij})_{i,j\in I}
 \[p^{(n)}_{ij}=\pp_i(X_n=j).\]
 \end{defn}
 
-\begin{thm}\tbf{Ecuaciones de Chapman-Kolmogorov}\MarginNote{Ec. de Chapman-Kolmogorov}[20pt]
+\begin{thm}\tbf{Ecuaciones de Chapman-Kolmogorov}\MarginNote{Ec. de Chapman-Kolmogorov}
 Si $X\sim\CM(P)$ entonces para todo $m,n\geq0$ se tiene
 \[p^{(m+n)}_{ij}=\sum_{k\in I}p^{(m)}_{ik}p^{(n)}_{kj}.\]
-En particular, \MarginNote{$P^{(n)}=P^n$}[15pt]
+En particular, \MarginNote{$P^{(n)}=P^n$}
 \[P^{(n)}=P^n\] 
 para todo $n\geq0$.
 \end{thm}
 
 \begin{proof}
+\NAM[
 \begin{align}
 p^{(m+n)}_{ij}&=\pp_i(X_{m+n}=j)=\sum_{k\in I}\pp_i(X_{m+n}=j|X_m=k)\pp_i(X_m=k)\\
 &=\sum_{k\in I}\pp(X_{m+n}=j|X_0=i,X_m=k)\pp_i(X_m=k)=\sum_{k\in I}\pp(X_{m+n}=j|X_m=k)\pp_i(X_m=k)\hspace{-18pt}\\
 &=\sum_{k\in I}\pp_k(X_{n}=j)\pp_i(X_m=k)=\sum_{k\in I}p^{(m)}_{ik}p^{(n)}_{kj}.
 \end{align}
+]{
+\begin{align}
+p^{(m+n)}_{ij}
+&=\pp_i(X_{m+n}=j)
+=\sum_{k\in I}\pp_i(X_{m+n}=j|X_m=k)\pp_i(X_m=k)\\
+&=\sum_{k\in I}\pp(X_{m+n}=j|X_0=i,X_m=k)\pp_i(X_m=k)\\
+&=\sum_{k\in I}\pp(X_{m+n}=j|X_m=k)\pp_i(X_m=k)\hspace{-18pt}\\
+&=\sum_{k\in I}\pp_k(X_{n}=j)\pp_i(X_m=k)=\sum_{k\in I}p^{(m)}_{ik}p^{(n)}_{kj}.
+\end{align}
+}
 La segunda afirmación sale de la primera por inducción, y además claramente implica la primera por definición de potencia de matrices.
 \end{proof}
 
@@ -427,6 +472,11 @@ Entonces
 \[\ee\big(f(X_{n+1},X_{n+2}\dotsc)\big|\cf_n\big)=\ee_{X_n}\tsm\big(f(X_1,X_2,\dotsc)\big).\]
 \end{thm}
 
+En palabras simples, la propiedad de Markov dice que:
+\begin{quote}
+\emph{Si reiniciamos la cadena a tiempo $n$ y observamos su trayectoria a partir de ese tiempo, lo que vemos es una copia de la cadena original, partiendo desde el estado $X_n$, pero independiente de los estados $X_0,\dotsc,X_{n-1}$.}
+\end{quote}
+
 \begin{rem}
 \leavevmode
 \begin{enumerate}[label=(\roman*)]
@@ -445,12 +495,22 @@ Use la propiedad de Markov para probar el caso base, $m=1$.
 
 Ahora hacemos el paso inductivo, considerando el caso $m+1$.
 Tenemos
+\NAM[
 \begin{align}
 \ee\big(f(X_{n+1},X_{n+2},\dotsc)\big|\cf_n\big)&=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m+1}(X_{n+m+1})\big|\cf_n\big)\\
 &=\ee\big(\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m+1}(X_{n+m+1})\big|\cf_{n+m}\big)\big|\cf_n\big)\\
 &=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m}(X_{n+m})\ee\big(f_{m+1}(X_{m+1})\big|\cf_{n+m}\big)\big|\cf_n\big)\hskip-15pt\\
 &=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m}(X_{n+m})\ee_{X_{n+m}}\big(f_{m+1}(X_1)\big)\big|\cf_n\big),
 \end{align}
+]{
+\begin{align}
+\ee\big(f(X_{n+1},X_{n+2},& \dotsc)\big |\cf_n\big)\\
+&=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m+1}(X_{n+m+1})\big|\cf_n\big)\\
+&=\ee\big(\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m+1}(X_{n+m+1})\big|\cf_{n+m}\big)\big|\cf_n\big)\\
+&=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m}(X_{n+m})\ee\big(f_{m+1}(X_{m+1})\big|\cf_{n+m}\big)\big|\cf_n\big)\hskip-15pt\\
+&=\ee\big(f_1(X_{n+1})f_2(X_{n+2})\dotsm f_{m}(X_{n+m})\ee_{X_{n+m}}\big(f_{m+1}(X_1)\big)\big|\cf_n\big),
+\end{align}
+}
 donde usamos el caso base en la última igualdad.
 Notemos que el último factor dentro de la esperanza depende ahora solo de $X_{n+m}$, al igual que el que lo precede.
 Entonces si definimos $\tilde f_m(j)=f_m(j)\ee_{j}\big(f_1(X_1)\big)$ y usamos la hipótesis inductiva, lo anterior es igual a
@@ -634,7 +694,7 @@ Si repetimos esto inductivamente obtenemos
 Ahora descomponiendo de acuerdo al primer paso, tenemos
 \[\phi_1(s)=p\tts\ee_0(s^{\tau_1}|X_1=1)+q\tts\ee_0(s^{\tau_1}|X_1=-1)=p\tts s+q\tts\ee_{-1}(s^{\tau_1+1}),\]
 donde aplicamos la propiedad de Markov (débil); \uexers: justifique este último paso; ¿por qué sale un término $+1$ en el último exponente?
-Para la última esperanza usamos de nuevo la invarianza bajo traslación de la marcha, de forma que es igual a $\ee_{0}(s^{\tau_2+1})=s\phi_2(s)=s\phi_1(s)^2$ (lo que habíamos probado recién) y obtenemos $\phi_1(s)=ps+qs\phi_1(s)^2$, lo que lleva a 
+Para la última esperanza usamos de nuevo la invarianza bajo traslación de la marcha, de forma que es igual a $\ee_{0}(s^{\tau_2+1})=~s\phi_2(s)=s\phi_1(s)^2$ (lo que habíamos probado recién) y obtenemos $\phi_1(s)=ps+qs\phi_1(s)^2$, lo que lleva a 
 \[\phi_1(s)=\frac{1\pm\sqrt{1-4pqs^2}}{2qs}.\]
 Un análisis sencillo muestra que el lado derecho anterior está en $[0,1]$ para todo $s\in[0,1]$ (como debe ser por de $\phi_1(s)$) para la raíz con signo menos, y de acá concluimos que
 \[\phi_a(s)=\left(\frac{1-\sqrt{1-4pqs^2}}{2qs}\right)^a.\]
@@ -659,11 +719,13 @@ Para la cadena de Markov dada por la ruina del jugador, Ej. \ref{ex:ruina}, demu
 ¿Puede calcular el tiempo esperado de llegada a $0$ para el caso $p>\frac12$?
 \end{ex}
 
-\subsection{Probabilidades de absorción}
+\subsection{Probabilidades de absorción}\label{sec:absor}
 
 Ver P2 aux. 3 \ucmark.
 
-\subsection{Clasificación de estados}
+% \subsection{Clasificación de estados}
+
+\subsection{Estructura de clases}
 
 \subsubsection{Clases e irreducibilidad}
 
@@ -713,7 +775,10 @@ Que (2) implica (1) es directo.
 Para ver que (1) implica (3) probamos la contrarecíproca: asumiendo que $\pp_i(X_n=j)=0$ para todo $n$, tenemos que 
 \[\pp_i(\exists n\geq0\!:X_n=j)\leq\sum_{n\geq0}\pp_i(X_n=j)=0.\]
 Veamos ahora que (3) implica (2): tenemos que
-\[0<\pp_i(X_n=j)=\!\!\sum_{i_1,\dotsc,i_{n-1}}\pp_i(X_1=i_1,\dotsc,X_{n-1}=i_{n-1},X_n=j)=\!\!\sum_{i_1,\dotsc,i_{n-1}}p_{ii_1}p_{i_1i_2}\dotsm p_{i_{n-1}j},\]
+\begin{multline*}
+0<\pp_i(X_n=j)=\!\!\sum_{i_1,\dotsc,i_{n-1}}\pp_i(X_1=i_1,\dotsc,X_{n-1}=i_{n-1},X_n=j)\\
+=\!\!\sum_{i_1,\dotsc,i_{n-1}}p_{ii_1}p_{i_1i_2}\dotsm p_{i_{n-1}j},
+\end{multline*}
 y luego alguno de los sumandos debe ser positivo.
 \end{proof}
 
@@ -868,11 +933,11 @@ Más aún, en este caso se tiene que para todo $i,j\in I$ existe un $n_0\geq0$ t
 Demuestre el lema anterior.
 \end{exer}
 
-\subsubsection{Recurrencia y transiencia}
+\subsection{Recurrencia y transiencia}
 
 Ahora examinaremos uno de los aspectos claves en el estudio de cadenas de Markov: la distinción entre recurrencia y transiencia.
 
-% \subsubsection{Definición y propiedades básicas}
+\subsubsection{Definición y propiedades básicas}
 
 \begin{defn}\tbf{Tiempo de retorno}\MarginNote{Tiempo de retorno}
 Dada una cadena de Markov $X$, definimos su \emph{tiempo de retorno} (o \emph{tiempo de llegada}) a $i\in I$ como
@@ -892,22 +957,23 @@ El \emph{número de visitas} a $i$ es
 \begin{defn}\tbf{Recurrencia y transiencia}
 Decimos que $i\in I$ es\MarginNote{Recurrencia} \emph{recurrente} si
 \[\pp_i(\tau_i<\infty)=1.\]
-En caso contrario, decimos que $i$ es\MarginNote{Transiencia} \emph{transiente}.
+En caso contrario, decimos que $i$ es \emph{transiente}.\MarginNote{Transiencia}
 \end{defn}
 
 En palabras, un estado es recurrente si partiendo de $i$ la cadena vuelve a $i$ en el futuro con probabilidad $1$.
-Nuestro objetivo es demostrar la siguiente dicotomía entre recurrencia y transiencia:
+Nuestro objetivo es demostrar la siguiente dicotomía entre recurrencia y transiencia.
+Enunciaremos el resultado por separado en los casos recurrente y transiente, aunque son esencialmente equivalentes.
 
 \begin{thm}\label{thm:rec-trans}\MarginNote{Teo: Dicotomía entre recurrencia y transiencia}
-\leavevmode
+Sea $i\in I$.
 \begin{enumerate}[label=\uptext{\arabic*.}]
-\item \uptext{(Caso recurrente)}\enspace Las siguientes son equivalentes:
+\item \uptext{($i$ recurrente)}\enspace Las siguientes son equivalentes:
 \begin{enumerate}[label=\uptext{(\roman*)}]
 \item $\pp_i(\tau_i<\infty)=1$.
 \item $\pp_i(N_i=\infty)=1$.
 \item $\ee_i(N_i)=\infty$.
 \end{enumerate}
-\item \uptext{(Caso transiente)}\enspace Las siguientes son equivalentes:
+\item \uptext{($i$ transiente)}\enspace Las siguientes son equivalentes:
 \begin{enumerate}[label=\uptext{(\roman*)}]
 \item $\pp_i(\tau_i<\infty)<1$.
 \item $\pp_i(N_i=\infty)=0$.
@@ -915,6 +981,24 @@ Nuestro objetivo es demostrar la siguiente dicotomía entre recurrencia y transi
 \end{enumerate}
 \end{enumerate}
 \end{thm}
+
+% \begin{thm}\label{thm:rec-trans}
+% \leavevmode
+% \begin{enumerate}[label=\uptext{\arabic*.}]
+% \item \uptext{(Caso recurrente)}\enspace Las siguientes son equivalentes:
+% \begin{enumerate}[label=\uptext{(\roman*)}]
+% \item $\pp_i(\tau_i<\infty)=1$.
+% \item $\pp_i(N_i=\infty)=1$.
+% \item $\ee_i(N_i)=\infty$.
+% \end{enumerate}
+% \item \uptext{(Caso transiente)}\enspace Las siguientes son equivalentes:
+% \begin{enumerate}[label=\uptext{(\roman*)}]
+% \item $\pp_i(\tau_i<\infty)<1$.
+% \item $\pp_i(N_i=\infty)=0$.
+% \item $\ee_i(N_i)<\infty$.
+% \end{enumerate}
+% \end{enumerate}
+% \end{thm}
 
 El contenido esencial de este teorema es el hecho de que la recurrencia de un estado $i\in I$ equivale a que, partiendo de $i$, la cadena visita $i$ una infinidad de veces.
 
@@ -935,7 +1019,7 @@ Como consecuencia de este lema y el teorema obtenemos un criterio explícito par
 Un estado $i\in I$ es recurrente si y solo si $\sum_{n\geq0}p_{ii}^{(n)}=\infty$.
 \end{cor}
 
-\begin{ex}\label{eq:srw-rec-1}
+\begin{ex}\label{ex:srw-rec-1}
 Veremos más adelante (\ucmark) que para la marcha aleatoria simple en $\zz$ se tiene $p^{(2n)}_{00}\sim\frac{(4p(1-p))^n}{\sqrt{\pi n}}$ (mientras que $p^{(2n)}_{00}=0$ para todo $n$).
 En el caso simétrico, $p=\frac12$, tenemos $4p(1-p)=1$, y por lo tanto $\sum_{n\geq0}p_{ii}^{(n)}=\infty$, de donde concluimos que la marcha aleatoria es recurrente.
 En el caso asimétrico, $p\neq\frac12$, como la función $p\longmapsto p(1-p)$ alcanza su máximo en $[0,1]$ en $p=\frac12$, tenemos $4p(1-p)<1$ y por lo tanto $\sum_{n\geq0}p_{ii}^{(n)}<\infty$, de donde se sigue que la marcha aleatoria es transiente.
@@ -945,7 +1029,9 @@ En el caso asimétrico, $p\neq\frac12$, como la función $p\longmapsto p(1-p)$ a
 Para la demostración del Teorema \ref{thm:rec-trans} utilizaremos una idea que se conoce a veces como\MarginNote{Descomposición por tiempo de llegada} descomposición por tiempo de llegada.
 Esto lo hacemos en el resultado siguiente.
 Sea
-\[u^{(n)}_{ij}=\pp_i(\tau_j=n).\]
+\begin{equation}
+u^{(n)}_{ij}=\pp_i(\tau_j=n).\label{eq:uijn}
+\end{equation}
 Notemos que $u^{(0)}_{ii}=0$, por definición de $\tau_i$.
 
 \begin{lem}\MarginNote{Fórm. para $p_{ij}^{(n)}$}
@@ -959,9 +1045,9 @@ Tenemos
 \NAM[
 \[p_{ij}^{(n)}=\pp_i(X_n=j)=\ee_i(\uno{X_n=j}\uno{\tau_j\leq n})=\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j\leq n})=\sum_{k=1}^n\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j=k}),\]%=\sum_{k=1}^n\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j=k})
 ]{
-\begin{multline}
+\begin{multline*}
     p_{ij}^{(n)}=\pp_i(X_n=j)=\ee_i(\uno{X_n=j}\uno{\tau_j\leq n})=\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j\leq n})\\ =\sum_{k=1}^n\ee_i(\ee(\uno{X_n=j}|\cf_{\tau_j})\uno{\tau_j=k}),
-\end{multline}
+\end{multline*}
 }
 
 donde usamos el hecho que $X_n=j$ implica que $\tau_j\leq n$.
@@ -975,7 +1061,7 @@ que es lo queríamos probar.
 Estamos listos para demostrar la dicotomía entre recurrencia y transiencia.
 Antes de hacerlo introducimos una notación que usaremos en la demostración.
 
-\begin{defn}\MarginNote{Tiempo del $k$-ésimo retorno}
+\begin{defn}\label{def:k-retorno}\MarginNote{Tiempo del $k$-ésimo retorno}
 Definimos en \emph{tiempo del $k$-ésimo retorno} a $i$, $\tau^{(k)}_i$, inductivamente como
 \[\tau^{(1)}_i=\tau_i,\qquad\tau^{(k)}_i=\inf\{n>\tau^{(k-1)}_i\!:X_n=i\}\quad\text{para $k>1$}.\]
 \end{defn}
@@ -1044,7 +1130,7 @@ La siguiente es una consecuencia más o menos directa del argumento usado en la 
 Sea $\theta_i=\pp_i(\tau_i<\infty)$.
 Entonces para todo $k\geq1$,
 \[\pp_i(\tau^{(k)}_i<\infty)=\theta_i^k.\]
-En particular
+En particular, en el caso $i$ transiente ($\theta_i<1$) tenemos
 \[\pp_i(N_i=k)=\theta_i^k(1-\theta_i)\qquad\text{y}\qquad\ee_i(N_i)=\frac{\theta_i}{1-\theta_i},\]
 es decir, $N_i$ es una variable Geom$[\theta_i]$.
 \end{prop}
@@ -1053,9 +1139,11 @@ es decir, $N_i$ es una variable Geom$[\theta_i]$.
 Demuestre la Proposición \ref{prop:geomNi} y asegúrese de comprender su contenido (¿por qué es natural esperar que $N_i$ sea una variable geométrica?).
 \end{exer}
 
+\subsubsection{Más propiedades}
+
 En el resto de esta sección profundizaremos nuestro estudio de recurrencia y transiencia.
 
-\begin{prop}
+\begin{prop}\MarginNote{Recurrencia es prop. de clase}
 La recurrencia es propiedad de clase, i.e. si $i\leftrightarrow j$ entonces $i$ es recurrente si y solo si $j$ es recurrente.
 \end{prop}
 
@@ -1068,7 +1156,14 @@ Deducimos entonces que $j$ es transiente.
 La otra implicancia sale igual, intercambiando $i$ y $j$.
 \end{proof}
 
-\begin{prop}
+En vista del resultado anterior hacemos la siguiente:
+
+\begin{defn}
+Decimos que una clase $C$ es \emph{recurrente} si algún (o equivalentemente todo) $i\in C$ lo es.
+Decimos que la cadena $X$ es \emph{recurrente}, o que su matriz de transición $P$ lo es, si todo $i\in I$ es recurrente.
+\end{defn}
+
+\begin{prop}\label{prop:recprops}
 \leavevmode
 \begin{enumerate}[label=\uptext{(\roman*)}]
 \item Para $i\neq j$ se tiene $i\rightarrow j$ si y solo si $\pp_i(\tau_j<\infty)>0$.
@@ -1086,22 +1181,33 @@ Use la propiedad de Markov para demostrar (ii).
 \noindent La parte (iii) es la más interesante.
 Partimos con la descomposición
 \[\pp_i(\tau_j<\infty)=\pp_i(\tau_j<\tau_i)+\pp_i(\tau_i\leq\tau_j,\,\tau_j<\infty).\]
-Para el segundo término del lado derecho usamos la propiedad de Markov fuerte:
+Para el segundo término del lado derecho usamos la propiedad de Markov fuerte a tiempo $\tau_i$:
 \begin{align}
 \pp_i(\tau_i\leq\tau_j,\,\tau_j<\infty)&=\ee_i(\ee(\uno{\tau_j<\infty}|\cf_{\tau_i})\uno{\tau_i\leq\tau_j})=\ee_i(\ee_{X_{\tau_i}}(\uno{\tau_j<\infty})\uno{\tau_i\leq\tau_j})\\
 &=\ee_i(\pp_i(\tau_j<\infty)\uno{\tau_i\leq\tau_j})=\pp_i(\tau_j<\infty)\pp_i(\tau_i\leq\tau_j)
 \end{align}
-donde, en la primera igualdad, usamos el hecho que $\{\tau_i\leq\tau_j\}\in\cf_{\tau_i}$.
-Luego $\pp_i(\tau_j<\infty)=\pp_i(\tau_j<\tau_i)+\pp_i(\tau_j<\infty)\pp_i(\tau_i\leq\tau_j)$, que podemos reescribir como
+donde, en la primera igualdad, usamos que $\{\tau_i\leq\tau_j\}\in\cf_{\tau_i}$.
+Deducimos que $\pp_i(\tau_j<\infty)=\pp_i(\tau_j<\tau_i)+\pp_i(\tau_j<\infty)\pp_i(\tau_i\leq\tau_j)$, que podemos reescribir como
 \[\pp_i(\tau_j<\infty)\pp_i(\tau_j<\tau_i)=\pp_i(\tau_j<\tau_i).\]
-Luego basta probar que $\pp_i(\tau_j<\tau_i)>0$, lo que se deja como ejercicio.
+Luego basta probar que $\pp_i(\tau_j<\tau_i)>0$, que es consecuencia de la hipótesis $i\rightarrow j$ y se deja como ejercicio.
 \end{proof}
 
 \begin{exer}
 Termine la demostración del resultado anterior.
 \end{exer}
 
-\begin{prop}
+\begin{cor}
+Sea $X$ una cadena de Markov irreducible.
+Entonces $X$ visita todo $i\in I$ una infinidad de veces con probabilidad $1$ (es decir, $\pp(N_i=\infty~\forall\,i\in I)=1$).
+\end{cor}
+
+\begin{exer}
+Demuestre lo anterior.
+\end{exer}
+
+\NAM[]{\newpage}
+
+\begin{prop}\MarginNote{Toda clase Recurrente es cerrada}
 Toda clase recurrente es cerrada.
 \end{prop}
 
@@ -1115,3 +1221,387 @@ Luego
 \[\pp_i(N_i<\infty)\geq\pp_i(X_n=j,N_i<\infty)=\pp_i(X_n=j)=p_{ij}^{(n)}>0,\]
 de donde se sigue que $i$ es transiente, lo que nos da la contradicción buscada.
 \end{proof}
+
+
+\begin{prop}
+Si $j$ es transiente entonces $\ee_i(N_j)=\sum_{n\geq0}p_{ij}^{(n)}<\infty$ para todo $i\in I$.
+\end{prop}
+
+\begin{proof}
+Esto lo sabemos ya en el caso $i=j$.
+Para el caso $i\neq j$ usaremos la misma idea que en la demostración de ese caso (Teorema \ref{thm:rec-trans}).
+\begin{exer}
+Sean $p_{ij}(z)=\sum_{n\geq0}p^{(n)}_{ij}z^n$ y $u_{ij}(z)=\sum_{n\geq0}u^{(n)}_{ij}z^n$, con $u^{(n)}_{ij}$ como en \eqref{eq:uijn}.
+Demuestre que para todo $|z|<1$ se tiene
+\[p_{ij}(z)=u_{ij}(z)p_{jj}(z).\]
+\end{exer}
+\noindent Usando el ejercicio y tomando $z\to1^-$ obtenemos (usando el Teorema de Convergencia Monótona)
+\[\sum_{n\geq0}p_{ij}^{(n)}=\left(\sum_{n\geq0}u_{ij}^{(n)}\right)\left(\sum_{n\geq0}p_{jj}^{(n)}\right)=\pp_i(\tau_j<\infty)\ee_j(N_j),\]
+y luego el lado derecho es finito pues $j$ es transiente.
+\end{proof}
+
+\begin{cor}\label{cor:finito-rec}
+Si $I$ es finito entonces existe un estado recurrente.
+En particular, si $I$ es finito y $X$ es irreducible entonces $X$ es recurrente.
+\end{cor}
+
+\begin{proof}
+Como $I$ es finito tenemos
+\[\textstyle\sum_{j\in I}\lim_{n\to\infty}p^{(n)}_{ij}=\lim_{n\to\infty}\sum_{j\in I}p^{(n)}_{ij}=1.\]
+Pero si todo $j$ fuera transiente, la suma del lado izquierdo necesariamente sería nula (\uexers: ¿por qué?).
+Deducimos entonces que debe existir algún $j$ recurrente.
+\end{proof}
+
+\subsubsection{Caracterización}
+
+Concluimos esta sección con una caracterización algebraica de recurrencia en base a propiedades de la matriz de transición $P$.
+
+\begin{defn}\tbf{Funciones armónicas}
+Sea $i\in I$.
+Decimos que una función $f\!:I\longrightarrow\rr$ es \emph{armónica} en $i$ (con respecto a $P$) si $Pf(i)=\sum_{j\in I}p_{ij}f(j)=f(i)$.
+Decimos que $f$ es \emph{superarmónica} (o \emph{subarmónica}) en $i$ si $Pf(i)\leq f(i)$ (o $Pf(i)\geq f(i)$).
+\end{defn}
+
+\begin{thm}\tbf{Caracterización de recurrencia}
+Sea $X\sim\CM(P)$ irreducible.
+Entonces $X$ es recurrente si y solo si existe un $i_0\in I$ (equivalentemente, para todo $i_0\in I$) que satisface lo siguiente: si $f$ es armónica en $I\setminus\{i_0\}$ (i.e. $\sum_{j}p_{ij}f(j)=f(i)$ para todo $i\neq i_0$) y acotada, entonces $f$ es constante.
+\end{thm}
+
+\begin{proof}
+Supongamos primero que la propiedad se cumple.
+Sea $\tilde\tau_{i_0}=\inf\{k\geq0\!:X_k=i_0\}$ (este es el primer tiempo de llegada a $i_0$, notar que permitimos que este tiempo sea $0$).
+Definimos $f\!:I\longrightarrow\rr$ mediante $f(i_0)=1$ y $f(i)=\pp_i(\tilde\tau_{i_0}<\infty)$ para $i\neq i_0$.
+Para $i\neq i_0$ tenemos
+\begin{align}
+f(i)&=\sum_{j\in I}\pp_{i}(\tilde\tau_{i_0}<\infty,\,X_1=j)=p_{ii_0}+\sum_{j\neq i_0}p_{ij}\pp_{j}(\tilde\tau_{i_0}<\infty)=p_{ii_0}+\sum_{j\neq i_0}p_{ij}f(j).
+\end{align}
+\uexer: Justifique este cálculo.
+Como $f(i_0)=1$, lo anterior equivale a afirmar que $f(i)=Pf(i)$ para todo $i\neq i_0$ (esto es el resultado de la Sección \ref{sec:absor} \ucmark).
+Luego $f$ es armónica en $I\setminus\{i_0\}$, y es claramente acotada, de forma que debe ser constante.
+Pero entonces para todo $i\neq i_0$ tenemos 
+\[\pp_i(\tau_{i_0}<\infty)=\pp_i(\tilde\tau_{i_0}<\infty)=f(i)=p_{ii_0}+\sum_{j\neq i_0}p_{ij}=1.\]
+Argumentando como en la demostración de Prop. \ref{prop:recprops}(iii) tenemos, para $i\neq i_0$,
+\[\pp_{i_0}(\tau_{i_0}<\infty)=\pp_{i_0}(\tau_{i_0}<\tau_i)+\pp_{i_0}(\tau_i\leq\tau_{i_0})\pp_i(\tau_{i_0}<\infty).\]
+Acabamos de probar que el factor de más a la derecha es igual a $1$, de donde obtenemos $\pp_{i_0}(\tau_{i_0}<\infty)=1$.
+Luego $i_0$ es recurrente, y por irreducibilidad la cadena completa lo es.
+
+Ahora asumamos que $X$ es recurrente y, para $i_0\in I$ dado, tomemos $f$ acotada y armónica en $I\setminus\{i_0\}$.
+Definamos una matriz de transición auxiliar $\hat P$ dada por $\hat p_{ij}=p_{ij}$ para $i\neq i_0$ y $\hat p_{i_0j}=\uno{j=i_0}$.
+Afirmamos que entonces $f$ es armónica con respecto a $\hat P$ en todo $I$.
+En efecto, $\hat Pf(i)=Pf(i)=f(i)$ para $i\neq i_0$, mientras que trivialmente $\hat Pf(i_0)=f(i_0)$.
+En otras palabras, tenemos $\hat Pf=f$, e iterando obtenemos $\hat P^{(n)}f=f$ para todo $n\geq0$.
+Luego escribiendo $f(i)=\hat p^{(n)}_{ii_0}f(i_0)+\sum_{j\neq i_0}\hat p^{(n)}_{ij}f(j)$ y aplicando  desigualdad triangular deducimos que
+\[\big|f(i)-\hat p^{(n)}_{ii_0}f(i_0)\big|\leq\sum_{j\neq i_0}\hat p^{(n)}_{ij}|f(j)|\leq\|f\|_\infty(1-\hat p^{(n)}_{ii_0}).\]
+Como consecuencia, es suficiente demostrar que $\lim_{n\to\infty}\hat p^{(n)}_{ii_0}=1$ pues, en ese caso, la desigualdad anterior entrega (en el límite $n\to\infty$) $|f(i)-f(i_0)|\leq0$, que implica lo requerido.
+
+Demostremos entonces que $\hat p^{(n)}_{ii_0}$ converge a $1$ cuando $n\to\infty$.
+El caso $i=i_0$ es trivial (y de hecho no se necesita en el argumento de arriba), así que tomemos $i\neq i_0$.
+Sea $\hat\pp$ la medida de probabilidad asociada a la cadena $\hat X\sim\CM(\hat P)$ y $\hat\tau_{i_0}$ el tiempo de retorno a $i_0$ de $\hat X$.
+\begin{exer}
+Demuestre que $\pp_i(\tau_{i_0}<\infty)=\hat\pp_i(\hat\tau_{i_0}<\infty)$.
+\end{exer}
+\noindent Luego, por hipótesis de recurrencia e irreducibilidad, tenemos $\hat\pp_i(\hat\tau_{i_0}<\infty)=1$.
+Pero como $i_0$ es absorbente para $\hat X$, es decir, una vez que $\hat X$ llega a $i_0$, se queda ahí para siempre, deducimos que
+\NAM[
+\[\hat\pp_i(\hat\tau_{i_0}<\infty)=\pp\big(\cup_{N\geq0}\{\exists\,n\leq N\!:\hat X_n=i_0\}\big)=\lim_{N\to\infty}\pp(\exists\,n\leq N\!:\hat X_n=i_0)=\lim_{N\to\infty}\pp(\hat X_N=i_0).\]
+]{
+\begin{multline*}
+\hat\pp_i(\hat\tau_{i_0}<\infty)
+=\pp\big(\cup_{N\geq0}\{\exists\,n\leq N\!:\hat X_n=i_0\}\big)\\
+=\lim_{N\to\infty}\pp(\exists\,n\leq N\!:\hat X_n=i_0)=\lim_{N\to\infty}\pp(\hat X_N=i_0).
+\end{multline*}
+}
+
+\uexer: Justifique las igualdades anteriores.
+Como el lado izquierdo es igual a $1$, el límite también lo eso, y obtenemos lo deseado.
+\end{proof}
+
+\begin{ex}\label{ex:srw-rec-2}
+Estudiemos nuevamente la marcha aleatoria simple en $\zz$.
+Consideremos primero el caso simétrico, $p=\frac12$.
+Elegimos $i_0=0$ y suponemos que $f$ es acotada y armónica en $\zz\setminus\{0\}$, es decir, $Pf(i)=f(i)$ para todo $i\neq0$, que se escribe como
+\[\tfrac12f(i+1)+\tfrac12f(i-1)=f(i).\]
+La recurrencia anterior puede entonces para $i\geq2$ (\uexers: hágalo), y obtenemos
+\[f(i)=(f(1)-f(0))i+f(0)\quad\forall\,i\geq0.\]
+Pero $f$ es acotada, por lo que necesariamente $f(1)=f(0)$ y entonces $f(i)=f(0)$ para todo $i\geq0$.
+El mismo argumento puede aplicarse para $i\leq0$, y deducimos que $f\equiv f(0)$.
+Luego, gracias al teorema, concluimos que $X$ es recurrente, como ya sabíamos del Ejemplo \ref{ex:srw-rec-1}.
+
+\noindent Consideremos ahora el caso asimétrico.
+Por simetría basta considerar $p>\frac12$.
+Del Ejemplo \ref{ex:srw-rec-1} sabemos que la cadena es ahora transiente, por lo que debiera existir una función $f$ que es acotada y que es armónica en $\zz\setminus\{0\}$, pero que no es constante.
+Veamos que esto es cierto.
+Para ellos definimos
+\[f(n)=\left(\frac{1-p}{p}\right)^{n}\uno{n>0}+\uno{n\leq0},\]
+que es claramente es acotada y no constante.
+Para $n>0$ tenemos
+\begin{align}
+Pf(n)&=(1-p)f(n-1)+pf(n+1)=(1-p)\left(\frac{1-p}{p}\right)^{n-1}+p\left(\frac{1-p}{p}\right)^{n+1}\\
+&=\left(\frac{1-p}{p}\right)^{n}\big(p+(1-p)\big)=f(n).
+\end{align}
+Por otro lado, la igualdad $Pf(n)=f(n)$ para $n<0$ se satisface trivialmente.
+Deducimos entonces que $f$ es armónica en $\zz\setminus\{0\}$, como queríamos.
+\end{ex}
+
+Un criterio alternativo al anterior, cuya demostración dejamos de ejercicio, es el siguiente:
+
+\begin{thm}\tbf{Caracterización de recurrencia, versión alternativa}
+Sea\\ $X\sim~\CM(P)$~irreducible.
+Entonces $X$ es recurrente si y solo si las únicas funciones superarmónicas y no-negativas en $I$ son las constantes.
+\end{thm}
+
+\begin{exer}
+Utilice el criterio anterior para escribir una demostración alternativa del resultado del Corolario \ref{cor:finito-rec} que afirma que toda cadena irreducible a valores en $I$ finito es recurrente.
+Por simplicidad, si lo desea restrínjase al caso $|I|=3$.
+\end{exer}
+
+\subsection{Recurrencia positiva y distribuciones invariantes}
+
+\begin{defn}\tbf{Medida invariante}
+Sea $P$ una matriz estocástica y $\mu$ una medida sobre $I$ (que interpretamos como un vector fila indexado por $I$).
+Decimos que $\mu$ es una \emph{medida invariante para $P$} (o \emph{medida $P$-invariante}) si
+\[\mu P=\mu\]
+(es decir, $\sum_i\mu_{i}p_{ij}=\mu_j$ para todo $j\in I$).
+Si $\mu$ es además una medida de probabilidad, decimos que es una \emph{distribución invariante}.
+Diremos también que $\mu$ es medida o distribución invariante para una cadena $X$ si lo es para su matriz de transición.
+\end{defn}
+
+Es claro que si $\mu$ es medida invariante, entonces cualquier múltiplo de ella lo es.
+
+Como veremos en esta y la próxima sección, la noción de medida invariante juega un rol muy importante en la teoría de cadenas de Markov.
+La relevancia de la definición (y la explicación de la terminología usada) es evidente, al menos para distribuciones invariantes: si $\mu$ es una distribución para $X\sim\CM(P)$, entonces $\mu P^n=\mu$ para todo $n\geq0$, y entonces
+\[\pp_\mu(X_n=i)=\mu(i)\quad\forall\,i\in I,~\forall\,n\geq0.\]
+Las distribuciones invariantes se conocen a veces también como \emph{distribuciones estacionarias} o \emph{distribuciones de equilibrio}.
+El siguiente ejercicio explica en parte este último nombre:
+
+\begin{exer}
+Sea $I$ finito.
+Supongamos que existe un $i\in I$ tal que los límites
+\[\pi_j=\lim_{n\to\infty}p^{(n)}_{ij}\]
+existen para todo $j$.
+Entonces $\pi$ es un distribución invariante.
+¿Qué puede decir del caso $I$ infinito? 
+(Para esta última parte piense en una marcha aleatoria asimétrica y recuerde el Ejemplo \ref{ex:srw-rec-1}).
+\end{exer}
+
+\begin{rem}
+Como $P$ es matriz estocástica, necesariamente tiene al $1$ como valor propio, asociado al vector propio por la derecha $v\equiv1$ (esto es $Pv=v$).
+Como $1$ es valor propio, se sigue que debe tener asociado también un vector propio por la izquierda $\hat v$, $\hat v^{\sf T}P=\hat v^{\sf T}$ (al menos si $P$ fuera una matriz finita, pero lo mismo vale en el caso $I$ numerable).
+Esto nos dice que $P$ siempre tiene una medida con signo invariante; buscar una medida invariante corresponde a buscar un vector propio no-negativo de $P$ por la izquierda, mientras que buscar una distribución invariante corresponde a pedir que este vector propio esté además en $\ell^1(I)$ (\uexers: ¿por qué?).
+\end{rem}
+
+En vista de la observación anterior, no tenemos por qué esperar que toda cadena de Markov tenga una medida invariante asociada, ni mucho menos una distribución invariante.
+Este es uno de los puntos centrales que queremos dilucidar en esta sección.
+Antes, veamos dos ejemplos donde estas medidas existen.
+
+\begin{ex}
+Para la marcha aleatoria simple con $p\in(0,1)$, la medida uniforme en $\zz$, $\mu\equiv1$, es invariante.
+Sin embargo, esta medida no es finita, por lo que no puede normalizarse a una distribución invariante (más adelante estudiaremos la pregunta de si esta cadena posee o no una distribución invariante).
+\end{ex}
+
+\begin{ex}
+Consideremos ahora la cadena de Ehrenfest del Ejemplo \ref{ex:ehrenfest}.
+Aquí $I=\{0,\dotsc,k\}$ y $P$ está dada por $p_{k,k+1}=(r-k)/r$ y $p_{k,k-1}=k/r$, todo el resto de la matriz es cero.
+En este caso hay una distribución invariante $\mu$, y es la que corresponde a una variable aleatoria Binomial$[r,\frac12]$, es decir
+\[\mu(k)=\frac1{2^k}\binom{r}{k}.\]
+Esto puede verificarse directamente, pero también puede entenderse de manera intuitiva: $\mu$ corresponde a elegir la urna en que se coloca cada bola de acuerdo a lanzamientos independientes de $r$ monedas, y cambiar una bola de urna corresponde a elegir una moneda al azar y darla vuelta.
+\uexer: Demuestre directamente que $\mu$ es distribución invariante y asegúrese de comprender la explicación intuitiva.
+\end{ex}
+
+\begin{exer}
+Considere una \emph{marcha aleatoria simple con reflexión} en $\zz_{\geq0}$, definida de igual forma que la marcha aleatoria usual (saltando a la derecha con probabilidad $p$ y a la izquierda con probabilidad $1-p$), salvo que cuando la cadena intenta pasar a $-1$, se le fuerza a quedarse en cero en vez.
+Determine condiciones para la existencia de una distribución invariante y calcule dicha distribución (el Ejemplo \ref{ex:srw-rec-2} podría servirle de inspiración).
+\end{exer}
+
+\begin{exer}
+Analice la existencia de medidas y distribuciones invariantes para la ruina del jugador (Ejemplo \ref{ex:ruina}).
+\end{exer}
+
+El principal resultado de esta sección mostrará que la existencia de distribuciones invariantes está íntimamente relacionada con una noción más fuerte de recurrencia, que definimos a continuación:
+
+\begin{defn}\tbf{Recurrencia positiva}
+Sea $i$ un estado recurrente.
+Decimos que $i$ es \emph{recurrente positivo} si su tiempo de retorno esperado es finito, es decir, si $\ee_i(\tau_i)<\infty$.
+En caso contrario, decimos que $i$ es \emph{recurrente nulo}.
+\end{defn}
+
+\begin{thm}\tbf{Existencia de distribuciones invariantes}\label{thm:ex-inv}
+Sea $X$ irreducible.
+Entonces las siguientes son equivalentes:
+\begin{enumerate}[label=\uptext{(\roman*)}]
+\item Existe un estado recurrente positivo.
+\item Todos los estados son recurrentes positivos.
+\item Existe una distribución invariante $\pi$.
+\end{enumerate}
+Más aún, en este caso se tiene que la distribución invariante está dada por
+\[\pi(i)=\frac{1}{\ee_i(\tau_i)}.\]
+\end{thm}
+
+La demostración de este teorema nos tomará bastante trabajo.
+Antes de pasar a ella enunciamos un resultado de unicidad en el contexto anterior.
+
+\begin{thm}\label{thm:uniq-inv}
+Sea $X$ irreducible.
+Si $X$ tiene una distribución invariante $\pi$, entonces toda medida invariante es un múltiplo de $\pi$.
+En particular, la distribución invariante es única.
+\end{thm}
+
+De estos dos teoremas se sigue directamente el siguiente:
+
+\begin{cor}
+Si $X$ es irreducible y tiene una medida invariante con masa infinita, entonces no existe distribución invariante (y en particular la cadena no es recurrente positiva).
+\end{cor}
+
+De esta forma tenemos, para $X$ irreducible:
+\begin{enumerate}[label=\arabic*.]
+\item La existencia de una distribución invariante equivale a que la cadena sea recurrente positiva.
+\item Si existe una medida invariante infinita, entonces la cadena es recurrente nula o transiente.
+\item Se puede demostrar también (\ucmark) que si $X$ es recurrente nula entonces existe una medida invariante infinita.
+\end{enumerate}
+
+\begin{proof}[Demostración Teorema \ref{thm:uniq-inv}]
+Sea $\pi$ una distribución invariante.
+Gracias al Teorema \ref{thm:ex-inv} tenemos $\pi(i)>0$ para todo $i\in I$.
+Fijemos ahora una función $\varphi\!:[0,\infty)\longrightarrow\rr$ estrictamente convexa (la elección particular no es importante) y acotada.
+Dada una medida $\mu$ sobre $I$, definimos
+\[\mathcal{E}(\mu)=\sum_{j\in I}\varphi\Big(\frac{\mu(j)}{\pi(j)}\Big)\pi(j).\]
+La demostración se basa en estudiar $\mathcal{E}(\mu P)$.
+Partimos escribiendo
+\[\mathcal{E}(\mu P)=\sum_{j}\varphi\Big(\frac{\sum_i\mu(i)p_{ij}}{\pi(j)}\Big)\pi(j)
+=\sum_{j}\varphi\Big(\sum_i\frac{p_{ij}\pi(i)}{\pi(j)}\frac{\mu(i)}{\pi(i)}\Big)\pi(j).\]
+Ahora $\frac{\sum_ip_{ij}\pi(i)}{\pi(j)}=\frac{(\pi P)_j}{\pi(j)}=1$, pues $\pi$ es invariante.
+Luego, como $\varphi$ es convexa (y usando Teorema de Convergencia Dominada), tenemos
+\[\mathcal{E}(\mu P)\leq\sum_{j}\sum_i\frac{p_{ij}\pi(i)}{\pi(j)}\varphi\Big(\frac{\mu(i)}{\pi(i)}\Big)\pi(j)=\sum_{j}\sum_ip_{ij}\pi(i)\varphi\Big(\frac{\mu(i)}{\pi(i)}\Big)
+=\sum_i\pi(i)\varphi\Big(\frac{\mu(i)}{\pi(i)}\Big)=\mathcal{E}(\mu).\]
+Supongamos ahora que $p_{ij}>0$ para todo $i,j$.
+Entonces como $\varphi$ es estrictamente convexa, la desigualdad anterior es estricta a menos que $\frac{\mu(i)}{\pi(i)}$ sea constante.
+Como $\mu$ es medida invariante, obviamente tenemos $\mathcal{E}(\mu P)=\mathcal{E}(\mu)$, y entonces deducimos que necesariamente $\frac{\mu(i)}{\pi(i)}$ es constante.
+El paso al caso general se deja como el siguiente:
+\begin{exer}
+Concluya la demostración.
+Para ello, considere la matriz de transición $\bar p_{ij}=\sum_{n\geq0}2^{-n}p^{(n)}_{ij}$.\qedhere
+\end{exer}
+\end{proof}
+
+\begin{rem}
+La cantidad $\mathcal{E}(\mu)$ que introdujimos en la demostración anterior se conoce usualmente como la \emph{entropía relativa} o la \emph{divergencia de Kullback-Leibler} de $\mu$ con respecto a $\pi$ (típicamente con la elección de $\varphi(x)=-\log(x)$, aunque en este caso levantamos el requerimiento de que $\varphi$ sea acotada, y extendemos la definición a $0$ mediante considerar $\lim_{x\to0^+}x\log(x)=0$).
+Esta noción tiene muchas aplicaciones en probabilidades y otras áreas de las matemáticas, así como también a la teoría de la información, la estadística y el aprendizaje de máquinas.
+
+\noindent La idea es que $\mathcal{E}(\mu)$ mide la distancia, o más precisamente el desorden, de $\mu$ con respecto a $\pi$ (note por ejemplo que $\mathcal{E}(\pi)=0$ para el caso $\varphi(x)=-\log(x)$).
+Una consecuencia de la demostración anterior es la siguiente: la entropía relativa de cualquier distribución $\mu$ (no necesariamente invariante) con respecto a $\pi$ decrece luego de aplicar $P$.
+Esto sugiere que las iteraciones sucesivas de una cadena de Markov acercan su distribución a la distribución de equilibrio $\pi$; esto será el tema de la siguiente sección.
+\end{rem}
+
+Comenzamos ahora con la demostración del Teorema \ref{thm:ex-inv}.
+El primer paso es  la siguiente:
+
+\begin{prop}\label{prop:timeconv}
+Sea $P$ irreducible y recurrente.
+Sea $N_n(i)=\sum_{k=0}^n\uno{X_k=i}$ el número de visiras a $i$ hasta tiempo $n$.
+Entonces
+\[\lim_{n\to\infty}\frac{N_n(i)}{n}=\frac1{\ee_i(\tau_i)}\quad\uptext{c.s.}\]
+\end{prop}
+
+\begin{proof}
+Sea $\tau^{(k)}_i$ el tiempo del $k$-ésimo retorno $i$, introducido en la Definición \ref{def:k-retorno}.
+Supondremos que $X_0=i$, el caso general queda de ejercicio.
+Por propiedad de Markov fuerte, las variables aleatorias $(\tau^{(k+1)}_i-\tau^{(k)}_i)_{k\geq0}$ son i.i.d., y todas con distribución igual a la de $\tau_i$.
+Luego
+\begin{equation}
+\frac{\tau^{(n)}_i}{n}=\frac1{n}\sum_{k=0}^{n-1}(\tau^{(k+1)}_i-\tau^{(k)}_i)
+\xrightarrow[n\to\infty]{\uptext{c.s.}}\ee_i(\tau_i)\label{eq:lgn}
+\end{equation}
+por Ley de los Grandes Números.
+Pero necesariamente tenemos $\tau^{(N_n(i))}_i\leq n<\tau^{(N_n(i)+1)}_i$, y luego
+\[\frac{\tau^{(N_n(i))}_i}{N_n(i)}\leq\frac{n}{N_n(i)}<\frac{\tau^{(N_n(i)+1)}_i}{N_n(i)+1}\frac{N_n(i)+1}{N_n(i)}.\]
+Como $X$ es recurrente, $N_n(i)\to\infty$, y luego de \eqref{eq:lgn} obtenemos 
+\[\frac{\tau_i^{(N_n(i))}}{N_n(i)}\longrightarrow\ee_i(\tau_i)\quad\uptext{c.s.},\]
+y lo mismo para el lado derecho.
+Concluimos entonces $\frac{n}{N_n(i)}\longrightarrow\ee_i(\tau_i)$ casi seguramente, lo que nos da lo requerido.
+
+\begin{exer}
+Concluya la demostración, adaptando el argumento anterior al caso $X_0\neq i$.\qedhere
+\end{exer}
+\end{proof}
+
+Para el próximo resultado introducimos, para cada $k\in I$,
+\[\gamma_i^k=\ee_k\!\left(\sum_{n=0}^{\tau_k-1}\uno{X_n=i}\right)=\sum_{n\geq0}\pp_k(X_n=i,\,\tau_k>n),\]
+el número de visitas a $i$ antes de retornar a $k$.
+
+\begin{prop}\label{prop:gammaik}
+Sea $P$ irreducible y recurrente.
+\begin{enumerate}[label=\uptext{(\alph*)}]
+\item $\gamma^k_k=1$.
+\item $\gamma^k$ es medida invariante (es decir, $\gamma^kP=\gamma^k$).
+\item $\gamma^k_i\in(0,\infty)$ para todo $i$.
+\end{enumerate}
+Más aún, $\mu=\gamma^k$ es la única medida invariante tal que $\mu_k=1$.
+\end{prop}
+
+\begin{proof}
+La parte (a) es directa.
+Para la parte (b) definimos $\bar p^{(n)}_{ki}= \pp_k(X_n=i,\,\tau_k>n)$ y notamos que
+\[(\gamma^kP)_\ell=\sum_{j\in I}\gamma^k_jp_{j\ell}=\sum_{j\in I}\sum_{n\geq0}\bar p^{(n)}_{kj}p_{j\ell}.\]
+Necesitamos considerar dos casos.
+Primero, si $\ell\neq k$, lo anterior y la propiedad de Markov nos da
+\begin{align}
+(\gamma^kP)_\ell&=\sum_{j\in I}\sum_{n\geq0}\pp_k(X_n=j,\,\tau_k>n,\,X_{n+1}=\ell)=\sum_{n\geq0}\pp_k(\tau_k>n+1,\,X_{n+1}=\ell)\\
+&=\sum_{n\geq0}\bar p^{(n+1)}_{k\ell}=\sum_{n\geq1}\bar p^{(n)}_{k\ell}
+\end{align}
+(\uexers: justifique la primera igualdad).
+Pero $\bar p^{(0)}_{k\ell}=\pp_k(X_0=\ell,\,\tau_k>0)=0$ para $\ell\neq k$ y por lo tanto la última suma puede extenderse hasta $n=0$, de modo que la suma es igual a $\gamma^k_\ell$ como queríamos.
+Supongamos ahora que $\ell=k$.
+Argumentando como antes tenemos
+\begin{equation}
+(\gamma^kP)_k=\sum_{j\in I}\sum_{n\geq0}\pp_k(X_n=j,\,\tau_k>n,\,X_{n+1}=k)=\sum_{n\geq0}\pp_k(\tau_k>n,\,X_{n+1}=k).
+\end{equation}
+El término $n$-ésimo del lado derecho es igual a $\pp_k(\tau_k=n+1)$, y entonces la suma completa es igual a $\pp_k(1\leq\tau_k<\infty)=1=\gamma^k_k$ por (a) y gracias a que $P$ es recurrente.
+
+Para (iii), como la cadena es irreducible podemos elegir un $n>0$ tal que $p_{ik}^{(n)}>0$, y entonces $1=\gamma^k_k=(\gamma^kP^n)_k\leq\gamma^k_ip_{ik}^{(n)}$ y deducimos que $\gamma^k_i>0$.
+\begin{exer}
+Use un argumento similar para probar que $\gamma^k_i<\infty$.
+\end{exer}
+
+Veamos ahora la unicidad.
+Supongamos que $\mu$ es una medida invariante con $\mu_k=1$.
+Iterando la relación $\mu P=\mu$ obtenemos, para $j\neq k$,
+\begin{align}
+\mu_j&=\sum_{i_0\in I}\mu_{i_0}p_{i_0j}=\sum_{i_0\neq k}\mu_{i_0}p_{i_0j}+p_{kj}=\sum_{i_0,i_1\neq k}\mu_{i_1}p_{i_1i_0}p_{i_0j}+p_{kj}+\sum_{i_0\neq k}p_{ki_0}p_{i_0j}\\
+\shortintertext{e, inductivamente,}
+&=\sum_{i_0,\dotsc,i_n\neq k}\mu_{i_n}p_{i_ni_{n-1}}\dotsm p_{i_0j}+p_{kj}+\sum_{i_0\neq k}p_{ki_0}p_{i_0j}+\dotsm+\sum_{i_0,\dotsc,i_{n-1}\neq k}p_{ki_{n-1}}\dotsm p_{i_0j}.
+\shortintertext{Omitiendo el primer término, el lado derecho es (recordando $j\neq k$)}
+&\geq\pp_k(X_1=j,\,\tau_k>1)+\pp_k(X_2=j,\,\tau_k>2)+\dotsm+\pp_k(X_n=j,\,\tau_k>n)\xrightarrow[n\to\infty]{}\gamma^k_j.
+\end{align}
+Deducimos entonces que $\mu_j\geq\gamma^k_j$ (notar que hasta acá no hemos usado recurrencia, y luego esta desigualdad es cierta en general).
+Como $P$ es recurrente, $\gamma^k$ es medida invariante por (b), y luego la medida $\lambda=\mu-\gamma^k$ (notar que $\lambda\geq0$) también lo es.
+Luego para $i\in I$ y cualquier $n>0$ tenemos $\lambda_ip_{ik}^{(n)}\leq(\lambda P)_k=\lambda_k=0$ (por hipótesis y (a)), y entonces usando la irreducibilidad para elegir $n>0$ tal que $p^{(n)}_{ik}>0$ obtenemos $\lambda_i=0$.
+\end{proof}
+
+\begin{proof}[Demostración Teorema \ref{thm:ex-inv}]
+Veamos primero que (i) implica (iii).
+Sea $k$ un estado recurrente positivo.
+Gracias a la proposición, $\gamma^k$ es una medida invariante.
+Basta probar entonces que $\gamma^k(I)<\infty$.
+Tenemos
+\begin{align}
+\gamma^k(I)&=\sum_{\ell\in I}\gamma^k_\ell=\sum_{\ell\in I}\sum_{n\geq0}\pp_k(X_n=\ell,\,\tau_k>n)=\sum_{n\geq0}\pp_k(\tau_k>n)=\ee_k(\tau_k)<\infty,
+\end{align}
+gracias a la recurrencia positiva de $k$.
+
+Que (ii) implica (i) es trivial.
+Para ver que (iii) implica (ii), sea $\pi$ una distribución invariante y fijemos $k\in I$.
+Gracias al Teorema \ref{thm:uniq-inv}, $\gamma^k=\alpha\pi$ para algún $\alpha\geq0$.
+Tal como en la parte anterior, tenemos $\ee_k(\tau_k)=\gamma^k(I)$, y luego $\ee_k(\tau_k)=\alpha\tts\pi(I)=\alpha<\infty$, y luego $k$ es recurrente positivo.
+\end{proof}
+
+Antes de terminar esta sección, enunciamos un resultado que puede demostrarse usando los métodos de esta sección (\ucmark):
+
+\begin{thm}\label{thm:ergodMC}\tbf{Teorema Ergódico para Cadenas de Markov}
+Sea $P$ irreducible con distribución invariante $\pi$.
+Sea $f\!:I\longrightarrow\rr$ tal que $\sum_i|f(i)|\pi(i)<\infty$ (es decir $f\in L^1(I,\pi)$).
+Entonces
+\[\lim_{n\to\infty}\frac1{n+1}\sum_{k=0}^nf(X_k)=\sum_if(i)\pi(i).\]
+\end{thm}
+
+Este tipo de resultados se conocen también como leyes de grandes números para funcionales aditivos (en este caso, de una cadena de Markov recurrente positiva).
+Bajo hipótesis adicionales sobre $f$ y $X$, es posible también demostrar una versión del Teorema Central del Límite en este contexto.
