@@ -11,7 +11,7 @@ $\pp$ es la \emph{medida de probabilidad}\MarginNote{Medida de Probabilidad}.
 Los $A\in\cf$ son los \emph{eventos}.
 \lsep
 Dado un espacio medible $(S,\cs)$, una \emph{variable aleatoria}\MarginNote{Variable Aleatoria} $X$ a valores en $S$ es una función $X\!:\Omega\longrightarrow S$ que es $\cf$-$\cs$ medible.
-Usualmente nos olvidamos del espacio de probabilidad en la notación.
+\hly{Usualmente nos olvidamos del espacio de probabilidad en la notación}.
 Por ejemplo, cuando escribimos $\pp(X\in A)$ a lo que nos referimos es a la medida de la preimagen de $A$ por $X$, es decir
 \[\pp(X\in A)=\pp(X^{-1}(A))=\pp(\{\omega\in \Omega\!:X(\omega)\in A\}).\]
 Rara vez incluimos los $\omega$'s en la notación, pero es importante mantener la definición formal en mente.
@@ -37,7 +37,7 @@ Repase la definición y propiedades de esperanza condicional, dadas en el Apénd
 
 \subsubsection{Procesos estocásticos y cadenas de Markov}
 
-Dados $(\Omega,\cf,\pp)$ y $(S,\cs)$ como antes, decimos que una sucesión $(X_n)_{n\geq0}$ de variables aleatorias es un \emph{proceso estocástico}\MarginNote{Proceso Estocástico}.
+Dados $(\Omega,\cf,\pp)$ y $(S,\cs)$ como antes, decimos que \hly{una sucesi{\'o}n $(X_n)_{n\geq0}$ de variables aleatorias} es un \emph{proceso estocástico}\MarginNote{Proceso Estocástico}.
 Alternativamente uno puede pensar en el proceso estocástico $(X_n)_{n\geq0}$ como una variable aleatoria a valores en el espacio producto $S^\nn$, es decir $X\!:\Omega\longrightarrow S^\nn$ que es $\cf$-$\cs^\nn$ medible, con $\cs^\nn$ dotado de la $\sigma$-álgebra producto.
 \lsep
 (Más adelante consideraremos procesos estocásticos indexados por $\rr^+$ en vez de $\nn$).
@@ -46,7 +46,7 @@ El propósito del curso es estudiar un tipo especial pero muy importante de proc
 
 \vs
 
-En todo lo que sigue $I$\MarginNote{Espacio de Estados} (o a veces $E$) denotará un conjunto numerable, el ``espacio de estados'' donde nuestros procesos estocásticos tomarán valores.
+En todo lo que sigue $I$\MarginNote{Espacio de Estados} (o a veces $E$) denotará un conjunto numerable, el ``espacio de estados'' donde \hly{nuestros procesos estoc{\'a}sticos tomar{\'a}n valores}.
 Sobre $I$ consideramos la $\sigma$-álgebra de las partes $\cp(I)$.
 Los elementos de $I$ los denotaremos típicamente por $i,j,k$ o $x,y,z$.
 Detrás de todo lo que haremos habrá un espacio de probabilidad fijo $(\Omega,\cf,\pp)$, que solo invocaremos cuando sea necesario.
@@ -66,12 +66,12 @@ La propiedad de Markov es equivalente a decir que $X_{n+1}$ y \NAM[$(X_0,\dotsc,
 \end{rem}
 
 
-\begin{prop}
+\begin{prop}\MarginNote{CM a distintos tiempos}
 Si $X$ es una cadena de Markov entonces para todo $0\leq t_0\leq\dotsm\leq t_{n+1}$ en $\nn$ y todo $i_0,\dotsc,i_{n+1}\in I$,
 \begin{equation}
 \pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_0}=i_0,\dotsc,X_{t_n}=i_{n}\big)=\pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_n}=i_{n}\big).
 \end{equation}
-\end{prop}\MarginNote{CM a distintos tiempos}
+\end{prop}
 \vskip
 \begin{proof}
 \uexer.
@@ -90,7 +90,7 @@ Entonces $(X_n)_{n\geq0}$ es una cadena de Markov (\uexers: chequee esto).
 Por ahora esta descripción es informal, luego veremos como se puede construir esta cadena de manera rigurosa.
 \end{ex}
 
-\begin{ex}\tbf{Ruina del jugador}\label{ex:ruina}
+\begin{ex}\tbf{Ruina del jugador}\label{ex:ruina}\MarginNote{Ruina del jugador}
 Consideramos ahora un juego de apuestas, donde en cada turno el jugador gana $1$ con probabilidad $p$ y pierde $1$ con probabilidad $1-p$.
 El jugador para de jugar si se queda sin dinero.
 Esto es muy similar a la cadena anterior, excepto que ahora el espacio de estados es $\zz_{\geq0}$ y tenemos
@@ -101,7 +101,7 @@ X_{n-1}-1 & con probabilidad $1-p$ si $n>0$,\\
 \end{dcases*}\]
 \end{ex}
 
-\begin{ex}\tbf{Cadena de Ehrenfest}\label{ex:ehrenfest}
+\begin{ex}\tbf{Cadena de Ehrenfest}\label{ex:ehrenfest}\MarginNote{Cadena de Ehrenfest}
 En este ejemplo nos imaginamos una caja rectangular dividida en dos cámaras que están conectadas por un pequeño orificio, donde $r$ moléculas de aire se mueven libremente al azar.
 \begin{figure}[h]
 \centering
@@ -118,9 +118,9 @@ X_{n-1}-1 & con probabilidad $\frac{X_{n-1}}{r}$.
 \end{ex}
 
 
-\begin{defn}\tbf{Cadena de Markov homogénea, matriz de transición} 
+\begin{defn}\tbf{Cadena de Markov homogénea, matriz de transición}\MarginNote{CM Homogénea}
 Sea $X$ una cadena de Markov.
-Decimos que $X$ es \emph{homogénea}\MarginNote{CM Homogénea} si
+Decimos que $X$ es \emph{homogénea} si
 \[\pp(X_{m+1}=j|X_m=i)=\pp(X_{n+1}=j|X_n=i)\quad\forall~m,n\geq0,~i,j\in I.\]
 En este caso a la matriz $P=\big(p_{ij}\big)_{i,j\in I}$\MarginNote{Matriz de Transición} dada por $p_{ij}=\pp(X_{1}=j|X_0=i)$ le llamamos \emph{matriz de transición} de la cadena de Markov $X$; $p_{ij}$\MarginNote{Prob. de Transición} es la \emph{probabilidad de transición de $i$ a $j$}.
 \end{defn}
@@ -138,7 +138,7 @@ p & si $j=i+1$,\\
 Escriba la matriz de transición asociada a la cadena de Ehrenfest introducida en el Ejemplo \ref{ex:ehrenfest}.
 \end{exer}
 
-Notar que $P$ es una matriz indexada por un conjunto numerable, pero esto no nos traerá mayores dificultades (lo discutiremos en más detalle más adelante).
+Notar que $P$ es una matriz \hly{indexada por un conjunto numerable}, pero esto no nos traerá mayores dificultades (lo discutiremos en más detalle más adelante).
 $P$ no puede ser cualquier matriz, si no que claramente debe satisfacer algunas propiedades especiales, precisamente:
 
 \begin{defn}\tbf{Matriz estocástica}
@@ -151,7 +151,7 @@ En otras palabras, $P$ es una matriz estocástica si para cada $i\in I$, $(p_{ij
 \end{defn}
 
 \begin{prop}\MarginNote{Matr. de Trans. de CM es Matr. Est.}
-Si $P$ es la matriz de transición de una cadena de Markov, entonces $P$ es matriz estocástica.
+Si \hlg{$P$ es la matriz de transici{\'o}n de una cadena de Markov}, entonces \hlo{$P$ es matriz estoc{\'a}stica}.
 \end{prop}
 
 \vskip
@@ -160,7 +160,7 @@ Si $P$ es la matriz de transición de una cadena de Markov, entonces $P$ es matr
 \uexer~(fácil).
 \end{proof} 
 
-Durante el curso estaremos interesados casi exclusivamente en el caso de cadenas de Markov homogéneas.
+Durante el curso estaremos interesados casi exclusivamente \hlo{en el caso de cadenas de Markov homog{\'e}neas}.
 Por lo tanto, en todo lo que sigue trabajaremos bajo la siguiente convención:
 \begin{quote}
 % \begin{mdframed}[style=st_red]
@@ -177,14 +177,14 @@ Encuentre una cadena de Markov $\tilde X$ a valores en $I\times\nn$ que es homog
 
 \subsubsection{Caracterización y construcción}
 
-La matriz de transición gobierna la evolución de nuestra cadena de Markov $X$.
+\hly{La matriz de transici{\'o}n gobierna la evoluci{\'o}n de nuestra cadena de Markov $X$}.
 Para determinar la distribución de la cadena hace falta un ingrediente más:
 
 \begin{defn}\tbf{Distribución inicial}\MarginNote{Distribución Inicial}
-Al vector de probabilidad $\mu$ sobre $I$ definido por $\mu_i=\pp(X_0=i)$ le llamamos la \emph{distribución inicial} de la cadena de Markov $X$.
+Al vector de probabilidad $\mu$ sobre $I$ definido por $\mu_i=\pp(X_0=i)$ le llamamos la \emph{\hlo{distribuci{\'o}n inicial}} de la cadena de Markov~$X$.
 \end{defn}
 
-Usaremos indistintamente la notación $\mu$ para un vector de probabilidad como en la definición y para una medida de probabilidad sobre $I$, que en cualquier caso son la misma cosa.
+\hly{Usaremos indistintamente la notaci{\'o}n $\mu$ para un vector de probabilidad} como en la definición y para una medida de probabilidad sobre $I$, que en cualquier caso son la misma cosa.
 
 Es relativamente fácil ver que toda cadena de Markov, y en particular sus distribuciones finito-dimensionales, queda determinada por su matriz de transición y su distribución inicial:
 

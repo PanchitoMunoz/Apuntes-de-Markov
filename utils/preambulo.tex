@@ -27,6 +27,7 @@
 % ============= Personal ================
 \usepackage{marginnote} 
 \renewcommand*{\marginfont}{\color{blue}\sffamily \upshape}
+\usepackage{soul}
 % ============= Personal ================
 \usepackage{graphics,graphicx}
 \usepackage{tocvsec2}
@@ -348,3 +349,22 @@
     (313.9400,393.7500) .. controls (327.6400,375.1200) and (332.7200,353.0000) ..
     (329.5300,335.1200) .. controls (329.2600,333.4800) and (330.0500,332.8500) ..
     (331.0000,332.8100) -- cycle;}}
+    
+% COMANDOS PARA DESTACAR
+\newcommand{\ifhlelse}[2]{% Comando auxiliar para destacar ssi \destacar está activado
+\ifnum\destacar=1{\sethlcolor{#1}\hl{#2}}\else {#2}\fi}
+
+\newcommand{\hly}[1]{% Comando para destacar en amarillo
+\ifhlelse{yellow}{#1}}
+
+\definecolor{my_lightblue}{RGB}{144,237,255}
+\newcommand{\hlb}[1]{% Comando para destacar en azul claro
+\ifhlelse{my_lightblue}{#1}}
+
+\definecolor{my_orange}{RGB}{255,207,122}
+\newcommand{\hlo}[1]{% Comando para destacar en naranjo
+\ifhlelse{my_orange}{#1}}
+
+\definecolor{my_green}{RGB}{122,255,107}
+\newcommand{\hlg}[1]{% Comando para destacar en verde
+\ifhlelse{my_green}{#1}}
