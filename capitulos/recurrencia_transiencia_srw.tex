@@ -1,0 +1,75 @@
+%!TEX root = ../apuntesMarkov.tex
+
+\section{Un criterio para recurrencia y transiencia para marchas aleatorias generales en $\zz^d$}\label{sec:rectranssrwgen}
+
+En esta sección daremos una demostración alternativa del Teorema \ref{thm:recSRW}, y de paso obtendremos un criterio para determinar la recurrencia o transiencia de una marcha aleatoria general, que definimos a continuación.
+
+\begin{defn}\tbf{Marcha aleatoria en $\zz^d$}
+Sean $\big(\xi_i\big)_{i\geq1}$ variables aleatorias i.i.d. en $\zz^d$.
+La \emph{marcha aleatoria} con saltos distribuidos de acuerdo a la distribución común de las variables $\xi_i$ es la cadena de Markov definida como
+\[X_n=X_0+\xi_1+\dotsm+\xi_n\]
+para $n\geq1$, con $X_0$ la condición inicial del paseo.
+\end{defn}
+
+El criterio se basa en el siguiente:
+
+\begin{lem}
+Sea $\varphi(\theta)=\ee(e^{\I \theta\cdot \xi_1})$, $\theta\in\rr^d$. 
+Entonces para la marcha $X$ introducida arriba se tiene
+\[\sum_{n\geq0}p_{00}^{(n)}=\lim_{t\nearrow1}\int_{[-\pi,\pi]^d}\frac{\d\theta}{(2 \pi)^d}\frac1{1-t\varphi(\theta)}.\]
+\end{lem}
+
+\begin{proof}
+Esto es una consecuencia de la fórmula
+\[\uno{X_n=0}=\int_{[-\pi,\pi]^d}\frac{\d\theta}{(2 \pi)^d}e^{\I \theta\cdot X_n},\]
+que se sigue de aplicar $d$ veces la identidad $\int_{-\pi}^{\pi}\frac{\d u}{2 \pi}e^{\I u n}=\uno{n=0}$ para $n\in\zz$.
+Tomando esperanza en esta identidad, multiplicando por $t^n$ y sumando tenemos
+\[\sum_{n\geq0}p_{00}^{(n)}t^n=\sum_{n\geq0}\int_{[-\pi,\pi]^d}\frac{\d \theta}{(2 \pi)^d}t^n\ee_0[e^{\I \theta\cdot X_n}]=\sum_{n\geq0}\int_{[-\pi,\pi]^d}\frac{\d\theta}{(2 \pi)^d}t^n\varphi(\theta)^n,\]
+pues $X_n$ es suma de $n$ copias independientes de $\xi_1$.
+Como $|\varphi(\theta)|\leq\ee(|e^{\I \theta\cdot \xi_1}|)=1$ podemos intercambiar la suma con la integral, lo que nos da
+\[\sum_{n\geq0}p_{00}^{(n)}t^n=\frac{1}{(2 \pi)^d}\int_{[-\pi,\pi]^d}\frac{\d\theta}{1-t\varphi(\theta)},\]
+y ahora tomando $t\nearrow1$ obtenemos el resultado.
+\end{proof}
+
+De aquí se sigue directamente el criterio buscado:
+
+\begin{cor}\label{cor:b3}
+La marcha aleatoria $X$ introducida es recurrente si y sólo si
+\[\lim_{t\nearrow1}\int_{[-\pi,\pi]^d}\frac{\d\theta}{1-t\varphi(\theta)}=\infty,\]
+donde $\varphi(\theta)=\ee(e^{\I \theta\cdot \xi_1})$.
+\end{cor}
+
+Con esto podemos resolver el caso de marchas aleatorias simples simétricas de manera sencilla.
+En este caso tenemos
+\[\varphi(\theta)=\tfrac1{2d}e^{\I\theta_1}+\tfrac1{2d}e^{-\I\theta_1}+\dotsm+\tfrac1{2d}e^{\I\theta_d}+\tfrac1{2d}e^{-\I\theta_d}=\tfrac{1}{d}\big[\cos(\theta_1)+\dotsm+\cos(\theta_d)\big].\]
+Ahora usamos la identidad $1-\cos(x)=2\sin^2(x/2)$ y las desigualdades $2x/\pi\leq\sin(x)\leq x$ para deducir que 
+\[1-t+2t\frac{|\theta|^2}{\pi^2 d}\leq1-t\varphi(\theta)\leq 1-t+\frac{|\theta|^2}{2d}\]
+con $|\theta|^2=\theta_1^2+\dotsm+\theta_d^2$.
+Usando esto obtenemos
+\[\lim_{t\nearrow1}\int_{[-\pi,\pi]^d}\frac{\d\theta}{1-t\varphi(\theta)}=\infty\qquad\Longleftrightarrow\qquad\int_{[-\pi,\pi]^d}\frac{\d\theta}{|\theta|^2}=\infty,\]
+lo que sucede si y sólo si $d\leq2$.
+Luego la marcha aleatoria simple simétrica es recurrente si $d=1,2$ y transiente si $d\geq3$.
+
+\smallskip
+
+Una pregunta natural es qué pasa si consideramos marchas aleatorias que no sean simples, es decir donde los saltos no son necesariamente a los vecinos más cercanos.
+Veamos un ejemplo.
+
+\begin{ex}
+Sea $X$ la marcha aleatoria en $\zz$ que salta a la derecha o a la izquierda con probabilidad $1/2$, elegiendo el largo del salto acuerdo a una variable geométrica $G$ de parámetro $\frac12$.
+La función característica de $G$ puede calcularse directamente, y es $\hat\varphi(\theta)=\frac{e^{\I\theta}}{2-e^{\I\theta}}$, y luego la función característica de la variable aleatoria $\xi_1$ en este caso es
+\[\varphi(\theta)=\tfrac12\ee(e^{\I\theta G})+\tfrac12\ee(e^{\I\theta(-G)})=\tfrac12\hat\varphi(\theta)+\tfrac12\hat\varphi(-\theta)=\frac{3}{5-4\cos(\theta)}-1,\]
+luego de algunas simplificaciones.
+Obtenemos
+\[\lim_{t\nearrow1}\int_{-\pi}^\pi\frac{\d\theta}{1-t\varphi(\theta)}=\int_{-\pi}^\pi\d\theta\,\frac{5-4\cos(\theta)}{7-8\cos(\theta)}=\infty\]
+(como puede verse luego de un cambio de variables simple).
+Por el Corolario \ref{cor:b3} deducimos que $X$ es recurrente.
+\end{ex}
+
+Tampoco es necesario pedir que los saltos sean simétricos:
+
+\begin{exer}
+Use el Corolario \ref{cor:b3} para demostrar que la marcha aleatoria en $\zz$ que da saltos de tamaño $-2$ con probabilidad $\frac38$, $1$ con probabilidad $\frac12$ y $2$ con probabilidad $\frac18$ es recurrente.
+\end{exer}
+
+El resultado general es el siguiente: si $X$ es una marcha aleatoria irreducible y aperiódica en $\zz^d$ entonces $X$ es transiente si $d\geq3$ mientras que en $d=2$ $X$ es recurrente si la ley de los saltos tiene media $0$ y varianza finita (ver \cite[Teo. 4.1.1]{lawler-limic}).

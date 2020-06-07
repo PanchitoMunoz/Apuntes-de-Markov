@@ -55,13 +55,13 @@ Detrás de todo lo que haremos habrá un espacio de probabilidad fijo $(\Omega,\
 Un proceso estocástico $X=(X_n)_{n\geq0}$ a valores en $I$ es un \emph{proceso de Markov a tiempo discreto} o una \emph{cadena de Markov}\MarginNote{Cadena de Markov} si satisface la \emph{propiedad de Markov}:
 \begin{equation}\label{eq:propMarkov}
 \pp\big(X_{n+1}=i_{n+1}\big|X_0=i_0,\dotsc,X_{n}=i_{n}\big)=\pp\big(X_{n+1}=i_{n+1}\big|X_{n}=i_{n}\big)
-\end{equation}\MarginNote{Propiedad de Markov}[-1cm]
+\end{equation}\MarginNote{Propiedad de Markov}
 para todo $i_0,\dotsc,i_{n+1}\in I$ (que satisfaga $\pp(X_0=i_0,\dotsc,X_{n}=i_{n}\big)>0$).
 % Es decir, condicional al presente, el futuro del proceso es independiente del pasado.
 \end{defn}
 
 \begin{rem}
-La propiedad de Markov es equivalente a decir que $X_{n+1}$ y \NAM[$(X_0,\dotsc,X_{n-1})$]{$(X_0,\dotsc,\\ X_{n-1})$} son independientes condicionales a $X_n$, es decir, ``condicional\MarginNote{Interpretación de la CM} al presente, el futuro del proceso es independiente del pasado''.
+La propiedad de Markov es equivalente a decir que $X_{n+1}$ y \NAM[$(X_0,\dotsc,X_{n-1})$]{$(X_0,\dotsc, X_{n-1})$} son independientes condicionales a $X_n$, es decir, ``condicional\MarginNote{Interpretación de la CM} al presente, el futuro del proceso es independiente del pasado''.
 \uexer: demuestre esto.
 \end{rem}
 
@@ -71,7 +71,7 @@ Si $X$ es una cadena de Markov entonces para todo $0\leq t_0\leq\dotsm\leq t_{n+
 \begin{equation}
 \pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_0}=i_0,\dotsc,X_{t_n}=i_{n}\big)=\pp\big(X_{t_{n+1}}=i_{n+1}\big|X_{t_n}=i_{n}\big).
 \end{equation}
-\end{prop}\MarginNote{CM a distintos tiempos}[-1cm]
+\end{prop}\MarginNote{CM a distintos tiempos}
 \vskip
 \begin{proof}
 \uexer.
@@ -343,7 +343,7 @@ El teorema nos asegura que el proceso estocástico construido de acuerdo a \eqre
 
 \begin{notation}
 Si $X\sim\CM(P)$ e $i\in I$ usaremos denotaremos por $\pp_i$\MarginNote{Notación $\pp_i$} a la medida de probabilidad correspondiente a la cadena $X\sim\CM(\delta_i,P)$ con $\delta_i(j)=\uno{i=j}$ (es decir, a la cadena que parte en $i$).
-Usaremos $\ee_i$\MarginNote{Notación $\ee_i$}[-2pt] para denotar la esperanza bajo $\pp_i$.
+Usaremos $\ee_i$\MarginNote{Notación $\ee_i$} para denotar la esperanza bajo $\pp_i$.
 \lsep
 Más generalmente, si $\mu$ es una distribución de probabilidad sobre $I$, usamos \MarginNote{Notación $\pp_\mu$ y $\ee_\mu$}$\pp_\mu$ (y $\ee_\mu$) para denotar la distribución de la cadena $X\sim\CM(\mu,P)$.
 \end{notation}
@@ -426,7 +426,7 @@ Si $\cg$ es sub $\sigma$-álgebra de $\cf$ y $A\in\cf$, escribimos \MarginNote{N
 
 En el siguiente resultado reinterpretamos la definición y caracterización de cadenas de Markov en el lenguaje de esperanzas condicionales:
 
-\begin{prop}\MarginNote{Caract. de CM usando filtración natural}
+\begin{prop}\label{prop:markov22}\MarginNote{Caract. de CM usando filtración natural}
 Sea $X$ un proceso estocástico (y $\big(\cf_n\big)_{n\geq0}$ su filtración natural asociada).
 Son equivalentes:
 \begin{enumerate}[label=\uptext{(\roman*)}]
@@ -1132,7 +1132,7 @@ Entonces para todo $k\geq1$,
 \[\pp_i(\tau^{(k)}_i<\infty)=\theta_i^k.\]
 En particular, en el caso $i$ transiente ($\theta_i<1$) tenemos
 \[\pp_i(N_i=k)=\theta_i^k(1-\theta_i)\qquad\text{y}\qquad\ee_i(N_i)=\frac{\theta_i}{1-\theta_i},\]
-es decir, $N_i$ es una variable Geom$[\theta_i]$.
+es decir, $N_i$ es una variable Geom$[1-\theta_i]$.
 \end{prop}
 
 \begin{exer}
@@ -1306,8 +1306,8 @@ Pero como $i_0$ es absorbente para $\hat X$, es decir, una vez que $\hat X$ lleg
 \[\hat\pp_i(\hat\tau_{i_0}<\infty)=\pp\big(\cup_{N\geq0}\{\exists\,n\leq N\!:\hat X_n=i_0\}\big)=\lim_{N\to\infty}\pp(\exists\,n\leq N\!:\hat X_n=i_0)=\lim_{N\to\infty}\pp(\hat X_N=i_0).\]
 ]{
 \begin{multline*}
-\hat\pp_i(\hat\tau_{i_0}<\infty)
-=\pp\big(\cup_{N\geq0}\{\exists\,n\leq N\!:\hat X_n=i_0\}\big)\\
+\hat\pp_i(\hat\tau_{i_0}<\infty)\\
+=\pp\big(\cup_{N\geq0}\{\exists\,n\leq N\!:\hat X_n=i_0\}\big)
 =\lim_{N\to\infty}\pp(\exists\,n\leq N\!:\hat X_n=i_0)=\lim_{N\to\infty}\pp(\hat X_N=i_0).
 \end{multline*}
 }
@@ -1374,7 +1374,7 @@ La relevancia de la definición (y la explicación de la terminología usada) es
 Las distribuciones invariantes se conocen a veces también como \emph{distribuciones estacionarias} o \emph{distribuciones de equilibrio}.
 El siguiente ejercicio explica en parte este último nombre:
 
-\begin{exer}
+\begin{exer}\label{exer:pijnf}
 Sea $I$ finito.
 Supongamos que existe un $i\in I$ tal que los límites
 \[\pi_j=\lim_{n\to\infty}p^{(n)}_{ij}\]
@@ -1394,7 +1394,7 @@ En vista de la observación anterior, no tenemos por qué esperar que toda caden
 Este es uno de los puntos centrales que queremos dilucidar en esta sección.
 Antes, veamos dos ejemplos donde estas medidas existen.
 
-\begin{ex}
+\begin{ex}\label{ex:srw-1-inv}
 Para la marcha aleatoria simple con $p\in(0,1)$, la medida uniforme en $\zz$, $\mu\equiv1$, es invariante.
 Sin embargo, esta medida no es finita, por lo que no puede normalizarse a una distribución invariante (más adelante estudiaremos la pregunta de si esta cadena posee o no una distribución invariante).
 \end{ex}
@@ -1434,7 +1434,9 @@ Entonces las siguientes son equivalentes:
 \item Existe una distribución invariante $\pi$.
 \end{enumerate}
 Más aún, en este caso se tiene que la distribución invariante está dada por
-\[\pi(i)=\frac{1}{\ee_i(\tau_i)}.\]
+\begin{equation}
+\pi(i)=\frac{1}{\ee_i(\tau_i)}.\label{eq:inv-form}
+\end{equation}
 \end{thm}
 
 La demostración de este teorema nos tomará bastante trabajo.
@@ -1448,7 +1450,7 @@ En particular, la distribución invariante es única.
 
 De estos dos teoremas se sigue directamente el siguiente:
 
-\begin{cor}
+\begin{cor}\label{cor:irrednorecpos}
 Si $X$ es irreducible y tiene una medida invariante con masa infinita, entonces no existe distribución invariante (y en particular la cadena no es recurrente positiva).
 \end{cor}
 
@@ -1469,8 +1471,8 @@ La demostración se basa en estudiar $\mathcal{E}(\mu P)$.
 Partimos escribiendo
 \[\mathcal{E}(\mu P)=\sum_{j}\varphi\Big(\frac{\sum_i\mu(i)p_{ij}}{\pi(j)}\Big)\pi(j)
 =\sum_{j}\varphi\Big(\sum_i\frac{p_{ij}\pi(i)}{\pi(j)}\frac{\mu(i)}{\pi(i)}\Big)\pi(j).\]
-Ahora $\frac{\sum_ip_{ij}\pi(i)}{\pi(j)}=\frac{(\pi P)_j}{\pi(j)}=1$, pues $\pi$ es invariante.
-Luego, como $\varphi$ es convexa (y usando Teorema de Convergencia Dominada), tenemos
+Ahora $\frac{\sum_ip_{ij}\pi(i)}{\pi(j)}=\frac{(\pi P)_j}{\pi(j)}=1$, pues $\pi$ es invariante, y luego $\varphi\Big(\sum_i\frac{p_{ij}\pi(i)}{\pi(j)}\frac{\mu(i)}{\pi(i)}\Big)$ puede intepretarse como $\varphi(\ee(\mu(Y)/\pi(Y)))$ donde $Y$ es la variable aleatoria con distribución $\big(\frac{p_{ij}\pi(i)}{\pi(j)}\big)_{i\in I}$.
+Entonces, como $\varphi$ es convexa, la desigualdad de Jensen implica que esta cantidad está acotada por $\ee(\varphi(\mu(Y)/\pi(Y)))$, y deducimos que
 \[\mathcal{E}(\mu P)\leq\sum_{j}\sum_i\frac{p_{ij}\pi(i)}{\pi(j)}\varphi\Big(\frac{\mu(i)}{\pi(i)}\Big)\pi(j)=\sum_{j}\sum_ip_{ij}\pi(i)\varphi\Big(\frac{\mu(i)}{\pi(i)}\Big)
 =\sum_i\pi(i)\varphi\Big(\frac{\mu(i)}{\pi(i)}\Big)=\mathcal{E}(\mu).\]
 Supongamos ahora que $p_{ij}>0$ para todo $i,j$.
@@ -1483,7 +1485,7 @@ Para ello, considere la matriz de transición $\bar p_{ij}=\sum_{n\geq0}2^{-n}p^
 \end{exer}
 \end{proof}
 
-\begin{rem}
+\begin{rem}\label{rem:entropia}
 La cantidad $\mathcal{E}(\mu)$ que introdujimos en la demostración anterior se conoce usualmente como la \emph{entropía relativa} o la \emph{divergencia de Kullback-Leibler} de $\mu$ con respecto a $\pi$ (típicamente con la elección de $\varphi(x)=-\log(x)$, aunque en este caso levantamos el requerimiento de que $\varphi$ sea acotada, y extendemos la definición a $0$ mediante considerar $\lim_{x\to0^+}x\log(x)=0$).
 Esta noción tiene muchas aplicaciones en probabilidades y otras áreas de las matemáticas, así como también a la teoría de la información, la estadística y el aprendizaje de máquinas.
 
@@ -1492,12 +1494,12 @@ Una consecuencia de la demostración anterior es la siguiente: la entropía rela
 Esto sugiere que las iteraciones sucesivas de una cadena de Markov acercan su distribución a la distribución de equilibrio $\pi$; esto será el tema de la siguiente sección.
 \end{rem}
 
-Comenzamos ahora con la demostración del Teorema \ref{thm:ex-inv}.
-El primer paso es  la siguiente:
+El siguiente resultado permite entender intuitivamente la fórmula \eqref{eq:inv-form} para la distribución invariante $\pi$: la fracción de tiempo que la cadena pasa en un estado $i$ converge al lado derecho de \eqref{eq:inv-form}, $1/\ee_i(\tau_i)$.
+Usaremos también este resultado en la demostración del Teorema \ref{thm:ex-inv}, aunque esto no es estrictamente necesario (ver Ejercicio \ref{exer:inv-form-alt}).
 
 \begin{prop}\label{prop:timeconv}
 Sea $P$ irreducible y recurrente.
-Sea $N_n(i)=\sum_{k=0}^n\uno{X_k=i}$ el número de visiras a $i$ hasta tiempo $n$.
+Sea $N_n(i)=\sum_{k=0}^{n-1}\uno{X_k=i}$ el número de visitas a $i$ antes de tiempo $n$.
 Entonces
 \[\lim_{n\to\infty}\frac{N_n(i)}{n}=\frac1{\ee_i(\tau_i)}\quad\uptext{c.s.}\]
 \end{prop}
@@ -1512,11 +1514,13 @@ Luego
 \xrightarrow[n\to\infty]{\uptext{c.s.}}\ee_i(\tau_i)\label{eq:lgn}
 \end{equation}
 por Ley de los Grandes Números.
-Pero necesariamente tenemos $\tau^{(N_n(i))}_i\leq n<\tau^{(N_n(i)+1)}_i$, y luego
-\[\frac{\tau^{(N_n(i))}_i}{N_n(i)}\leq\frac{n}{N_n(i)}<\frac{\tau^{(N_n(i)+1)}_i}{N_n(i)+1}\frac{N_n(i)+1}{N_n(i)}.\]
+Pero necesariamente tenemos $\tau^{(N_n(i))}_i\leq n<\tau^{(N_n(i)+1)}_i$ (pues, por definición, $\tau^{(N_n(i))}_i$ es el tiempo de la última visita a $i$ antes de tiempo $n$ y $\tau^{(N_n(i)+1)}_i$ es el tiempo de la primera visita a $i$ después de tiempo $n$), y luego
+\begin{equation}
+\frac{\tau^{(N_n(i))}_i}{N_n(i)}\leq\frac{n}{N_n(i)}<\frac{\tau^{(N_n(i)+1)}_i}{N_n(i)+1}\frac{N_n(i)+1}{N_n(i)}.\label{eq:tauNn-sandw}
+\end{equation}
 Como $X$ es recurrente, $N_n(i)\to\infty$, y luego de \eqref{eq:lgn} obtenemos 
 \[\frac{\tau_i^{(N_n(i))}}{N_n(i)}\longrightarrow\ee_i(\tau_i)\quad\uptext{c.s.},\]
-y lo mismo para el lado derecho.
+y lo mismo para el lado derecho de \eqref{eq:tauNn-sandw}.
 Concluimos entonces $\frac{n}{N_n(i)}\longrightarrow\ee_i(\tau_i)$ casi seguramente, lo que nos da lo requerido.
 
 \begin{exer}
@@ -1540,7 +1544,7 @@ Más aún, $\mu=\gamma^k$ es la única medida invariante tal que $\mu_k=1$.
 
 \begin{proof}
 La parte (a) es directa.
-Para la parte (b) definimos $\bar p^{(n)}_{ki}= \pp_k(X_n=i,\,\tau_k>n)$ y notamos que
+Para la parte (b) definimos $\bar p^{(n)}_{ki}=\pp_k(X_n=i,\,\tau_k>n)$ y notamos que
 \[(\gamma^kP)_\ell=\sum_{j\in I}\gamma^k_jp_{j\ell}=\sum_{j\in I}\sum_{n\geq0}\bar p^{(n)}_{kj}p_{j\ell}.\]
 Necesitamos considerar dos casos.
 Primero, si $\ell\neq k$, lo anterior y la propiedad de Markov nos da
@@ -1557,9 +1561,9 @@ Argumentando como antes tenemos
 \end{equation}
 El término $n$-ésimo del lado derecho es igual a $\pp_k(\tau_k=n+1)$, y entonces la suma completa es igual a $\pp_k(1\leq\tau_k<\infty)=1=\gamma^k_k$ por (a) y gracias a que $P$ es recurrente.
 
-Para (iii), como la cadena es irreducible podemos elegir un $n>0$ tal que $p_{ik}^{(n)}>0$, y entonces $1=\gamma^k_k=(\gamma^kP^n)_k\leq\gamma^k_ip_{ik}^{(n)}$ y deducimos que $\gamma^k_i>0$.
+Para (iii), como la cadena es irreducible podemos elegir un $n>0$ tal que $p_{ik}^{(n)}>0$, y entonces $1=\gamma^k_k=(\gamma^kP^n)_k\geq\gamma^k_ip_{ik}^{(n)}$ y deducimos que $\gamma^k_i<\infty$.
 \begin{exer}
-Use un argumento similar para probar que $\gamma^k_i<\infty$.
+Use un argumento similar para probar que $\gamma^k_i>0$.
 \end{exer}
 
 Veamos ahora la unicidad.
@@ -1577,6 +1581,14 @@ Como $P$ es recurrente, $\gamma^k$ es medida invariante por (b), y luego la medi
 Luego para $i\in I$ y cualquier $n>0$ tenemos $\lambda_ip_{ik}^{(n)}\leq(\lambda P)_k=\lambda_k=0$ (por hipótesis y (a)), y entonces usando la irreducibilidad para elegir $n>0$ tal que $p^{(n)}_{ik}>0$ obtenemos $\lambda_i=0$.
 \end{proof}
 
+\begin{cor}\label{cor:recnul}
+Si $X$ es irreducible y recurrente nula entonces existe una medida invariante infinita.
+\end{cor}
+
+\begin{proof}
+Como $X$ es recurrente, de la proposición anterior tenemos que existe una medida invariante, y del Teorema \ref{thm:ex-inv} deducimos que esta medida no puede ser finita (pues en este caso existiría una distribución invariante).
+\end{proof}
+
 \begin{proof}[Demostración Teorema \ref{thm:ex-inv}]
 Veamos primero que (i) implica (iii).
 Sea $k$ un estado recurrente positivo.
@@ -1590,18 +1602,402 @@ gracias a la recurrencia positiva de $k$.
 
 Que (ii) implica (i) es trivial.
 Para ver que (iii) implica (ii), sea $\pi$ una distribución invariante y fijemos $k\in I$.
-Gracias al Teorema \ref{thm:uniq-inv}, $\gamma^k=\alpha\pi$ para algún $\alpha\geq0$.
+% Como $X$ es irreducible podemos elegir $n>0$ tal que $p_{ik}^($
+Gracias al Teorema \ref{thm:uniq-inv}, $\gamma^k=\alpha\tts\pi$ para algún $\alpha\geq0$.
 Tal como en la parte anterior, tenemos $\ee_k(\tau_k)=\gamma^k(I)$, y luego $\ee_k(\tau_k)=\alpha\tts\pi(I)=\alpha<\infty$, y luego $k$ es recurrente positivo.
+
+Resta ver la fórmula para la distribución invariante $\pi$.
+Para ello podemos estudiar la cadena en equilibrio, es decir partiendo en $\pi$.
+Tenemos
+\[\textstyle\ee_\pi(N_n(i))=\ee_\pi(\sum_{k=0}^{n-1}\uno{X_k=i})=\sum_{k=0}^{n-1}\pp_\pi(X_k=i)=n\pi(i).\]
+Luego 
+\[\pi(i)=\frac1{n}\ee_\pi(N_n(i)).\]
+Pero gracias a la Proposición \ref{prop:timeconv} tenemos $N_n(i)/(n+1)\longrightarrow1/\ee_i(\tau_i)$ casi seguramente, y el lado izquierdo está acotado en valor absoluto por $1$, y entonces por Teorema de Convergencia Dominada concluimos que $\ee_\pi(N_n(i))/(n+1)$ converge al mismo número, lo que nos da la fórmula.
 \end{proof}
 
-Antes de terminar esta sección, enunciamos un resultado que puede demostrarse usando los métodos de esta sección (\ucmark):
+\begin{exer}\label{exer:inv-form-alt} 
+Encuentre una demostración alternativa de \eqref{eq:inv-form} basada en el cálculo usado en la demostración de que (i) implica (iii) y el resultado de unicidad de la Proposición \ref{prop:gammaik}.
+\end{exer}
+
+Para terminar esta sección, enunciamos un resultado que puede demostrarse usando las ideas de la demostración la Proposición \ref{prop:timeconv} (notar que la misma proposición \ref{prop:timeconv} se sigue como consecuencia de este teorema):
 
 \begin{thm}\label{thm:ergodMC}\tbf{Teorema Ergódico para Cadenas de Markov}
 Sea $P$ irreducible con distribución invariante $\pi$.
 Sea $f\!:I\longrightarrow\rr$ tal que $\sum_i|f(i)|\pi(i)<\infty$ (es decir $f\in L^1(I,\pi)$).
-Entonces
-\[\lim_{n\to\infty}\frac1{n+1}\sum_{k=0}^nf(X_k)=\sum_if(i)\pi(i).\]
+Entonces para cualquier condición inicial sobre la cadena de Markov $X$ se tiene
+\[\lim_{n\to\infty}\frac1{n}\sum_{k=0}^{n-1}f(X_k)=\sum_if(i)\pi(i)\]
+casi seguramente.
 \end{thm}
 
 Este tipo de resultados se conocen también como leyes de grandes números para funcionales aditivos (en este caso, de una cadena de Markov recurrente positiva).
 Bajo hipótesis adicionales sobre $f$ y $X$, es posible también demostrar una versión del Teorema Central del Límite en este contexto.
+
+Daremos la demostración de este teorema en el caso que $f$ es acotado, para la demostración en el caso general ver por ejemplo \cite[Ejer. 6.6.4]{durrett}.
+
+\begin{proof}[Demostración del Teorema \ref{thm:ergodMC}, caso $f$ acotado]
+Como estamos en el caso $f$ acotado, podemos asumir sin pérdida de generalidad que $|f|\leq1$.
+Escribimos
+\[\frac1{n}\sum_{k=0}^{n-1}f(X_k)=\frac1{n}\sum_{k=0}^{n-1}\sum_{i\in I}f(i)\uno{X_k=i}=\sum_{i\in I}\frac{N_n(i)}{n},\]
+y luego
+\begin{equation}\label{eq:ergpf}
+\left|\frac1{n}\sum_{k=0}^{n-1}f(X_k)-\sum_if(i)\pi(i)\right|
+=\left|\sum_{i\in I}\left(\frac{N_n(i)}{n}-\pi(i)\right)\tsm f(i)\right|
+\leq\sum_{i\in I}\left|\frac{N_n(i)}{n}-\pi(i)\right|.
+\end{equation}
+Sea ahora $J\subseteq I$ finito y separemos la última suma en $J$ e $I\!\setminus\!J$.
+Sobre el segundo conjunto acotamos por
+\[\sum_{i\notin J}\frac{N_n(i)}{n}+\sum_{i\notin J}\pi(i)=1-\sum_{i\in J}\frac{N_n(i)}{n}+\pi(I\setminus J)=\sum_{i\in J}\left(\pi(i)-\frac{N_n(i)}{n}\right)+2\ts\pi(I\!\setminus\!J)\]
+(donde usamos que $\sum_iN_n(i)=n$).
+Luego el lado izquierdo de \eqref{eq:ergpf} está acotado por
+\[2\sum_{i\in J}\left|\frac{N_n(i)}{n}-\pi(i)\right|+2\ts\pi(I\!\setminus\!J).\]
+Dado $\varepsilon>0$ podemos elegir $J$ suficientemente grande de manera que $\pi(I\!\setminus\!J)<\varepsilon$.
+Con $J$ fijo (y finito), y dado $\omega\in\Omega$ fijo, podemos elegir ahora, gracias a la Proposición \ref{prop:timeconv}, un $N=N(\omega)>0$ tal que $\sum_{i\in J}\left|\frac{N_n(i)}{n}-\pi(i)\right|<\varepsilon$ para todo $n\geq N(\omega)$.
+Para tal $\omega\in\Omega$ tenemos entonces que el lado izquierdo de \eqref{eq:ergpf} está acotado por $4\varepsilon$, y como $\varepsilon$ es arbitrario la convergencia casi segura se sigue.
+\end{proof}
+
+\subsection{Recurrencia y transiencia de marchas aleatorias}
+
+Hacemos una pausa ahora en nuestro desarrollo de la teoría de cadenas de Markov para estudiar en mayor detalle las propiedades de recurrencia de marchas aleatorias en $\zz^d$.
+Comenzamos considerando el caso de la marcha aleatoria simple en $\zz$.
+
+\begin{ex}\tbf{Marcha aleatoria simple en $\zz$}\label{ex:srw-1-a}
+Volvemos al caso del Ejemplo \ref{ex:marchaZ}, con $p\in(0,1)$.
+La cadena es irreducible, por lo que basta enfocarse en el origen.
+Para que la cadena partiendo en $0$ vuelva a $0$ en un cierto número de pasos, necesita haber dado el mismo número de pasos a la derecha y a la izquierda, y luego
+\[p^{(2n)}_{00}={\binom{2n}{n}}p^n(1-p)^n\qquad\uptext{(y }p^{(2n+1)}_{00}=0\uptext{)},\]
+de donde obtenemos
+\begin{equation}
+\sum_{m\geq0}p^{(m)}_{00}=\sum_{n\geq0}{\binom{2n}{n}}p^n(1-p)^n.\label{eq:srw-1-a}
+\end{equation}
+Usando la fórmula de Stirling, $n!\sim\sqrt{2\pi n}\big(\frac{n}{e}\big)^n$, obtenemos 
+\[{\binom{2n}{n}}=\frac{(2n)!}{(n!)^2}\sim\frac{2^{2n}}{\sqrt{\pi n}},\]
+donde $\sim$ significa que el lado derecho dividido por el lado izquierdo tiende a $1$ cuando $n\to\infty$.
+Luego la convergencia de la serie en \eqref{eq:srw-1-a} está determinada por la convergencia de
+\[\sum_{n\geq0}\frac{1}{\sqrt{n}}(4p(1-p))^n.\]
+Como ya vimos en el Ejemplo \ref{ex:srw-rec-1}, esto implica que la marcha aleatoria en $\zz$ es recurrente en el caso simétrico y transiente en el caso asimétrico.
+
+\noindent Resta determinar si en el caso simétrico la marcha aleatoria es recurrente positiva o recurrente nula.
+Pero ya vimos en el Ejemplo \ref{ex:srw-1-inv} que esta cadena tiene a la medida uniforme $\mu\equiv1$ en $\zz$ como medida invariante, y luego por Corolario \ref{cor:irrednorecpos} no hay distribución invariante, de lo que se sigue (por Teorema \ref{thm:ex-inv}) que la cadena es recurrente nula.
+\end{ex}
+
+\begin{ex}\tbf{Marcha aleatoria simple simétrica en $\zz^2$}\label{ex:srw-2-a}
+Ahora consideramos el caso de una marcha simétrica en dos dimensiones, que en cada paso salta a uno de sus cuatro vecinos (es decir pasa de $x$ a $x\pm e_1$ o $x\pm e_2$) con probabilidad $\frac14$.
+Nuevamente la cadena es irreducible y, como en el caso $1$-dimensional, tiene periodo $2$.
+Para que la cadena retorne al origen en $2n$ pasos ahora debe, para algún $r=0,\dotsc,n$, dar $r$ pasos a la derecha, $r$ a la izquierda, $n-r$ hacia arriba, y los restantes $n-r$ hacia abajo, y de esta forma
+\begin{align}
+p^{(2n)}_{00}&=\sum_{r=0}^n\binom{2n}{r}\binom{2n-r}{r}\binom{2n-2r}{r}\left(\frac14\right)^{2n}
+=\sum_{r=0}^n\frac{(2n)!}{(r!)^2((n-r)!)^2}\left(\frac14\right)^{2n}\\
+&=\binom{2n}{n}\left(\frac14\right)^{2n}\sum_{r=0}^n\binom{n}{r}^2
+\end{align}
+(\uexers: asegúrese de comprender la primera igualdad).
+La última suma es igual a $\sum_{r=0}^n\binom{n}{r}\binom{n}{n-r}$, que no es más que el número de maneras de elegir $n$ elementos de entre $2n$ posibles, es decir $\binom{2n}{n}$.
+Luego
+\[\sum_{m\geq0}p^{(m)}_{00}=\sum_{n\geq0}\binom{2n}{n}^2\left(\frac14\right)^{2n}.\]
+Usando la fórmula de Stirling como en el ejemplo anterior obtenemos
+\[\binom{2n}{n}^2\left(\frac14\right)^{2n}\sim\frac1{2\pi}\left(\frac{(2n)^{2n+\frac12}e^{-2n}}{n^{2n+1}e^{-2n}}\right)^2\left(\frac14\right)^{2n}=\frac1{\pi n},\]
+y luego
+\[\sum_{m\geq0}p^{(m)}_{00}\approx\sum_{n\geq0}\frac1{\pi n},\]
+que es divergente.
+Deducimos entonces que la marcha es recurrente, y por la misma razón que en una dimensión, es de hecho recurrente nula.
+\end{ex}
+
+\begin{exer}
+Demuestre que la marcha aleatoria simple en $\zz^2$ es transiente en el caso asimétrico (note que basta estudiar su proyección a una dimensión).
+\end{exer}
+
+\begin{ex}\tbf{Marcha aleatoria simple simétrica en $\zz^3$}\label{ex:srw-3-a}
+Ahora consideramos el caso $3$-dimensional, donde la marcha salta a cada uno de sus 6 vecinos con igual probabilidad.
+La cadena es una vez más $2$-periódica, y para ir de $0$ as $0$ en $2n$ pasos ahora debe dar, para algún $r$ y $s$ con $r+s\leq n,$ $r$ pasos a la derecha, $r$ a la izquierda, $s$ hacia arriba, $s$ hacia abajo, $n-r-s$ hacia adelante y $n-r-s$ hacia atrás.
+Para $r$ y $s$ fijos esto puede hacerse de $\binom{2n}{r}\binom{2n-r}{r}\binom{2n-2r}{s}\binom{2n-2r-s}{s}\binom{2n-2r-2s}{n-r-s}=\frac{(2n)!}{(r!)^2(s!)^2((n-r-s)!)^2}$ maneras, y luego procediendo como antes obtenemos
+\begin{equation}\label{eq:srw-3-a1}
+p^{(2n)}_{00}=\sum_{\substack{i,j,k\geq0\\\uptext{t.q. }i+j+k=n}}\frac{(2n)!}{(i!)^2(j!)^2(k!)^2}\left(\frac16\right)^{2n}
+=\binom{2n}{n}\left(\frac1{12}\right)^{n}\sum_{\substack{i,j,k\geq0\\\uptext{t.q. }i+j+k=n}}\binom{n}{i\,j\,k}^2\left(\frac13\right)^{n},
+\end{equation}
+donde $\binom{n}{i\,j\,k}$ es el coeficiente multinomial $\frac{n!}{i!j!k!}$ correspondiente al número de maneras de elegir subconjuntos de tamaños $i$, $j$ y $k$ de entre un total de $n=i+j+k$ elementos.
+% \begin{exer}
+% Demuestre \eqref{eq:srw-3-a1}.
+% \end{exer}
+% \noindent 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%% Ojo borrar esto %%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \addtocounter{thm}{1}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Para el caso $n=3m$ puede probarse usando la ``pirámide de Pascal'' (es decir, la generalización a este contexto del triángulo de Pascal usual) que $\binom{n}{i\,j\,k}\leq\binom{n}{m\,m\,m}$, y luego en este caso obtenemos
+\[p^{(2n)}_{00}\leq\binom{2n}{n}\left(\frac1{12}\right)^{n}\binom{n}{m\,m\,m}\sum_{\substack{i,j,k\geq0\\\uptext{t.q. }i+j+k=n}}\binom{n}{i\,j\,k}\left(\frac13\right)^{n}=\binom{2n}{n}\left(\frac1{12}\right)^{n}\binom{n}{m\,m\,m}\sim\frac{C}{n^{3/2}}\]
+para algún $C>0$, nuevamente la fórmula de Stirling (\uexers: verifique esto).
+Para manejar el caso en que $2n$ no es múltiplo de $6$ notamos simplemente que $p^{(6n)}_{00}\geq(\frac16)^2p^{(6n-2)}_{00}\geq(\frac16)^4p^{(6n-4)}_{00}$.
+Obtenemos entonces
+\[\sum_{m\geq0}p^{(m)}_{00}\leq\sum_{n\geq0}(1+6^2+6^4)p^{(6n)}_{00}\leq2\cdot6^4\ts C\sum_{n\geq0}\frac1{n^{3/2}}<\infty,\]
+y deducimos entonces que la marcha es transiente.
+\end{ex}
+
+Hemos visto que la marcha aleatoria simple simétrica es recurrente en 1 y 2 dimensiones, pero transiente en 3.
+El chiste usual es que entonces ``un hombre borracho eventualmente vuelve a casa, pero un astronauta borracho puede perderse para siempre''.
+
+Es natural esperar que para $d\geq4$ la marcha aleatoria simétrica siga siendo transiente.
+Esto puede demostrarse proyectando la marcha $d$-dimensional a 3 dimensiones y adaptando el argumento anterior.
+En el Apéndice \ref{sec:rectranssrwgen} damos un criterio bastante más general, que permite dar una demostración alternativa de este resultado.
+
+Resumiendo, tenemos:
+
+\begin{thm}\label{thm:recSRW}
+Sea $X$ el paseo aleatorio simétrico en $\zz^d$ (dado por $X_n=\xi_1+\dotsm+\xi_n$ con $\big(\xi_i\big)_{i\geq1}$ i.i.d. con $\xi_1$ elegido uniformemente entre $\{e_1,-e_1,\dotsc,e_d,-e_d\}$, con $e_i$ el $i$-ésimo vector canónico en $\zz^d$).
+Entonces $X$ es recurrente nula si $d=1,2$ y transiente si $d\geq3$.
+En el caso asimétrico (donde la elección entre los vectores canónicos no es uniforme), la marcha es transiente en todo $d$.
+\end{thm}
+
+\subsection{Convergencia al equilibrio}
+
+Nos tornamos ahora a una pregunta que ya hemos tocado varias veces: ¿debiéramos esperar que, si existe una distribución invariante $\pi$, entonces la distribución de la cadena converja a $\pi$?
+Concretamente, ¿podremos asegurar que $p^{(n)}_{ij}\xrightarrow[n\to\infty]{}\pi(j)$?
+
+Ya mencionamos un resultado relacionado (Ejercicio \ref{exer:pijnf}): en el caso $I$ finito, si el límite existe entonces debe ser la distribución invariante.
+Pero es fácil ver que el límite en general no existe, incluso en el caso finito.
+Por ejemplo, si el espacio de estados es $\{1,2\}$ y $P=\left(\begin{smallmatrix}0 & 1\\1 & 0\end{smallmatrix}\right)$ entonces $P^{2n}=I$ (la matriz identidad) y $P^{2n+1}=P$, de manera que la convergencia es imposible.
+Generalizando este ejemplo, es claro que la convergencia a $\pi$ no puede tenerse a menos que para cada para $i,j\in I$ se tenga $p^{(n)}_{ij}>0$ (pues $\pi(j)>0$ para todo $j$); esto es, es necesario que la cadena sea irreducible y aperiódica.
+El principal resultado de esta sección es que, cuando existe una distribución invariante, estas dos condiciones son de hecho suficientes.
+Veremos después (sin demostración) que el resultado puede reformularse en el caso irreducible pero no necesariamente aperiódico.
+
+\begin{exer}
+Demuestre que la distribución invariante no es necesariamente única cuando la cadena no es irreducible (para esto basta por supuesto exhibir un contraejemplo).
+\end{exer}
+
+\subsubsection{Caso aperiódico}
+
+\begin{thm}\tbf{Convergencia al equilibrio}\label{thm:equil}
+Sea $X$ una cadena de Markov irreducible y aperiódica con distribución invariante $\pi$.
+Entonces para cualquier condición inicial $\mu$ se tiene
+\[\lim_{n\to\infty}\pp_\mu(X_n=i)=\pi(i)\quad\forall~i\in I.\]
+Más aún, si $I$ es finito la convergencia es uniformemente exponencial: existen un $c>0$ y un $\alpha\in(0,1)$ tales que
+\[\sup_{i,j\in I}\big|p_{ij}^{(n)}-\pi(j)\big|\leq c\tts\alpha^n.\]
+\end{thm}
+
+Para demostrar esto usaremos una técnica muy importante en la teoría de probabilidades, conocida como \emph{coupling}.
+El ingrediente base es la construcción dada en el siguiente resultado:
+
+\begin{prop}\label{prop:couplingMC}
+Sean $X\sim\CM(\mu,P)$ e $Y\sim\CM(\nu,Q)$ cadenas de Markov irreducibles, aperiódicas e independientes entre sí, definidas en espacios de estados $I_1$ e $I_2$.
+Entonces el proceso $(X,Y)=((X_n,Y_n))_{n\geq0}$ a valores en $I_1\times I_2$ es $\CM(\mu\otimes\nu,P\otimes Q)$ donde $\mu\otimes\nu$ es la medida producto y
+\[(P\otimes Q)_{(i,k)(j,\ell)}=p_{ij}q_{k\ell}.\]
+Más aún $(X,Y)$ es irreducible y aperiódica, y si además $X$ e $Y$ son recurrentes positivas con distribuciones invariantes $\pi_X$ y $\pi_Y$ entonces $(X,Y)$ es recurrente positiva con distribución invariante $\pi_X\otimes\pi_Y$.
+\end{prop}
+
+\begin{rem}
+La cadena $(X,Y)$ construida en la proposición es lo que se conoce como un coupling, o acoplamiento, de las dos cadenas.
+La idea es que las marginales de la cadena acoplada son justamente $X$ e $Y$.
+Este es un coupling particular, donde las dos cadenas evolucionan de manera independiente; en otros contextos se utilizan construcciones más complicadas, pero para nuestros propósitos esta construcción será suficiente.
+\end{rem}
+
+\begin{proof}[Demostración Proposición \ref{prop:couplingMC}]
+Sea $Z=(X,Y)$.
+Varias de las afirmaciones en la proposición son sencillas, y quedan de:
+\begin{exer}
+Demuestre que $Z\sim\CM(\mu\otimes\nu,P\otimes Q)$.
+Demuestre además que $(P\otimes Q)^{(n)}=P^{(n)}\otimes Q^{(n)}$ y que la distribución $\pi_X\otimes\pi_Y$ dada en el resultado es $P\otimes Q$-invariante.
+\end{exer}
+\noindent Veamos ahora la irreducibilidad.
+Sean $i,j\in I_1$ y $k,\ell\in I_2$.
+Por irreducibilidad y aperiodicidad de $X$ e $Y$ existen $m_0,n_0\in\nn$ tales que $p^{(m_0)}_{ij},q^{(n_0)}_{k\ell}>0$ y existe un $N>0$ tal que $p^{(n)}_{jj},q^{(n)}_{\ell\ell}>0$ para todo $n\geq N$ (lo último gracias al Lema \ref{lem:aperiod}).
+Eligiendo $M\geq\max\{n_0+N,m_0+N\}$ tenemos entonces (usando el ejercicio) que
+\[((P\otimes Q)^{(M)})_{(i,k)(j,\ell)}=p^{(M)}_{ij}q^{(M)}_{k\ell}\geq(p^{(m_0)}_{ij}p^{(M-m_0)}_{jj})(q^{(n_0)}_{k\ell}q^{(M-n_0)}_{\ell\ell})>0,\]
+lo que da lo requerido.
+Pero de hecho hemos obtenido esto para todo $M$ suficientemente grande, así que tomando $(j,\ell)=(i,k)$ obtenemos la aperiodicidad de $Z$, lo que termina la demostración.
+\end{proof}
+
+\begin{proof}[Demostración Teorema \ref{thm:equil}]
+Sean $X\sim\CM(\mu,P)$ con $\mu$ una condición inicial general e $Y\sim\CM(\pi,P)$, donde $\pi$ es la distribución invariante de $P$, con $Y$ independiente de $X$.
+Dadas estas dos cadenas, consideramos la cadena acoplada $(X,Y)$ de la proposición anterior con $I_1=I_2=I$ y $Q=P$.
+Ahora definimos los tiempos
+\[T=\inf\{n\geq1\!:X_n=Y_n\}\qquad\uptext{y}\qquad T_i=\inf\{n\geq1\!:X_n=Y_n=i\},\quad i\in I.\]
+Ambos son tiempos de parada para la cadena $(X,Y)$ (\uexers: convénzase de lo anterior).
+Notar también que $T=\inf_{i\in I}T_i$.
+
+Definimos ahora un nuevo proceso estocástico $Z$ a valores en $I$, dado por
+\[Z_n=\begin{dcases*}
+X_n & si $n<T$,\\
+Y_n & si $n\geq T$.
+\end{dcases*}\]
+En palabras, $Z$ sigue la trayectoria de $X$ hasta el primer instante en que se encuentra con $Y$, y de ahí en adelante sigue pegado a $Y$.
+La clave de la demostración es la siguiente afirmación: $Z\sim\CM(\mu,P)$.
+En efecto, sean $(\cf^X_n)_{n\geq0}$, $(\cf^Y_n)_{n\geq0}$ y $(\cg_n)_{n\geq0}$ las filtraciones naturales asociadas a $X$, $Y$ y $Z$, respectivamente.
+Tenemos
+\begin{align}
+\pp(Z_{n+1}=j\tts|\tts\cg_n)&=\pp(Z_{n+1}=j,\,n<T\tts|\tts\cg_n)+\pp(Z_{n+1}=j,\,n\geq T\tts|\tts\cg_n)\\
+&=\pp(X_{n+1}=j,\,n<T\tts|\tts\cg_n)+\pp(Y_{n+1}=j,\,n\geq T\tts|\tts\cg_n)
+\end{align}
+(notar que para obtener la segunda igualdad hemos usado el hecho que $X_n=Y_n$ cuando $n+1=T$).
+Consideremos el primer término del lado derecho.
+Claramente tenemos $\cg_n\subseteq\cf^X_n\wedge\cf^Y_n$ (\uexers: aunque no lo necesitamos en la demostración, es natural preguntarse, ¿se tiene la igualdad?) y además $\{n<T\}\in\cf^X_n\vee\cf^Y_n$, luego 
+\[\pp(X_{n+1}=j,\,n<T\tts|\tts\cg_n)=\ee(\pp(X_{n+1}=j|\cf^X_n\wedge\cf^Y_n)\uno{n<T}\tts|\tts\cg_n).\]
+% esta probabilidad puede reescribirse como $$.
+Pero $X$ e $Y$ son independientes, y entonces la probabilidad condicional dentro de la esperanza es igual a $\pp(X_{n+1}=j|\cf^X_n)=p_{X_n,j}$, donde aplicamos la propiedad de Markov.
+Un argumento análogo puede aplicarse al segundo término de arriba, y llegamos a
+\[\pp(Z_{n+1}=j\tts|\tts\cg_n)=\ee(p_{X_n,j}\uno{n<T}\tts|\tts\cg_n)+\ee(p_{Y_n,j}\uno{n\geq T}\tts|\tts\cg_n)=\ee(p_{Z_n,j}\tts|\tts\cg_n)=p_{Z_n,j}.\]
+Deducimos, por Proposición \ref{prop:markov22}, que $Z\sim\CM(P)$, mientras que el hecho que $Z_0\sim\mu$ es directo, lo que nos da la afirmación.
+
+Hemos visto que  $X$ y $Z$ tienen la misma distribución.
+Luego
+\[\pp(X_n=j)=\pp(Z_n=j)=\pp(X_n=j,\,n<T)+\pp(Y_n=j,\,n\geq T)\leq\pp(n<T)+\pp(Y_n=j),\]
+y entonces $\pp(X_n=j)-\pp(Y_n=j)\leq\pp(T>n)$.
+Pero podemos repetir el argumento anterior con $Z_n'=Y_n\uno{n<T}+X_n\uno{n\leq T}$ y, de igual forma, deducir que $\pp(Y_n=j)-\pp(X_n=j)\leq\pp(T>n)$.
+La conclusión es que
+\begin{equation}
+\left|\pp(X_n=j)-\pp(Y_n=j)\right|\leq\pp(T>n).\label{eq:coupling-des}
+\end{equation}
+Pero $Y$ tiene a $\pi$ como condición inicial, de forma que $\pp(Y_n=j)=\pi(j)$, mientras que el lado derecho puede acotarse por $\pp(T_i>n)$ para cualquier $i\in I$.
+Entonces
+\[\lim_{n\to\infty}\left|\pp(X_n=j)-\pi(j)\right|\leq\lim_{n\to\infty}\pp(T_i>n)=\pp(T_i=\infty)=0,\]
+pues $(X,Y)$ es recurrente (positivo) gracias a la Proposición \ref{prop:couplingMC}.
+Esto prueba la convergencia deseada.
+
+Veamos ahora la estimación sobre la velocidad de convergencia en el caso $|I|<\infty$.
+Gracias a \eqref{eq:coupling-des} y la cota $T\leq T_i$ basta fijar un $i\in I$ y probar que existen $c>0$ y $\alpha\in(0,1)$ tales que $\pp_{(j,k)}(T_i>n)\leq c\tts\alpha^n$ para todo $j,k\in I$.
+Fijemos entonces $i,j,k\in I$.
+Argumentando como hemos hecho ya varias veces, por aperiodicidad e irreducibilidad de $P\otimes P$ sabemos que existe un $N=N(j,k)\in\nn$ tal que $(P\otimes P)^{(n)}_{(j,k)(i,i)}>0$ para todo $n\geq N(j,k)$, y como $I$ es finito podemos definir $N=\max_{j,k\in I}N(j,k)$ y luego $\eta=\min_{j,k\in I}(P\otimes P)^{(N)}_{(j,k)(i,i)}\in(0,1)$.
+Para $m\in\nn$ tenemos entonces que
+\[\pp_{(j,k)}(T_i>mN)\leq\pp_{(j,k)}(T_i\notin\{N,2N,\dotsc,mN\})\leq(1-\eta)^m\]
+gracias a la propiedad de Markov.
+\begin{exer}
+Justifique esto, usando la elección uniforme en $j,k\in I$ de $N$ y $\eta$.
+\end{exer}
+\noindent Luego para $n\in\nn$ tenemos
+\[\pp_{(j,k)}(T_i>n)\leq\pp_{(j,k)}(T_i>\lfloor n/N\rfloor N)\leq(1-\eta)^{\lfloor n/N\rfloor}\leq(1-\eta)^{n/N-1},\]
+y la cota deseada se sigue tomando $c=(1-\eta)^{-1}$ y $\alpha=(1-\eta)^{1/N}$.
+\end{proof}
+
+\subsubsection{Caso general}
+
+Enunciaremos ahora, sin detenernos en detalles ni en las demostraciones, el resultado de convergencia en el caso general (irreducible), donde no asumimos aperiodicidad ni recurrencia positiva.
+El primer ingrediente es la siguiente descomposición del espacio de estados $I$:
+
+\begin{prop}
+Sea $X$ irreducible, con periodo $d$.
+Entonces existe una partición $C_0,\dotsc,C_{d-1}$ de $I$ tal que para cada $r\in\{0,\dotsc,d-1\}$ se tiene:
+\begin{enumerate}[label=\uptext{(\arabic*)}]
+\item Si $i\in C_r$ y $p^{(n)}_{ij}>0$ entonces $j\in C_{r+n~\uptext{mod}~d}$.
+\item Para todo $i,j\in C_r$, $p^{(nd)}_{ij}>0$ para todo $n$ suficientemente grande.
+\end{enumerate}
+\end{prop}
+
+\begin{ex}
+Para la marcha aleatoria en $\zz$, si $X_0$ es par entonces $C_0=2\zz$ y $C_1=2\zz+1$.
+\end{ex}
+
+\begin{thm}\tbf{Convergencia al equilibrio, caso general}\label{thm:eq-gen}
+Sea $X$ irreducible, con periodo $d$, y sea $C_0,\dotsc,C_{d-1}$ la partición dada en la proposición anterior.
+Supongamos que $X_0\in C_0$ con probabilidad $1$.
+Entonces
+\[\lim_{n\to\infty}\pp(X_{nd+r}=j)=\frac{d}{\ee_j(\tau_j)}\qquad\forall\,j\in C_r.\]
+\end{thm}
+
+\begin{rem}
+El teorema contiene información nueva incluso en el caso aperiódico, pues nos dice que cuando $X$ no es recurrente positivo se tiene $\lim_{n\to\infty}\pp(X_{n}=j)=0$ para todo $j$.
+Si $X$ es transiente esto es más o menos directo (\uexers: demuéstrelo), pero en el caso en que $X$ es recurrente nulo esto requiere un argumento no trivial.
+\end{rem}
+
+\begin{exer}
+Demuestre el teorema en el caso en que $\ee_j(\tau_j)<\infty$ para algún (y luego todo) $j\in I$.
+Para esto, defina una cadena de Markov auxiliar con matriz de transición y condición inicial apropiadas, que permita reducir al caso aperiódico.
+\end{exer}
+
+\subsection{Reversibilidad}
+
+Comenzamos con una observación previa.
+
+\begin{rem}\label{rem:rev}
+Si $P$ tiene distribución invariante $\pi$, entonces es posible construir una cadena de Markov $X$ indexada por todo $\zz$ que tiene a $P$ como matriz de transición y $\pi$ como distribución marginal a todo tiempo.
+En efecto, basta definir las leyes finito-dimensionales de $X$, que podemos hacer como sigue: para cualquier $n\in\zz$ y $m\in\nn$,
+\[\pp(X_n=i_0,X_{n+1}=i_1,\dotsc,X_{n+m}=i_m)=\pi(i_0)p_{i_0i_1}\dotsm p_{i_{m-1}i_m}.\]
+\end{rem}
+
+\begin{exer}
+Hacer la observación anterior precisa, y verificar que las leyes finito-dimensionales son consistentes y definen lo requerido.
+\end{exer}
+
+Para una cadena de Markov, el pasado y el futuro son independientes condicionales al presente.
+Como esta relación entre el pasado y el futuro de la cadena es simétrica, es natural preguntarse sobre qué se observa cuando uno mira la cadena corriendo hacia atrás en el tiempo (por un tiempo finito, o quizás con un horizonte infinito como en el contexto de la observación anterior), y en particular si es posible que esta evolución sea Markoviana.
+Observemos, sin embargo, que los resultados de convergencia ya ilustran una asimetría importante en la evolución temporal de una cadena recurrente (en el lenguaje de la Observación \ref{rem:entropia}, la entropía relativa con respecto a $\pi$ decrece).
+Por ello, si queremos obtener algún tipo de simetría temporal es necesario partir desde el equilibrio (el mismo razonamiento, junto con el Teorema \ref{thm:eq-gen}, sugieren que esto no es posible si la cadena no es recurrente positiva).
+
+\begin{thm}\label{thm:rev}
+Sea $P$ matriz estocástica con distribución invariante $\pi$ y sea $X\sim\CM(\pi,P)$.
+Sea $N\in\nn$.
+Entonces el proceso $(Y_n)_{n=0,\dotsc,N}$ dado por
+\[Y_n=X_{N-n}\]
+es una cadena de Markov (indexada por $\{0,\dotsc,N\}$) con matriz de transción $\hat P$ dada por
+\[\hat p_{ij}=\frac{\pi_j}{\pi_i}p_{ji}\]
+y distribución inicial $\pi$.
+Si la cadena $X$ tiene a todo $\zz$ como conjunto de índices, como en la Observación \ref{rem:rev}, entonces la cadena completa $Y=(Y_{N-n})_{n\geq0}$ satisface $Y\sim\CM(\pi,P)$.
+\end{thm}
+
+\begin{exer}
+Demuestre el teorema.
+\end{exer}
+
+\begin{defn}\tbf{Reversibilidad}
+Sea $X\sim\CM(\mu,P)$.
+Decimos que $X$ es \emph{reversible} si para cada $N\in\nn$, $(X_{N-n})_{n=0,\dotsc,N}$ también es $\CM(\mu,P)$.
+\end{defn}
+
+\begin{ex}
+Consideremos la marcha aleatoria simple en $\zz/N\zz$, donde $p_{ij}=p$ si $j-i=1~\uptext{mod}~N$ y $p_{ij}=1-p$ si $j-i=-1~\uptext{mod}~N$, con condición inicial $\mu$ elegida uniformemente en $\{0,,\dotsc,N-1\}$.
+No es difícil convencerse (\uexers: hágalo) de que en este caso $(X_{N-n})_{n=0,\dotsc,N}$ es $\CM(\mu,P^{\sf T})$.
+Luego $X$ es reversible si y solo si $p=1/2$.
+\end{ex}
+
+El Teorema \ref{thm:rev} sugiere estudiar la siguiente condición:
+
+\begin{defn}\tbf{Balance detallado}
+Decimos que una medida $\lambda$ y una matriz estocástica $P$ satisfacen la \emph{condición de balance detallado} si
+\[\lambda_ip_{ij}=\lambda_jp_{ji}.\]
+\end{defn}
+
+La condición de balance detallado dice que el ``flujo de masa'' de $i$ a $j$ bajo condición inicial $\lambda$ es el mismo que el de $j$ a $i$.
+Como veremos a continuación, esta noción es más fuerte que la de invarianza:
+
+\begin{prop}
+Si $\lambda$ satisface la condición de balance detallado para $P$ entonces $\lambda$ es $P$-invariante.
+\end{prop}
+
+\begin{proof}
+$(\lambda P)_j=\sum_i\lambda_ip_{ij}=\sum_i\lambda_jp_{ji}=\lambda_j$.
+\end{proof}
+
+Tenemos entonces la siguiente relación entre reversibilidad y balance detallado:
+
+\begin{thm}
+Sea $X\sim\CM(\lambda,P)$.
+Entonces $X$ es reversible si y solo si $\lambda$ y $P$ están en balance detallado.
+\end{thm}
+
+\begin{proof}
+Directo de las definiciones y el Teorema \ref{thm:rev}.
+\end{proof}
+
+Una aplicación importante de la condición de balance detallado es que nos permite encontrar medidas invariantes de manera relativamente fácil: resolver la condición de balance detallado suele ser más sencillo que resolver la ecuación $\pi P=\pi$.
+Terminamos esta sección con una aplicación de esta idea a un ejemplo importante.
+
+\begin{ex}\tbf{Cadena de nacimiento y muerte}
+Acá el espacio de estados es $I=\zz_{\geq0}$ y tenemos $p_{i,i+1}=p_i$, $p_{i,i}=r_i$ y $p_{i,i-1}=q_i$, con $p_i+r_i+q_i=1$ y $q_0=0$.
+La idea es que la cadena modela el número de individuos en una población, y cuando la población tiene tamaño $i$ tenemos un nacimiento con probabilidad $p_i$, una muerte con probabilidad $q_i$, y la población se conserva con probabilidad $r_i=1-p_i-q_i$.
+En auxiliar se vio (\ucmark) que la cadena es recurrente si y solo si
+\begin{equation}
+\sum_{i=2}^{\infty}\prod_{\ell=1}^{i-1}\frac{q_\ell}{p_\ell}=\infty.\label{eq:bd-rec}
+\end{equation}
+Busquemos ahora medidas invariantes.
+Para ellos buscamos soluciones de la condición de balance detallado, es decir medidas $\mu$ tales que $\mu_ip_{i,j}=\mu_jp_{ji}$ para todo $i,j$.
+La ecuación en el caso $i=j$ es trivial, y los otros dos casos relevantes ($j=i+1$ y $j=i-1$) llevan, en ambos casos, a la ecuación
+\[\mu_ip_i=\mu_{i+1}q_{i+1},\quad i\geq0.\]
+Resolviendo esta ecuación recursivamente obtenemos la solución
+\[\mu_i=\mu_0\prod_{\ell=1}^i\frac{p_{\ell-1}}{q_\ell},\quad i\geq1.\]
+De lo anterior deducimos que la cadena de nacimiento y muerte es recurrente positiva si solo si se satisface la condición \eqref{eq:bd-rec} y además
+\[\sum_{i\geq1}\prod_{\ell=1}^i\frac{p_{\ell-1}}{q_\ell}<\infty\]
+(en cuyo caso la distribución invariante se obtiene de $\mu_i$ luego de normalizar).
+
+\noindent En el ejemplo más sencillo de una cadena de nacimiento y muerte, en la cual $p_i=p$ para todo $i\geq0$, $q_i=1-p$ para todo $i\geq1$ y $r_0=1-p$, $r_i=0$ para $i\geq1$, la primera condición es $\sum_{i=2}^{\infty}(q/p)^{i-1}=\infty$, mientras que la segunda es $\sum_{i\geq1}(p/q)^i<\infty$.
+Luego la cadena es recurrente positiva, y tiene a $\mu_i=\frac{1-2p}{1-p}\left(\frac{p}{1-p}\right)^i$ como distribución invariante, si y solo si $p<\frac12$.
+\end{ex}
+
