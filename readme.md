@@ -1,4 +1,4 @@
-[![OverLeaf](https://img.shields.io/badge/OverLeaf-Observar-green.svg)](https://www.overleaf.com/read/ycczkjyrcxvq)
+[![OverLeaf](https://img.shields.io/badge/OverLeaf-view-green.svg)](https://www.overleaf.com/read/ycczkjyrcxvq)
 
 # Procesos de Markov
 
