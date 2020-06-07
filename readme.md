@@ -1,4 +1,6 @@
-De no estar actualizado el apunte: [![OverLeaf](https://img.shields.io/badge/OverLeaf-view-green.svg)](https://www.overleaf.com/read/ycczkjyrcxvq)
+De no estar actualizado el apunte:
+
+[![OverLeaf](https://img.shields.io/badge/OverLeaf-view-green.svg)](https://www.overleaf.com/read/ycczkjyrcxvq)
 # Procesos de Markov
 
 Este repositorio contiene el [apunte](./pdfs/Apuntes_de_Markov.pdf) en desarrollo del [curso MA4401](./pdfs/prog-curso.pdf), Procesos de Markov.
