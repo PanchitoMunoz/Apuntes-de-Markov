@@ -8,6 +8,7 @@
 \usepackage[extension=pdf]{hyperref}
 \usepackage{enumitem,comment}
 \usepackage[T1]{fontenc}
+\usepackage{soulutf8}
 % \usepackage{times}
 \usepackage{lmodern}
 \usepackage{mathtools}
@@ -350,7 +351,10 @@
     (329.5300,335.1200) .. controls (329.2600,333.4800) and (330.0500,332.8500) ..
     (331.0000,332.8100) -- cycle;}}
     
+
 % COMANDOS PARA DESTACAR
+\soulaccent{\'}
+
 \newcommand{\ifhlelse}[2]{% Comando auxiliar para destacar ssi \destacar está activado
 \ifnum\destacar=1{\sethlcolor{#1}\hl{#2}}\else {#2}\fi}
 

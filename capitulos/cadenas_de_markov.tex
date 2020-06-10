@@ -923,7 +923,7 @@ Sin embargo, y tal como el mismo ejemplo muestra, muchas cadenas naturales no so
 
 El siguiente resultado se demuestra de manera similar a la Prop. \ref{prop:periodo-clase}:
 
-\begin{lem}\MarginNote{$i$ aperiódico $\implies$ $X$ lo sea}
+\begin{lem}\label{lem:aperiod}\MarginNote{$i$ aperiódico $\implies$ $X$ lo sea}
 Sea $X$ irreducible y sea $i\in I$.
 Si \hlg{$i$ es aperi{\'o}dico} entonces \hlo{$X$ lo es}.
 Más aún, en este caso se tiene que \hlo{para todo $i,j\in I$ existe un $n_0\geq0$ tal que $p_{ij}^{(n)}>0$ para todo $n\geq n_0$}.
@@ -1390,7 +1390,7 @@ Como $1$ es valor propio, \hly{se sigue que debe tener asociado tambi{\'e}n un v
 Esto nos dice que $P$ \hlo{siempre tiene una medida con signo invariante}; buscar una medida invariante corresponde a buscar un vector propio no-negativo de $P$ por la izquierda, mientras que buscar una distribución invariante corresponde a pedir que este vector propio esté además en $\ell^1(I)$ (\uexers: ¿por qué?).
 \end{rem}
 
-En vista de la observación anterior, no tenemos por qué esperar que \hly{toda cadena de Markov tenga una medida invariante asociada}, ni mucho menos una distribución invariante.
+En vista de la observación anterior, no tenemos por qué esperar que\MarginNote{No toda CM tiene medida invariante asociada} \hly{toda cadena de Markov tenga una medida invariante asociada}, ni mucho menos una distribución invariante.
 Este es uno de los puntos centrales que queremos dilucidar en esta sección.
 Antes, veamos dos ejemplos donde estas medidas existen.
 
@@ -1417,17 +1417,17 @@ Determine condiciones para la existencia de una distribución invariante y calcu
 Analice la existencia de medidas y distribuciones invariantes para la ruina del jugador (Ejemplo \ref{ex:ruina}).
 \end{exer}
 
-El principal resultado de esta sección mostrará que la existencia de distribuciones invariantes está íntimamente relacionada con una noción más fuerte de recurrencia, que definimos a continuación:
+El principal resultado de esta sección mostrará que \hly{la existencia de distribuciones invariantes} \hlo{est{\'a} {\'i}ntimamente relacionada con una noci{\'o}n m{\'a}s fuerte de recurrencia}, que definimos a continuación:
 
-\begin{defn}\tbf{Recurrencia positiva}
+\begin{defn}\tbf{Recurrencia positiva}\MarginNote{Recurrencia positiva}
 Sea $i$ un estado recurrente.
-Decimos que $i$ es \emph{recurrente positivo} si su tiempo de retorno esperado es finito, es decir, si $\ee_i(\tau_i)<\infty$.
+Decimos que \hlb{$i$ es \emph{recurrente positivo}} si \hlg{su tiempo de retorno esperado es finito}, es decir, si $\ee_i(\tau_i)<\infty$.
 En caso contrario, decimos que $i$ es \emph{recurrente nulo}.
 \end{defn}
 
-\begin{thm}\tbf{Existencia de distribuciones invariantes}\label{thm:ex-inv}
-Sea $X$ irreducible.
-Entonces las siguientes son equivalentes:
+\begin{thm}\tbf{Existencia de distribuciones invariantes}\label{thm:ex-inv}\MarginNote{Existencia de distribuciones invariantes}
+Sea \hlg{$X$ irreducible}.
+Entonces \hlo{las siguientes son equivalentes}:
 \begin{enumerate}[label=\uptext{(\roman*)}]
 \item Existe un estado recurrente positivo.
 \item Todos los estados son recurrentes positivos.
@@ -1442,23 +1442,23 @@ Más aún, en este caso se tiene que la distribución invariante está dada por
 La demostración de este teorema nos tomará bastante trabajo.
 Antes de pasar a ella enunciamos un resultado de unicidad en el contexto anterior.
 
-\begin{thm}\label{thm:uniq-inv}
-Sea $X$ irreducible.
-Si $X$ tiene una distribución invariante $\pi$, entonces toda medida invariante es un múltiplo de $\pi$.
-En particular, la distribución invariante es única.
+\begin{thm}\label{thm:uniq-inv}\MarginNote{Dist. invariante es única}
+Sea \hlg{$X$ irreducible}.
+Si \hlg{$X$ tiene una distribuci{\'o}n invariante $\pi$}, entonces \hlo{toda medida invariante es un m{\'u}ltiplo de $\pi$}.
+En particular, \hlo{la distribuci{\'o}n invariante es {\'u}nica}.
 \end{thm}
 
 De estos dos teoremas se sigue directamente el siguiente:
 
-\begin{cor}\label{cor:irrednorecpos}
-Si $X$ es irreducible y tiene una medida invariante con masa infinita, entonces no existe distribución invariante (y en particular la cadena no es recurrente positiva).
+\begin{cor}\label{cor:irrednorecpos}\MarginNote{Dist. invariante no existe}
+Si \hlg{$X$ es irreducible y tiene una medida invariante con masa infinita}, entonces \hlo{no existe distribuci{\'o}n invariante} (y en particular la cadena no es recurrente positiva).
 \end{cor}
 
-De esta forma tenemos, para $X$ irreducible:
+De esta forma tenemos, para \hlg{$X$ irreducible}:
 \begin{enumerate}[label=\arabic*.]
-\item La existencia de una distribución invariante equivale a que la cadena sea recurrente positiva.
-\item Si existe una medida invariante infinita, entonces la cadena es recurrente nula o transiente.
-\item Se puede demostrar también (\ucmark) que si $X$ es recurrente nula entonces existe una medida invariante infinita.
+\item La \hlo{existencia de una distribuci{\'o}n invariante} equivale a que \hlo{la cadena sea recurrente positiva}.
+\item Si \hlg{existe una medida invariante infinita}, entonces \hlo{la cadena es recurrente nula o transiente}.
+\item Se puede demostrar también (\ucmark) que si \hlg{$X$ es recurrente nula} entonces \hlo{existe una medida invariante infinita}.
 \end{enumerate}
 
 \begin{proof}[Demostración Teorema \ref{thm:uniq-inv}]
@@ -1486,19 +1486,19 @@ Para ello, considere la matriz de transición $\bar p_{ij}=\sum_{n\geq0}2^{-n}p^
 \end{proof}
 
 \begin{rem}\label{rem:entropia}
-La cantidad $\mathcal{E}(\mu)$ que introdujimos en la demostración anterior se conoce usualmente como la \emph{entropía relativa} o la \emph{divergencia de Kullback-Leibler} de $\mu$ con respecto a $\pi$ (típicamente con la elección de $\varphi(x)=-\log(x)$, aunque en este caso levantamos el requerimiento de que $\varphi$ sea acotada, y extendemos la definición a $0$ mediante considerar $\lim_{x\to0^+}x\log(x)=0$).
+La cantidad $\mathcal{E}(\mu)$ que introdujimos en la demostración anterior se conoce usualmente como la \emph{entropía relativa} o la\MarginNote{Divergencia de Kullback-Leibler} \emph{divergencia de Kullback-Leibler} de $\mu$ con respecto a $\pi$ (típicamente con la elección de $\varphi(x)=-\log(x)$, aunque en este caso levantamos el requerimiento de que $\varphi$ sea acotada, y extendemos la definición a $0$ mediante considerar $\lim_{x\to0^+}x\log(x)=0$).
 Esta noción tiene muchas aplicaciones en probabilidades y otras áreas de las matemáticas, así como también a la teoría de la información, la estadística y el aprendizaje de máquinas.
 
-\noindent La idea es que $\mathcal{E}(\mu)$ mide la distancia, o más precisamente el desorden, de $\mu$ con respecto a $\pi$ (note por ejemplo que $\mathcal{E}(\pi)=0$ para el caso $\varphi(x)=-\log(x)$).
-Una consecuencia de la demostración anterior es la siguiente: la entropía relativa de cualquier distribución $\mu$ (no necesariamente invariante) con respecto a $\pi$ decrece luego de aplicar $P$.
-Esto sugiere que las iteraciones sucesivas de una cadena de Markov acercan su distribución a la distribución de equilibrio $\pi$; esto será el tema de la siguiente sección.
+\noindent La idea es que\MarginNote{$\mathcal{E}(\mu)$ mide la distancia} \hlo{$\mathcal{E}(\mu)$ mide la distancia}, o más precisamente \hlo{el desorden}, de $\mu$ con respecto a $\pi$ (note por ejemplo que $\mathcal{E}(\pi)=0$ para el caso $\varphi(x)=-\log(x)$).
+Una consecuencia de la demostración anterior es la siguiente: la entropía relativa de cualquier distribución $\mu$ (no necesariamente invariante) con respecto a $\pi$ \hlo{decrece luego de aplicar $P$}.
+Esto sugiere que \hlo{las iteraciones sucesivas de una cadena de Markov acercan su distribuci{\'o}n a la distribuci{\'o}n de equilibrio $\pi$}; esto será el tema de la siguiente sección.
 \end{rem}
 
 El siguiente resultado permite entender intuitivamente la fórmula \eqref{eq:inv-form} para la distribución invariante $\pi$: la fracción de tiempo que la cadena pasa en un estado $i$ converge al lado derecho de \eqref{eq:inv-form}, $1/\ee_i(\tau_i)$.
 Usaremos también este resultado en la demostración del Teorema \ref{thm:ex-inv}, aunque esto no es estrictamente necesario (ver Ejercicio \ref{exer:inv-form-alt}).
 
-\begin{prop}\label{prop:timeconv}
-Sea $P$ irreducible y recurrente.
+\begin{prop}\label{prop:timeconv}\MarginNote{Interpretación de la Ec.~\eqref{eq:inv-form}}
+Sea \hlg{$P$ irreducible y recurrente}.
 Sea $N_n(i)=\sum_{k=0}^{n-1}\uno{X_k=i}$ el número de visitas a $i$ antes de tiempo $n$.
 Entonces
 \[\lim_{n\to\infty}\frac{N_n(i)}{n}=\frac1{\ee_i(\tau_i)}\quad\uptext{c.s.}\]
@@ -1530,16 +1530,16 @@ Concluya la demostración, adaptando el argumento anterior al caso $X_0\neq i$.\
 
 Para el próximo resultado introducimos, para cada $k\in I$,
 \[\gamma_i^k=\ee_k\!\left(\sum_{n=0}^{\tau_k-1}\uno{X_n=i}\right)=\sum_{n\geq0}\pp_k(X_n=i,\,\tau_k>n),\]
-el número de visitas a $i$ antes de retornar a $k$.
+el\MarginNote{Definición de $\gamma_{i}^{k}$} \hlb{n{\'u}mero de visitas a $i$ antes de retornar a $k$}.
 
-\begin{prop}\label{prop:gammaik}
-Sea $P$ irreducible y recurrente.
+\begin{prop}\label{prop:gammaik}\MarginNote{Propiedades de $\gamma_i^k$}
+Sea \hlg{$P$ irreducible y recurrent}.
 \begin{enumerate}[label=\uptext{(\alph*)}]
 \item $\gamma^k_k=1$.
 \item $\gamma^k$ es medida invariante (es decir, $\gamma^kP=\gamma^k$).
 \item $\gamma^k_i\in(0,\infty)$ para todo $i$.
 \end{enumerate}
-Más aún, $\mu=\gamma^k$ es la única medida invariante tal que $\mu_k=1$.
+Más aún, $\mu=\gamma^k$ \hlo{es la {\'u}nica medida invariante tal que $\mu_k=1$}.
 \end{prop}
 
 \begin{proof}
@@ -1581,8 +1581,8 @@ Como $P$ es recurrente, $\gamma^k$ es medida invariante por (b), y luego la medi
 Luego para $i\in I$ y cualquier $n>0$ tenemos $\lambda_ip_{ik}^{(n)}\leq(\lambda P)_k=\lambda_k=0$ (por hipótesis y (a)), y entonces usando la irreducibilidad para elegir $n>0$ tal que $p^{(n)}_{ik}>0$ obtenemos $\lambda_i=0$.
 \end{proof}
 
-\begin{cor}\label{cor:recnul}
-Si $X$ es irreducible y recurrente nula entonces existe una medida invariante infinita.
+\begin{cor}\label{cor:recnul}\MarginNote{Existencia de medida invariante infinita}
+Si \hlg{$X$ es irreducible y recurrente nula} entonces \hlo{existe una medida invariante infinita}.
 \end{cor}
 
 \begin{proof}
@@ -1621,15 +1621,15 @@ Encuentre una demostración alternativa de \eqref{eq:inv-form} basada en el cál
 
 Para terminar esta sección, enunciamos un resultado que puede demostrarse usando las ideas de la demostración la Proposición \ref{prop:timeconv} (notar que la misma proposición \ref{prop:timeconv} se sigue como consecuencia de este teorema):
 
-\begin{thm}\label{thm:ergodMC}\tbf{Teorema Ergódico para Cadenas de Markov}
-Sea $P$ irreducible con distribución invariante $\pi$.
+\begin{thm}\label{thm:ergodMC}\tbf{Teorema Ergódico para Cadenas de Markov}\MarginNote{Teo. Ergódico para CM}
+Sea \hlg{$P$ irreducible con distribuci{\'o}n invariante $\pi$}.
 Sea $f\!:I\longrightarrow\rr$ tal que $\sum_i|f(i)|\pi(i)<\infty$ (es decir $f\in L^1(I,\pi)$).
-Entonces para cualquier condición inicial sobre la cadena de Markov $X$ se tiene
+\hlo{Entonces} para cualquier condición inicial sobre la cadena de Markov $X$ se tiene
 \[\lim_{n\to\infty}\frac1{n}\sum_{k=0}^{n-1}f(X_k)=\sum_if(i)\pi(i)\]
 casi seguramente.
 \end{thm}
 
-Este tipo de resultados se conocen también como leyes de grandes números para funcionales aditivos (en este caso, de una cadena de Markov recurrente positiva).
+Este tipo de resultados se conocen también como \hlo{leyes de grandes n{\'u}meros para funcionales aditivos} (en este caso, de una cadena de Markov recurrente positiva).
 Bajo hipótesis adicionales sobre $f$ y $X$, es posible también demostrar una versión del Teorema Central del Límite en este contexto.
 
 Daremos la demostración de este teorema en el caso que $f$ es acotado, para la demostración en el caso general ver por ejemplo \cite[Ejer. 6.6.4]{durrett}.
@@ -1657,7 +1657,7 @@ Para tal $\omega\in\Omega$ tenemos entonces que el lado izquierdo de \eqref{eq:e
 
 \subsection{Recurrencia y transiencia de marchas aleatorias}
 
-Hacemos una pausa ahora en nuestro desarrollo de la teoría de cadenas de Markov para estudiar en mayor detalle las propiedades de recurrencia de marchas aleatorias en $\zz^d$.
+Hacemos una pausa ahora en nuestro desarrollo de la teoría de cadenas de Markov para \hly{estudiar en mayor detalle las propiedades de recurrencia de marchas aleatorias en $\zz^d$}.
 Comenzamos considerando el caso de la marcha aleatoria simple en $\zz$.
 
 \begin{ex}\tbf{Marcha aleatoria simple en $\zz$}\label{ex:srw-1-a}
@@ -1726,7 +1726,14 @@ donde $\binom{n}{i\,j\,k}$ es el coeficiente multinomial $\frac{n!}{i!j!k!}$ cor
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Para el caso $n=3m$ puede probarse usando la ``pirámide de Pascal'' (es decir, la generalización a este contexto del triángulo de Pascal usual) que $\binom{n}{i\,j\,k}\leq\binom{n}{m\,m\,m}$, y luego en este caso obtenemos
+\NAM[
 \[p^{(2n)}_{00}\leq\binom{2n}{n}\left(\frac1{12}\right)^{n}\binom{n}{m\,m\,m}\sum_{\substack{i,j,k\geq0\\\uptext{t.q. }i+j+k=n}}\binom{n}{i\,j\,k}\left(\frac13\right)^{n}=\binom{2n}{n}\left(\frac1{12}\right)^{n}\binom{n}{m\,m\,m}\sim\frac{C}{n^{3/2}}\]
+]{
+\begin{multline*}
+    p^{(2n)}_{00}\leq\binom{2n}{n}\left(\frac1{12}\right)^{n}\binom{n}{m\,m\,m}\sum_{\substack{i,j,k\geq0\\\uptext{t.q. }i+j+k=n}}\binom{n}{i\,j\,k}\left(\frac13\right)^{n}\\
+    =\binom{2n}{n}\left(\frac1{12}\right)^{n}\binom{n}{m\,m\,m}\sim\frac{C}{n^{3/2}}
+\end{multline*}
+}
 para algún $C>0$, nuevamente la fórmula de Stirling (\uexers: verifique esto).
 Para manejar el caso en que $2n$ no es múltiplo de $6$ notamos simplemente que $p^{(6n)}_{00}\geq(\frac16)^2p^{(6n-2)}_{00}\geq(\frac16)^4p^{(6n-4)}_{00}$.
 Obtenemos entonces
@@ -1743,15 +1750,15 @@ En el Apéndice \ref{sec:rectranssrwgen} damos un criterio bastante más general
 
 Resumiendo, tenemos:
 
-\begin{thm}\label{thm:recSRW}
-Sea $X$ el paseo aleatorio simétrico en $\zz^d$ (dado por $X_n=\xi_1+\dotsm+\xi_n$ con $\big(\xi_i\big)_{i\geq1}$ i.i.d. con $\xi_1$ elegido uniformemente entre $\{e_1,-e_1,\dotsc,e_d,-e_d\}$, con $e_i$ el $i$-ésimo vector canónico en $\zz^d$).
-Entonces $X$ es recurrente nula si $d=1,2$ y transiente si $d\geq3$.
+\begin{thm}\label{thm:recSRW}\MarginNote{Teo. sobre el paseo aleatorio multidimensional}
+Sea \hlg{$X$ el paseo aleatorio sim{\'e}trico en $\zz^d$} (dado por $X_n=\xi_1+\dotsm+\xi_n$ con $\big(\xi_i\big)_{i\geq1}$ i.i.d. con $\xi_1$ elegido uniformemente entre $\{e_1,-e_1,\dotsc,e_d,-e_d\}$, con $e_i$ el $i$-ésimo vector canónico en $\zz^d$).
+Entonces \hlo{$X$ es recurrente nula si $d=1,2$ y transiente si $d\geq3$}.
 En el caso asimétrico (donde la elección entre los vectores canónicos no es uniforme), la marcha es transiente en todo $d$.
 \end{thm}
 
 \subsection{Convergencia al equilibrio}
 
-Nos tornamos ahora a una pregunta que ya hemos tocado varias veces: ¿debiéramos esperar que, si existe una distribución invariante $\pi$, entonces la distribución de la cadena converja a $\pi$?
+Nos tornamos ahora a una pregunta que ya hemos tocado varias veces: ¿debiéramos esperar que, si \hlg{existe una distribuci{\'o}n invariante $\pi$}, entonces \hlo{la distribuci{\'o}n de la cadena converja a $\pi$}?
 Concretamente, ¿podremos asegurar que $p^{(n)}_{ij}\xrightarrow[n\to\infty]{}\pi(j)$?
 
 Ya mencionamos un resultado relacionado (Ejercicio \ref{exer:pijnf}): en el caso $I$ finito, si el límite existe entonces debe ser la distribución invariante.
@@ -1767,28 +1774,28 @@ Demuestre que la distribución invariante no es necesariamente única cuando la 
 
 \subsubsection{Caso aperiódico}
 
-\begin{thm}\tbf{Convergencia al equilibrio}\label{thm:equil}
-Sea $X$ una cadena de Markov irreducible y aperiódica con distribución invariante $\pi$.
-Entonces para cualquier condición inicial $\mu$ se tiene
+\begin{thm}\tbf{Convergencia al equilibrio}\label{thm:equil}\MarginNote{Convergencia al equilibrio}
+Sea \hlg{$X$ una cadena de Markov irreducible y aperi{\'o}dica con distribuci{\'o}n invariante $\pi$}.
+Entonces \hlo{para cualquier condici{\'o}n inicial $\mu$ se tiene}
 \[\lim_{n\to\infty}\pp_\mu(X_n=i)=\pi(i)\quad\forall~i\in I.\]
 Más aún, si $I$ es finito la convergencia es uniformemente exponencial: existen un $c>0$ y un $\alpha\in(0,1)$ tales que
 \[\sup_{i,j\in I}\big|p_{ij}^{(n)}-\pi(j)\big|\leq c\tts\alpha^n.\]
 \end{thm}
 
-Para demostrar esto usaremos una técnica muy importante en la teoría de probabilidades, conocida como \emph{coupling}.
+Para demostrar esto usaremos una técnica muy importante en la teoría de probabilidades, conocida como\MarginNote{Coupling} \emph{\hlb{coupling}}.
 El ingrediente base es la construcción dada en el siguiente resultado:
 
-\begin{prop}\label{prop:couplingMC}
-Sean $X\sim\CM(\mu,P)$ e $Y\sim\CM(\nu,Q)$ cadenas de Markov irreducibles, aperiódicas e independientes entre sí, definidas en espacios de estados $I_1$ e $I_2$.
-Entonces el proceso $(X,Y)=((X_n,Y_n))_{n\geq0}$ a valores en $I_1\times I_2$ es $\CM(\mu\otimes\nu,P\otimes Q)$ donde $\mu\otimes\nu$ es la medida producto y
+\begin{prop}\label{prop:couplingMC}\MarginNote{Coupling de una CM}
+Sean \hlg{$X\sim\CM(\mu,P)$ e $Y\sim\CM(\nu,Q)$ cadenas de Markov irreducibles, aperi{\'o}dicas e independientes entre s{\'i}}, definidas en espacios de estados $I_1$ e $I_2$.
+Entonces \hlo{el proceso $(X,Y)=((X_n,Y_n))_{n\geq0}$ a valores en $I_1\times I_2$ es $\CM(\mu\otimes\nu,P\otimes Q)$} donde $\mu\otimes\nu$ es la medida producto y
 \[(P\otimes Q)_{(i,k)(j,\ell)}=p_{ij}q_{k\ell}.\]
-Más aún $(X,Y)$ es irreducible y aperiódica, y si además $X$ e $Y$ son recurrentes positivas con distribuciones invariantes $\pi_X$ y $\pi_Y$ entonces $(X,Y)$ es recurrente positiva con distribución invariante $\pi_X\otimes\pi_Y$.
+Más aún \hlo{$(X,Y)$ es irreducible y aperi{\'o}dica}, y si además $X$ e $Y$ son recurrentes positivas con distribuciones invariantes $\pi_X$ y $\pi_Y$ entonces $(X,Y)$ es recurrente positiva con distribución invariante $\pi_X\otimes\pi_Y$.
 \end{prop}
 
 \begin{rem}
-La cadena $(X,Y)$ construida en la proposición es lo que se conoce como un coupling, o acoplamiento, de las dos cadenas.
-La idea es que las marginales de la cadena acoplada son justamente $X$ e $Y$.
-Este es un coupling particular, donde las dos cadenas evolucionan de manera independiente; en otros contextos se utilizan construcciones más complicadas, pero para nuestros propósitos esta construcción será suficiente.
+La cadena $(X,Y)$ construida en la proposición \hly{es lo que se conoce como un coupling}, o acoplamiento, de las dos cadenas.
+La idea es que \hly{las marginales de la cadena acoplada son justamente $X$ e $Y$}.
+Este es un coupling particular, donde \hly{las dos cadenas evolucionan de manera independiente}; en otros contextos se utilizan construcciones más complicadas, pero para nuestros propósitos esta construcción será suficiente.
 \end{rem}
 
 \begin{proof}[Demostración Proposición \ref{prop:couplingMC}]
@@ -1796,7 +1803,7 @@ Sea $Z=(X,Y)$.
 Varias de las afirmaciones en la proposición son sencillas, y quedan de:
 \begin{exer}
 Demuestre que $Z\sim\CM(\mu\otimes\nu,P\otimes Q)$.
-Demuestre además que $(P\otimes Q)^{(n)}=P^{(n)}\otimes Q^{(n)}$ y que la distribución $\pi_X\otimes\pi_Y$ dada en el resultado es $P\otimes Q$-invariante.
+Demuestre además que $(P\!\!\!~\otimes~\!\!\! Q)^{(n)}=P^{(n)}\otimes Q^{(n)}$ y que la distribución $\pi_X\otimes\pi_Y$ dada en el resultado es $P\otimes Q$-invariante.
 \end{exer}
 \noindent Veamos ahora la irreducibilidad.
 Sean $i,j\in I_1$ y $k,\ell\in I_2$.
@@ -1873,9 +1880,9 @@ y la cota deseada se sigue tomando $c=(1-\eta)^{-1}$ y $\alpha=(1-\eta)^{1/N}$.
 Enunciaremos ahora, sin detenernos en detalles ni en las demostraciones, el resultado de convergencia en el caso general (irreducible), donde no asumimos aperiodicidad ni recurrencia positiva.
 El primer ingrediente es la siguiente descomposición del espacio de estados $I$:
 
-\begin{prop}
-Sea $X$ irreducible, con periodo $d$.
-Entonces existe una partición $C_0,\dotsc,C_{d-1}$ de $I$ tal que para cada $r\in\{0,\dotsc,d-1\}$ se tiene:
+\begin{prop}\MarginNote{Descomposición del espacio $I$}
+Sea \hlg{$X$ irreducible, con periodo $d$}.
+Entonces \hlo{existe una partición $C_0,\dotsc,C_{d-1}$ de $I$ tal que para cada $r\in\{0,\dotsc,d-1\}$ se tiene}:
 \begin{enumerate}[label=\uptext{(\arabic*)}]
 \item Si $i\in C_r$ y $p^{(n)}_{ij}>0$ entonces $j\in C_{r+n~\uptext{mod}~d}$.
 \item Para todo $i,j\in C_r$, $p^{(nd)}_{ij}>0$ para todo $n$ suficientemente grande.
@@ -1886,15 +1893,15 @@ Entonces existe una partición $C_0,\dotsc,C_{d-1}$ de $I$ tal que para cada $r\
 Para la marcha aleatoria en $\zz$, si $X_0$ es par entonces $C_0=2\zz$ y $C_1=2\zz+1$.
 \end{ex}
 
-\begin{thm}\tbf{Convergencia al equilibrio, caso general}\label{thm:eq-gen}
-Sea $X$ irreducible, con periodo $d$, y sea $C_0,\dotsc,C_{d-1}$ la partición dada en la proposición anterior.
-Supongamos que $X_0\in C_0$ con probabilidad $1$.
-Entonces
+\begin{thm}\tbf{Convergencia al equilibrio, caso general}\label{thm:eq-gen}\MarginNote{Convergencia al equilibrio, caso general}
+Sea \hlg{$X$ irreducible, con periodo $d$, y sea $C_0,\dotsc,C_{d-1}$ la partición dada en la proposición anterior}.
+Supongamos que \hlg{$X_0\in C_0$ con probabilidad $1$}.
+\hlo{Entonces}
 \[\lim_{n\to\infty}\pp(X_{nd+r}=j)=\frac{d}{\ee_j(\tau_j)}\qquad\forall\,j\in C_r.\]
 \end{thm}
 
 \begin{rem}
-El teorema contiene información nueva incluso en el caso aperiódico, pues nos dice que cuando $X$ no es recurrente positivo se tiene $\lim_{n\to\infty}\pp(X_{n}=j)=0$ para todo $j$.
+El teorema contiene información nueva incluso en el caso aperiódico, pues nos dice que \hlg{cuando $X$ no es recurrente positivo} se tiene \hlo{$\lim_{n\to\infty}\pp(X_{n}=j)=0$ para todo $j$}.
 Si $X$ es transiente esto es más o menos directo (\uexers: demuéstrelo), pero en el caso en que $X$ es recurrente nulo esto requiere un argumento no trivial.
 \end{rem}
 
